@@ -14,4 +14,12 @@
 
 #define LocalizedString(key) NSLocalizedStringFromTable(key, @"InfoPlist", nil)
 
+#import "MyMacros.h"
+#import <UIKit/UIKit.h>
+#import "NSString+RegexCategory.h"
+#import "BWValidatorTool.h"
+#import "BWDealNullTool.h"
+#import "MBProgressHUD+JDW.h"
+
+
 #endif /* WFChat_Prefix_Header_pch */

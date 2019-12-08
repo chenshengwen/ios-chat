@@ -9,8 +9,9 @@
 #import "WFCBaseTabBarController.h"
 #import <WFChatClient/WFCChatClient.h>
 #import <WFChatUIKit/WFChatUIKit.h>
-#import "DiscoverViewController.h"
+//#import "DiscoverViewController.h"
 #import "WFCMeTableViewController.h"
+#import "MyBaseWebViewViewController.h"
 
 #define kClassKey   @"rootVCClassString"
 #define kTitleKey   @"title"
@@ -49,9 +50,10 @@
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.1 green:0.27 blue:0.9 alpha:0.9]} forState:UIControlStateSelected];
     [self addChildViewController:nav];
     
-    vc = [DiscoverViewController new];
-    vc.title = LocalizedString(@"Discover");
-    nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    MyBaseWebViewViewController *webvc = [MyBaseWebViewViewController new];
+    webvc.url = @"https://ss111.cc/mobile/v3/";
+    webvc.title = LocalizedString(@"Discover");
+    nav = [[UINavigationController alloc] initWithRootViewController:webvc];
     item = nav.tabBarItem;
     item.title = LocalizedString(@"Discover");
     item.image = [UIImage imageNamed:@"tabbar_discover"];

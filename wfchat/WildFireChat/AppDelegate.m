@@ -20,7 +20,9 @@
 #if WFCU_SUPPORT_VOIP
 #import <WFAVEngineKit/WFAVEngineKit.h>
 #endif
-#import "WFCLoginViewController.h"
+//#import "WFCLoginViewController.h"
+#import "MyLoginViewController.h"
+
 #import "WFCConfig.h"
 #import "WFCBaseTabBarController.h"
 #import <WFChatUIKit/WFChatUIKit.h>
@@ -101,7 +103,7 @@
         //需要注意token跟clientId是强依赖的，一定要调用getClientId获取到clientId，然后用这个clientId获取token，这样connect才能成功，如果随便使用一个clientId获取到的token将无法链接成功。
         [[WFCCNetworkService sharedInstance] connect:savedUserId token:savedToken];
     } else {
-        UIViewController *loginVC = [[WFCLoginViewController alloc] init];
+        UIViewController *loginVC = [[MyLoginViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
         self.window.rootViewController = nav;
     }
@@ -239,7 +241,7 @@
         if (status == kConnectionStatusRejected || status == kConnectionStatusTokenIncorrect || status == kConnectionStatusSecretKeyMismatch) {
             [[WFCCNetworkService sharedInstance] disconnect:YES];
         } else if (status == kConnectionStatusLogout) {
-            UIViewController *loginVC = [[WFCLoginViewController alloc] init];
+            UIViewController *loginVC = [[MyLoginViewController alloc] init];
             self.window.rootViewController = loginVC;
         } 
     });

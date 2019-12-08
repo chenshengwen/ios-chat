@@ -1,0 +1,49 @@
+//
+//  BWKindTextField.m
+//  Betway
+//
+//  Created by mac on 2019/5/25.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import "BWKindTextField.h"
+
+@implementation BWKindTextField
+
+
+//- (instancetype)initWithFrame:(CGRect)frame {
+//    
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        
+//        [self setup];
+//    }
+//    
+//    return self;
+//}
+//
+//- (void)setup {
+//    [self setValue:[UIColor redColor] forKeyPath:@"_placeholderLabel.textColor"];
+//    [self setValue:FONT(15) forKeyPath:@"_placeholderLabel.font"];
+//    self.textColor = normalColor;
+//    self.font = FONT(15);
+//}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.attributedPlaceholder = [[NSMutableAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName : lineWhiteColor,NSFontAttributeName:FONT(15)}];
+
+//    [self setValue:lineWhiteColor forKeyPath:@"_placeholderLabel.textColor"];
+//    [self setValue:FONT(15) forKeyPath:@"_placeholderLabel.font"];
+    self.textColor = normalColor;
+    self.font = FONT(15);
+    
+//    [CALayer addSubLayerWithFrame:CGRectMake(0, self.height-1, self.width, 1) backgroundColor:lineWhiteColor backView:self];
+}
+
+- (void)drawRect:(CGRect)rect {
+    [CALayer addSubLayerWithFrame:CGRectMake(0, self.height-1, self.width, 1) backgroundColor:lineWhiteColor backView:self];
+}
+
+@end

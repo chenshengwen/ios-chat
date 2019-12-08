@@ -68,6 +68,31 @@
 		2FF07F5D21F82E7200A78A62 /* WFCMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5121F82E7200A78A62 /* WFCMeTableViewCell.m */; };
 		2FF07F5E21F82E7200A78A62 /* WFCMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5421F82E7200A78A62 /* WFCMeTableViewController.m */; };
 		2FF07F5F21F82E7200A78A62 /* WFCSecurityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */; };
+		60F30481239C9397001215AE /* MyBaseWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */; };
+		60F30485239C93D2001215AE /* NSString+category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30484239C93D2001215AE /* NSString+category.m */; };
+		60F3048B239C9F99001215AE /* MyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30489239C9F99001215AE /* MyLoginViewController.m */; };
+		60F3048C239C9F99001215AE /* MyLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F3048A239C9F99001215AE /* MyLoginViewController.xib */; };
+		60F304B2239CD0F8001215AE /* BWTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F3048F239CD0F8001215AE /* BWTextField.m */; };
+		60F304B4239CD0F8001215AE /* BWRecommendValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30492239CD0F8001215AE /* BWRecommendValidator.m */; };
+		60F304B5239CD0F8001215AE /* BWIDCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30495239CD0F8001215AE /* BWIDCardValidator.m */; };
+		60F304B6239CD0F8001215AE /* BWMoneyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30496239CD0F8001215AE /* BWMoneyValidator.m */; };
+		60F304B7239CD0F8001215AE /* BWUserNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30498239CD0F8001215AE /* BWUserNameValidator.m */; };
+		60F304B8239CD0F8001215AE /* BWEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304A1239CD0F8001215AE /* BWEmailValidator.m */; };
+		60F304B9239CD0F8001215AE /* BWRealNameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304A2239CD0F8001215AE /* BWRealNameValidator.m */; };
+		60F304BA239CD0F8001215AE /* BWNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304A4239CD0F8001215AE /* BWNumberValidator.m */; };
+		60F304BB239CD0F8001215AE /* BWPasswordValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304A7239CD0F8001215AE /* BWPasswordValidator.m */; };
+		60F304BC239CD0F8001215AE /* BWBetwayCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304A9239CD0F8001215AE /* BWBetwayCardValidator.m */; };
+		60F304BD239CD0F8001215AE /* BWProvinceValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AA239CD0F8001215AE /* BWProvinceValidator.m */; };
+		60F304BE239CD0F8001215AE /* BWIdentifyCodeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AB239CD0F8001215AE /* BWIdentifyCodeValidator.m */; };
+		60F304BF239CD0F8001215AE /* BWRealTextValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AC239CD0F8001215AE /* BWRealTextValidator.m */; };
+		60F304C0239CD0F8001215AE /* BWInputValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AD239CD0F8001215AE /* BWInputValidator.m */; };
+		60F304C1239CD0F8001215AE /* BWPhoneNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AE239CD0F8001215AE /* BWPhoneNumberValidator.m */; };
+		60F304C2239CD0F8001215AE /* BWCardNoValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304AF239CD0F8001215AE /* BWCardNoValidator.m */; };
+		60F304C5239CD235001215AE /* NSString+RegexCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304C4239CD235001215AE /* NSString+RegexCategory.m */; };
+		60F304C9239CD2B5001215AE /* BWValidatorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304C7239CD2B5001215AE /* BWValidatorTool.m */; };
+		60F304CC239CD370001215AE /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304CB239CD370001215AE /* RegExCategories.m */; };
+		60F304CF239CD41F001215AE /* BWDealNullTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304CE239CD41E001215AE /* BWDealNullTool.m */; };
+		60F304D5239CE310001215AE /* MBProgressHUD+JDW.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F304D4239CE310001215AE /* MBProgressHUD+JDW.m */; };
 		6E616DA020AB3435002CB8BE /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 6E616D9B20AB3435002CB8BE /* LICENSE.md */; };
 		6E616DA220AB3435002CB8BE /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E616D9F20AB3435002CB8BE /* WebRTC.framework */; };
 		6E616DB520AB3540002CB8BE /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E616D9F20AB3435002CB8BE /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -238,6 +263,56 @@
 		2FF07F5321F82E7200A78A62 /* WFCAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFCAboutViewController.h; sourceTree = "<group>"; };
 		2FF07F5421F82E7200A78A62 /* WFCMeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFCMeTableViewController.m; sourceTree = "<group>"; };
 		2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFCSecurityTableViewController.m; sourceTree = "<group>"; };
+		60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseWebViewViewController.m; sourceTree = "<group>"; };
+		60F30480239C9397001215AE /* MyBaseWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseWebViewViewController.h; sourceTree = "<group>"; };
+		60F30483239C93D2001215AE /* NSString+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+category.h"; sourceTree = "<group>"; };
+		60F30484239C93D2001215AE /* NSString+category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+category.m"; sourceTree = "<group>"; };
+		60F30487239C94D3001215AE /* MyMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMacros.h; sourceTree = "<group>"; };
+		60F30488239C9F99001215AE /* MyLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLoginViewController.h; sourceTree = "<group>"; };
+		60F30489239C9F99001215AE /* MyLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLoginViewController.m; sourceTree = "<group>"; };
+		60F3048A239C9F99001215AE /* MyLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLoginViewController.xib; sourceTree = "<group>"; };
+		60F3048F239CD0F8001215AE /* BWTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTextField.m; sourceTree = "<group>"; };
+		60F30492239CD0F8001215AE /* BWRecommendValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWRecommendValidator.m; sourceTree = "<group>"; };
+		60F30493239CD0F8001215AE /* BWRealNameValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWRealNameValidator.h; sourceTree = "<group>"; };
+		60F30494239CD0F8001215AE /* BWEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWEmailValidator.h; sourceTree = "<group>"; };
+		60F30495239CD0F8001215AE /* BWIDCardValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWIDCardValidator.m; sourceTree = "<group>"; };
+		60F30496239CD0F8001215AE /* BWMoneyValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWMoneyValidator.m; sourceTree = "<group>"; };
+		60F30497239CD0F8001215AE /* BWNumberValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWNumberValidator.h; sourceTree = "<group>"; };
+		60F30498239CD0F8001215AE /* BWUserNameValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWUserNameValidator.m; sourceTree = "<group>"; };
+		60F30499239CD0F8001215AE /* BWPasswordValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWPasswordValidator.h; sourceTree = "<group>"; };
+		60F3049A239CD0F8001215AE /* BWCardNoValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWCardNoValidator.h; sourceTree = "<group>"; };
+		60F3049B239CD0F8001215AE /* BWPhoneNumberValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWPhoneNumberValidator.h; sourceTree = "<group>"; };
+		60F3049C239CD0F8001215AE /* BWInputValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWInputValidator.h; sourceTree = "<group>"; };
+		60F3049D239CD0F8001215AE /* BWIdentifyCodeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWIdentifyCodeValidator.h; sourceTree = "<group>"; };
+		60F3049E239CD0F8001215AE /* BWRealTextValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWRealTextValidator.h; sourceTree = "<group>"; };
+		60F3049F239CD0F8001215AE /* BWProvinceValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWProvinceValidator.h; sourceTree = "<group>"; };
+		60F304A0239CD0F8001215AE /* BWBetwayCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWBetwayCardValidator.h; sourceTree = "<group>"; };
+		60F304A1239CD0F8001215AE /* BWEmailValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWEmailValidator.m; sourceTree = "<group>"; };
+		60F304A2239CD0F8001215AE /* BWRealNameValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWRealNameValidator.m; sourceTree = "<group>"; };
+		60F304A3239CD0F8001215AE /* BWRecommendValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWRecommendValidator.h; sourceTree = "<group>"; };
+		60F304A4239CD0F8001215AE /* BWNumberValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWNumberValidator.m; sourceTree = "<group>"; };
+		60F304A5239CD0F8001215AE /* BWIDCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWIDCardValidator.h; sourceTree = "<group>"; };
+		60F304A6239CD0F8001215AE /* BWMoneyValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWMoneyValidator.h; sourceTree = "<group>"; };
+		60F304A7239CD0F8001215AE /* BWPasswordValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWPasswordValidator.m; sourceTree = "<group>"; };
+		60F304A8239CD0F8001215AE /* BWUserNameValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWUserNameValidator.h; sourceTree = "<group>"; };
+		60F304A9239CD0F8001215AE /* BWBetwayCardValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWBetwayCardValidator.m; sourceTree = "<group>"; };
+		60F304AA239CD0F8001215AE /* BWProvinceValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWProvinceValidator.m; sourceTree = "<group>"; };
+		60F304AB239CD0F8001215AE /* BWIdentifyCodeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWIdentifyCodeValidator.m; sourceTree = "<group>"; };
+		60F304AC239CD0F8001215AE /* BWRealTextValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWRealTextValidator.m; sourceTree = "<group>"; };
+		60F304AD239CD0F8001215AE /* BWInputValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWInputValidator.m; sourceTree = "<group>"; };
+		60F304AE239CD0F8001215AE /* BWPhoneNumberValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWPhoneNumberValidator.m; sourceTree = "<group>"; };
+		60F304AF239CD0F8001215AE /* BWCardNoValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWCardNoValidator.m; sourceTree = "<group>"; };
+		60F304B1239CD0F8001215AE /* BWTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTextField.h; sourceTree = "<group>"; };
+		60F304C3239CD235001215AE /* NSString+RegexCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegexCategory.h"; sourceTree = "<group>"; };
+		60F304C4239CD235001215AE /* NSString+RegexCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegexCategory.m"; sourceTree = "<group>"; };
+		60F304C7239CD2B5001215AE /* BWValidatorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWValidatorTool.m; sourceTree = "<group>"; };
+		60F304C8239CD2B5001215AE /* BWValidatorTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWValidatorTool.h; sourceTree = "<group>"; };
+		60F304CA239CD370001215AE /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
+		60F304CB239CD370001215AE /* RegExCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegExCategories.m; sourceTree = "<group>"; };
+		60F304CD239CD41E001215AE /* BWDealNullTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWDealNullTool.h; sourceTree = "<group>"; };
+		60F304CE239CD41E001215AE /* BWDealNullTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWDealNullTool.m; sourceTree = "<group>"; };
+		60F304D3239CE310001215AE /* MBProgressHUD+JDW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+JDW.h"; sourceTree = "<group>"; };
+		60F304D4239CE310001215AE /* MBProgressHUD+JDW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+JDW.m"; sourceTree = "<group>"; };
 		6E616D9B20AB3435002CB8BE /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = Frameworks/GoogleWebRTC/LICENSE.md; sourceTree = SOURCE_ROOT; };
 		6E616D9F20AB3435002CB8BE /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Frameworks/GoogleWebRTC/Frameworks/frameworks/WebRTC.framework; sourceTree = SOURCE_ROOT; };
 		9051774B2243CD830020A2AC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -330,6 +405,8 @@
 				90FF267D222AB34B0001D8AF /* PCLoginConfirmViewController.m */,
 				2F9E8600222BA6180076B82B /* GroupInfoViewController.h */,
 				2F9E8601222BA6180076B82B /* GroupInfoViewController.m */,
+				60F30480239C9397001215AE /* MyBaseWebViewViewController.h */,
+				60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -354,6 +431,10 @@
 		2E1D1FF91FAF0AE600F4405D /* WildFireChat */ = {
 			isa = PBXGroup;
 			children = (
+				60F304C6239CD2A1001215AE /* Tool */,
+				60F3048D239CD0C5001215AE /* component */,
+				60F30486239C94A4001215AE /* macros */,
+				60F30482239C93C1001215AE /* category */,
 				2BCBC82F23954AC4009321AD /* Moments */,
 				2F518FF0235ED77700FA3D58 /* AppService */,
 				2F94F98422291577005BD461 /* LBXScan */,
@@ -607,8 +688,11 @@
 		2FEA5D6721F4AC8900280B23 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2FEA5D6821F4AC8900280B23 /* WFCLoginViewController.m */,
 				2FEA5D6921F4AC8900280B23 /* WFCLoginViewController.h */,
+				2FEA5D6821F4AC8900280B23 /* WFCLoginViewController.m */,
+				60F30488239C9F99001215AE /* MyLoginViewController.h */,
+				60F30489239C9F99001215AE /* MyLoginViewController.m */,
+				60F3048A239C9F99001215AE /* MyLoginViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -632,6 +716,95 @@
 				2F50BE83237970780049CD39 /* WFCDiagnoseViewController.m */,
 			);
 			path = Me;
+			sourceTree = "<group>";
+		};
+		60F30482239C93C1001215AE /* category */ = {
+			isa = PBXGroup;
+			children = (
+				60F30483239C93D2001215AE /* NSString+category.h */,
+				60F30484239C93D2001215AE /* NSString+category.m */,
+				60F304C3239CD235001215AE /* NSString+RegexCategory.h */,
+				60F304C4239CD235001215AE /* NSString+RegexCategory.m */,
+				60F304D3239CE310001215AE /* MBProgressHUD+JDW.h */,
+				60F304D4239CE310001215AE /* MBProgressHUD+JDW.m */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
+		60F30486239C94A4001215AE /* macros */ = {
+			isa = PBXGroup;
+			children = (
+				60F30487239C94D3001215AE /* MyMacros.h */,
+			);
+			path = macros;
+			sourceTree = "<group>";
+		};
+		60F3048D239CD0C5001215AE /* component */ = {
+			isa = PBXGroup;
+			children = (
+				60F3048E239CD0F8001215AE /* BWTextField */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
+		60F3048E239CD0F8001215AE /* BWTextField */ = {
+			isa = PBXGroup;
+			children = (
+				60F30491239CD0F8001215AE /* InputValidator */,
+				60F3048F239CD0F8001215AE /* BWTextField.m */,
+				60F304B1239CD0F8001215AE /* BWTextField.h */,
+			);
+			path = BWTextField;
+			sourceTree = "<group>";
+		};
+		60F30491239CD0F8001215AE /* InputValidator */ = {
+			isa = PBXGroup;
+			children = (
+				60F30492239CD0F8001215AE /* BWRecommendValidator.m */,
+				60F30493239CD0F8001215AE /* BWRealNameValidator.h */,
+				60F30494239CD0F8001215AE /* BWEmailValidator.h */,
+				60F30495239CD0F8001215AE /* BWIDCardValidator.m */,
+				60F30496239CD0F8001215AE /* BWMoneyValidator.m */,
+				60F30497239CD0F8001215AE /* BWNumberValidator.h */,
+				60F30498239CD0F8001215AE /* BWUserNameValidator.m */,
+				60F30499239CD0F8001215AE /* BWPasswordValidator.h */,
+				60F3049A239CD0F8001215AE /* BWCardNoValidator.h */,
+				60F3049B239CD0F8001215AE /* BWPhoneNumberValidator.h */,
+				60F3049C239CD0F8001215AE /* BWInputValidator.h */,
+				60F3049D239CD0F8001215AE /* BWIdentifyCodeValidator.h */,
+				60F3049E239CD0F8001215AE /* BWRealTextValidator.h */,
+				60F3049F239CD0F8001215AE /* BWProvinceValidator.h */,
+				60F304A0239CD0F8001215AE /* BWBetwayCardValidator.h */,
+				60F304A1239CD0F8001215AE /* BWEmailValidator.m */,
+				60F304A2239CD0F8001215AE /* BWRealNameValidator.m */,
+				60F304A3239CD0F8001215AE /* BWRecommendValidator.h */,
+				60F304A4239CD0F8001215AE /* BWNumberValidator.m */,
+				60F304A5239CD0F8001215AE /* BWIDCardValidator.h */,
+				60F304A6239CD0F8001215AE /* BWMoneyValidator.h */,
+				60F304A7239CD0F8001215AE /* BWPasswordValidator.m */,
+				60F304A8239CD0F8001215AE /* BWUserNameValidator.h */,
+				60F304A9239CD0F8001215AE /* BWBetwayCardValidator.m */,
+				60F304AA239CD0F8001215AE /* BWProvinceValidator.m */,
+				60F304AB239CD0F8001215AE /* BWIdentifyCodeValidator.m */,
+				60F304AC239CD0F8001215AE /* BWRealTextValidator.m */,
+				60F304AD239CD0F8001215AE /* BWInputValidator.m */,
+				60F304AE239CD0F8001215AE /* BWPhoneNumberValidator.m */,
+				60F304AF239CD0F8001215AE /* BWCardNoValidator.m */,
+			);
+			path = InputValidator;
+			sourceTree = "<group>";
+		};
+		60F304C6239CD2A1001215AE /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				60F304CA239CD370001215AE /* RegExCategories.h */,
+				60F304CB239CD370001215AE /* RegExCategories.m */,
+				60F304C8239CD2B5001215AE /* BWValidatorTool.h */,
+				60F304C7239CD2B5001215AE /* BWValidatorTool.m */,
+				60F304CD239CD41E001215AE /* BWDealNullTool.h */,
+				60F304CE239CD41E001215AE /* BWDealNullTool.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		6E616D9A20AB3435002CB8BE /* GoogleWebRTC */ = {
@@ -778,6 +951,7 @@
 				6E616DA020AB3435002CB8BE /* LICENSE.md in Resources */,
 				2F1B0DD321E1B38100139CB1 /* ring.caf in Resources */,
 				2F143A70217F7DA900B3E38A /* Emoj.plist in Resources */,
+				60F3048C239C9F99001215AE /* MyLoginViewController.xib in Resources */,
 				2E1D20041FAF0AE600F4405D /* Assets.xcassets in Resources */,
 				2E1D20021FAF0AE600F4405D /* Main.storyboard in Resources */,
 				2F94FB8B22291577005BD461 /* CodeScan.bundle in Resources */,
@@ -818,16 +992,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F9E8602222BA6180076B82B /* GroupInfoViewController.m in Sources */,
+				60F304D5239CE310001215AE /* MBProgressHUD+JDW.m in Sources */,
 				2FEA5D6A21F4AC8900280B23 /* WFCLoginViewController.m in Sources */,
+				60F304C2239CD0F8001215AE /* BWCardNoValidator.m in Sources */,
 				2F94FB8E22291577005BD461 /* LBXScanVideoZoomView.m in Sources */,
 				2F94FC7222291578005BD461 /* LBXScanNative.m in Sources */,
 				2F518FF3235ED7DD00FA3D58 /* AppService.m in Sources */,
 				2FF07F5D21F82E7200A78A62 /* WFCMeTableViewCell.m in Sources */,
 				2E1D20D41FAF127100F4405D /* WFCConfig.m in Sources */,
+				60F304BF239CD0F8001215AE /* BWRealTextValidator.m in Sources */,
+				60F304C9239CD2B5001215AE /* BWValidatorTool.m in Sources */,
+				60F304BC239CD0F8001215AE /* BWBetwayCardValidator.m in Sources */,
 				2F94FC9B22291813005BD461 /* UIActionSheet+LBXAlertAction.m in Sources */,
+				60F304BD239CD0F8001215AE /* BWProvinceValidator.m in Sources */,
+				60F304BA239CD0F8001215AE /* BWNumberValidator.m in Sources */,
 				2FF07F5E21F82E7200A78A62 /* WFCMeTableViewController.m in Sources */,
+				60F304C1239CD0F8001215AE /* BWPhoneNumberValidator.m in Sources */,
 				2F94FB8D22291577005BD461 /* LBXScanViewStyle.m in Sources */,
 				2F94FB9022291577005BD461 /* LBXScanView.m in Sources */,
+				60F30485239C93D2001215AE /* NSString+category.m in Sources */,
+				60F30481239C9397001215AE /* MyBaseWebViewViewController.m in Sources */,
 				2F50BE84237970780049CD39 /* WFCDiagnoseViewController.m in Sources */,
 				2FF07F5F21F82E7200A78A62 /* WFCSecurityTableViewController.m in Sources */,
 				2E1D200A1FAF0AE600F4405D /* main.m in Sources */,
@@ -836,25 +1020,39 @@
 				2F94FC9A22291813005BD461 /* UIWindow+LBXHierarchy.m in Sources */,
 				2F7268FD21F714C900E05F9C /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				2F94FC9922291813005BD461 /* LBXAlertAction.m in Sources */,
+				60F304B5239CD0F8001215AE /* BWIDCardValidator.m in Sources */,
 				2E1D20D91FAF127100F4405D /* DiscoverViewController.m in Sources */,
+				60F304B2239CD0F8001215AE /* BWTextField.m in Sources */,
 				2E1D20B01FAF125D00F4405D /* WFCBaseTabBarController.m in Sources */,
+				60F304B7239CD0F8001215AE /* BWUserNameValidator.m in Sources */,
 				2FF07F5A21F82E7200A78A62 /* WFCSettingTableViewController.m in Sources */,
+				60F304BE239CD0F8001215AE /* BWIdentifyCodeValidator.m in Sources */,
 				9085427E222A00430009713D /* DIYScanViewController.m in Sources */,
 				2F94FCA422291813005BD461 /* LBXPermissionPhotos.m in Sources */,
 				90854281222A04C80009713D /* QQLBXScanViewController.m in Sources */,
 				90E927F222DFF45F00F168BC /* WFCPrivacyTableViewController.m in Sources */,
 				2F94FCA722291813005BD461 /* LBXPermissionCamera.m in Sources */,
+				60F304B8239CD0F8001215AE /* BWEmailValidator.m in Sources */,
 				2F94FC9C22291813005BD461 /* UIAlertView+LBXAlertAction.m in Sources */,
 				909ACDAF2130473100A64FE7 /* ChatroomListViewController.m in Sources */,
 				2F7268F921F7136600E05F9C /* WFCPrivacyViewController.m in Sources */,
 				2F94FB8C22291577005BD461 /* LBXScanViewController.m in Sources */,
+				60F304C5239CD235001215AE /* NSString+RegexCategory.m in Sources */,
 				2F94FB8F22291577005BD461 /* LBXScanLineAnimation.m in Sources */,
 				2F94FCA322291813005BD461 /* LBXPermissionSetting.m in Sources */,
+				60F304C0239CD0F8001215AE /* BWInputValidator.m in Sources */,
+				60F304B9239CD0F8001215AE /* BWRealNameValidator.m in Sources */,
 				90854287222A06870009713D /* CreateBarCodeViewController.m in Sources */,
 				2FF07F5921F82E7200A78A62 /* WFCAboutViewController.m in Sources */,
 				2F94FCA822291813005BD461 /* LBXPermission.m in Sources */,
+				60F304BB239CD0F8001215AE /* BWPasswordValidator.m in Sources */,
 				2E1D1FFC1FAF0AE600F4405D /* AppDelegate.m in Sources */,
 				2F94FC9D22291813005BD461 /* UIAlertController+supportedInterfaceOrientations.m in Sources */,
+				60F304B4239CD0F8001215AE /* BWRecommendValidator.m in Sources */,
+				60F304B6239CD0F8001215AE /* BWMoneyValidator.m in Sources */,
+				60F3048B239C9F99001215AE /* MyLoginViewController.m in Sources */,
+				60F304CF239CD41F001215AE /* BWDealNullTool.m in Sources */,
+				60F304CC239CD370001215AE /* RegExCategories.m in Sources */,
 				2F94FB9122291577005BD461 /* LBXScanNetAnimation.m in Sources */,
 				90FF267E222AB34B0001D8AF /* PCLoginConfirmViewController.m in Sources */,
 				909ACDB321304CD900A64FE7 /* ChatroomItemCell.m in Sources */,
@@ -1026,7 +1224,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = ZTJABWRJ5T;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -28,12 +28,27 @@ static AppService *sharedSingleton = nil;
 
 - (void)login:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *token, BOOL newUser))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
-    [self post:@"/login" data:@{@"mobile":user, @"code":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS)} success:^(NSDictionary *dict) {
-        if([dict[@"code"] intValue] == 0) {
+    [self post:@"/login" data:@{@"mobile":user, @"password":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS)} success:^(NSDictionary *dict) {
+        if([dict[@"code"] intValue] == 0 && dict != nil) {
             NSString *userId = dict[@"result"][@"userId"];
             NSString *token = dict[@"result"][@"token"];
             BOOL newUser = [dict[@"result"][@"register"] boolValue];
             successBlock(userId, token, newUser);
+        } else {
+            errorBlock([dict[@"code"] intValue], dict[@"message"]);
+        }
+    } error:^(NSError * _Nonnull error) {
+        errorBlock(-1, error.description);
+    }];
+}
+
+- (void)regist:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *name))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
+    
+    [self post:@"/register" data:@{@"mobile":user, @"password":password} success:^(NSDictionary *dict) {
+        if([dict[@"code"] intValue] == 0 && dict != nil) {
+            NSString *userId = dict[@"result"][@"userId"];
+            NSString *name = dict[@"result"][@"name"];
+            successBlock(userId, name);
         } else {
             errorBlock([dict[@"code"] intValue], dict[@"message"]);
         }

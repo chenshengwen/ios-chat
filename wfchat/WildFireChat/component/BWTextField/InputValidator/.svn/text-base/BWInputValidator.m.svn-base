@@ -1,0 +1,229 @@
+//
+//  BWInputValidator.m
+//  Betway
+//
+//  Created by mac on 2019/5/16.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import "BWInputValidator.h"
+@interface BWInputValidator ()
+
+@property (nonatomic, strong) UILabel *tipLab;
+
+@end
+
+@implementation BWInputValidator
+
+- (BOOL)validateInput:(UITextField *)input {
+    
+    if (input.text.length <= 0) {
+        
+        self.errorMessage = @"输入内容不能为空!";
+        
+    } else {
+        
+        BOOL isMatch = [input.text isValidWithMinLenth:1 maxLenth:10000 containChinese:YES firstCannotBeDigtal:NO];
+        if (isMatch == NO) {
+            
+            self.errorMessage = @"请输入正确格式的内容!";
+        } else {
+            
+            self.errorMessage = nil;
+        }
+    }
+    
+    return self.errorMessage == nil ? YES : NO;
+}
+
+- (BOOL)validateCharacter:(NSString *)string textField:(UITextField *)textField range:(NSRange)range
+{
+    return YES;
+}
+
+/**
+ *  显示错误提示
+ *
+ *  @param errorMessage
+ */
+- (void)showErrorMessage:(NSString *)errorMessage
+{
+    if (BWIsNull(errorMessage)) return;
+    // 弹出吐司提示
+    [self showToast:errorMessage];
+}
+
+/**
+ *  剔除卡号里的非法字符(仅保留数字)
+ *
+ *  @param s 需要处理的字符串
+ *
+ *  @return 处理后的字符串
+ */
+- (NSString *)getDigitsOnly:(NSString *)s
+{
+    NSString *digitsOnly = @"";
+    char c;
+    for (NSInteger i = 0; i < s.length; i++)
+    {
+        c = [s characterAtIndex:i];
+        if (isdigit(c))
+        {
+            digitsOnly =[digitsOnly stringByAppendingFormat:@"%c",c];
+        }
+    }
+    return digitsOnly;
+}
+
+/**
+ *  格式化输入框中的内容
+ *
+ *  @param textField 输入框
+ *  @param string    当前改变的字符串
+ *  @param range     改变字符串所在位置
+ *  @param maxLen     格式化后字符串最大长度
+ *
+ *  @return 是否有效改变
+ */
+- (BOOL)formatTextField:(UITextField *)textField validateCharacter:(NSString *)string range:(NSRange)range maxLen:(NSInteger)maxLen
+{
+    NSString *text = [textField text];
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
+    string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
+        return NO;
+    }
+    
+    text = [text stringByReplacingCharactersInRange:range withString:string];
+    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    NSString *newString = @"";
+    while (text.length > 0) {
+        NSString *subString = [text substringToIndex:MIN(text.length, 4)];
+        newString = [newString stringByAppendingString:subString];
+        if (subString.length == 4) {
+            newString = [newString stringByAppendingString:@"-"];
+        }
+        text = [text substringFromIndex:MIN(text.length, 4)];
+    }
+    
+    newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
+    
+    if (newString.length >= maxLen) {
+        return NO;
+    }
+    
+    [textField setText:newString];
+    
+    return NO;
+}
+
+/**
+ *  格式化输入框中的内容（针对不同类型输入框格式化）
+ *
+ *  @param textField 输入框
+ *  @param string    当前改变的字符串
+ *  @param range     改变字符串所在位置
+ *  @param maxLen     格式化后字符串最大长度
+ *
+ *  @return 是否有效改变
+ */
+- (BOOL)formatTextField:(UITextField *)textField validateCharacter:(NSString *)string range:(NSRange)range maxLen:(NSInteger)maxLen textFieldType:(BWInputFieldType)type
+{
+    NSString *text = [textField text];
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
+    string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
+        return NO;
+    }
+    
+    text = [text stringByReplacingCharactersInRange:range withString:string];
+    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    NSString *newString = @"";
+    
+    int tag = 0;
+    
+    while (text.length > 0) {
+        
+        if (tag == 0 && type == BWInputFieldTypePhone) {
+            
+            NSString *subString = [text substringToIndex:MIN(text.length, 3)];
+            newString = [newString stringByAppendingString:subString];
+            if (subString.length == 3) {
+                newString = [newString stringByAppendingString:@"-"];
+                tag++;
+            }
+            text = [text substringFromIndex:MIN(text.length, 3)];
+            
+        } else {
+            
+            NSString *subString = [text substringToIndex:MIN(text.length, 4)];
+            newString = [newString stringByAppendingString:subString];
+            if (subString.length == 4) {
+                newString = [newString stringByAppendingString:@"-"];
+                tag++;
+            }
+            text = [text substringFromIndex:MIN(text.length, 4)];
+        }
+    }
+    
+    newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
+    
+    if (newString.length >= maxLen) {
+        return NO;
+    }
+    
+    [textField setText:newString];
+    
+    return NO;
+}
+
+#pragma mark - private
+
+- (void)showToast:(NSString *)message
+{
+    if (BWIsNull(message)) return ;
+    
+    self.tipLab.text = message;
+    
+    if (self.tipLab.alpha == 0.0) {
+        self.tipLab.alpha = 1.0;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:1 animations:^{
+                self.tipLab.alpha = 0.0;
+            }];
+        });
+    }
+}
+
+#pragma mark - setter/getter
+
+- (UILabel *)tipLab
+{
+    if (!_tipLab) {
+        _tipLab = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/4.0, kScreenHeight/2 - 22, kScreenWidth/2.0, 44)];
+        _tipLab.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+        _tipLab.layer.cornerRadius = 6.0;
+        _tipLab.layer.masksToBounds = YES;
+        _tipLab.alpha = 0.0;
+        _tipLab.textAlignment = NSTextAlignmentCenter;
+        _tipLab.numberOfLines = 0;
+        _tipLab.textColor = normalColor;
+        _tipLab.font = [UIFont systemFontOfSize:12];
+        [[UIApplication sharedApplication].keyWindow addSubview:_tipLab];
+    }
+    
+    return _tipLab;
+}
+
+#pragma mark - share单例
++(instancetype)shareBWInputValidator{
+    static BWInputValidator *share_BWInput;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        share_BWInput = [[BWInputValidator alloc]init];
+    });
+    return share_BWInput;
+}
+@end
