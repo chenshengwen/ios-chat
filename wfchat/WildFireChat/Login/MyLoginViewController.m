@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
           
           MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
           hud.mode = MBProgressHUDModeText;
-          hud.label.text = @"注册失败";
+            hud.label.text = BWIsNull(message) ? @"注册失败" : message;
           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
           [hud hideAnimated:YES afterDelay:1.f];
         });

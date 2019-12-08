@@ -44,17 +44,52 @@ static AppService *sharedSingleton = nil;
 
 - (void)regist:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *name))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
-    [self post:@"/register" data:@{@"mobile":user, @"password":password} success:^(NSDictionary *dict) {
-        if([dict[@"code"] intValue] == 0 && dict != nil) {
-            NSString *userId = dict[@"result"][@"userId"];
-            NSString *name = dict[@"result"][@"name"];
-            successBlock(userId, name);
-        } else {
-            errorBlock([dict[@"code"] intValue], dict[@"message"]);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    /*   获取   */
+    dispatch_async(queue, ^{
+        __block BOOL isExist = NO;
+        NSString *url = [NSString stringWithFormat:@"/user/%@",user];
+        [self post:url data:nil success:^(NSDictionary *dict) {
+            if([dict[@"code"] intValue] == 0 && dict != nil) {
+                isExist = YES;
+            } else {
+                isExist = NO;
+            }
+            
+            dispatch_semaphore_signal(semaphore);
+
+        } error:^(NSError * _Nonnull error) {
+            isExist = NO;
+            
+            dispatch_semaphore_signal(semaphore);
+
+        }];
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+        if (isExist) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                errorBlock(-1, @"用户已存在");
+            });
+            return ;
         }
-    } error:^(NSError * _Nonnull error) {
-        errorBlock(-1, error.description);
-    }];
+        [self post:@"/register" data:@{@"mobile":user, @"password":password} success:^(NSDictionary *dict) {
+               if([dict[@"code"] intValue] == 0 && dict != nil) {
+                   NSString *userId = dict[@"result"][@"userId"];
+                   NSString *name = dict[@"result"][@"name"];
+                   successBlock(userId, name);
+               } else {
+                   errorBlock([dict[@"code"] intValue], dict[@"message"]);
+               }
+           } error:^(NSError * _Nonnull error) {
+               errorBlock(-1, error.description);
+           }];
+        
+    });
+    
+   
 }
 
 - (void)sendCode:(NSString *)phoneNumber success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {
