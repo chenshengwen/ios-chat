@@ -300,7 +300,7 @@
         return self.cells.count;
     } else {
         if (self.sendMessageCell) {
-            return 2;
+            return 1;//隐藏网络电话
         } else {
             return 1;
         }

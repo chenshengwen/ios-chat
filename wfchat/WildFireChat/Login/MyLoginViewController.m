@@ -17,6 +17,8 @@
 #import "AppService.h"
 //#import "BWPasswordValidator.h"
 #import "BWPhoneNumberValidator.h"
+#import "WMZCodeView.h"
+
 
 typedef NS_ENUM(NSInteger,LoginType) {
     myLoginType,
@@ -26,8 +28,13 @@ typedef NS_ENUM(NSInteger,LoginType) {
 @interface MyLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *regihterBtn;
+@property (weak, nonatomic) IBOutlet BWTextField *confirepasswordTF;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTopCon;
+@property (weak, nonatomic) IBOutlet UIButton *secturyBtn;
 
 @property (nonatomic, assign) LoginType type;
+@property(nonatomic,strong)WMZCodeView *codeView;
+
 @end
 
 @implementation MyLoginViewController
@@ -51,9 +58,30 @@ typedef NS_ENUM(NSInteger,LoginType) {
     self.passwordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
 //    self.passwordTF.validator = [BWPasswordValidator new];
     [self.passwordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
+    self.confirepasswordTF.layer.borderWidth = 1;
+    self.confirepasswordTF.leftViewMode = UITextFieldViewModeAlways;
+    self.confirepasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
+    [self.confirepasswordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     self.loginBtn.backgroundColor = GrayBlogColor;
     self.loginBtn.enabled = NO;
+    
+    self.confirepasswordTF.hidden = YES;
+    self.secturyBtn.hidden = YES;
+    self.loginBtnTopCon.constant = 50;
+    
+    NSString *phone = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedPassword"];
+    if (!BWIsNull(phone)) {
+        self.phoneTF.text = phone;
+    }
+    
+    if (!BWIsNull(password)) {
+        self.passwordTF.text = password;
+    }
+
 }
 - (IBAction)loginClick:(UIButton *)sender {
     
@@ -67,12 +95,16 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
     [self resetKeyboard:nil];
     
-    if (self.type == myLoginType) {
-        [self logintAction];
-    }else {
-        [self registerAction];
-    }
+    
+    [self verfirSlider];
+
+    
      
+}
+
+- (void)verfirSlider {
+    [self.view addSubview:self.codeView];
+    self.codeView.hidden = NO;
 }
 
 - (void)logintAction {
@@ -83,6 +115,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
        
          [[AppService sharedAppService] login:self.phoneTF.text password:self.passwordTF.text success:^(NSString *userId, NSString *token, BOOL newUser) {
              [[NSUserDefaults standardUserDefaults] setObject:self.phoneTF.text forKey:@"savedName"];
+             [[NSUserDefaults standardUserDefaults] setObject:self.passwordTF.text forKey:@"savedPassword"];
+
              [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"savedToken"];
              [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"savedUserId"];
              [[NSUserDefaults standardUserDefaults] synchronize];
@@ -142,10 +176,18 @@ typedef NS_ENUM(NSInteger,LoginType) {
         self.type = myRegistType;
         [self.loginBtn setTitle:@"注册" forState:UIControlStateNormal];
         [sender setTitle:@"登录" forState:UIControlStateNormal];
+        
+        self.confirepasswordTF.hidden = NO;
+        self.secturyBtn.hidden = NO;
+        self.loginBtnTopCon.constant = 100;
     }else {
         self.type = myLoginType;
         [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         [sender setTitle:@"新用户" forState:UIControlStateNormal];
+        
+        self.confirepasswordTF.hidden = YES;
+        self.secturyBtn.hidden = YES;
+        self.loginBtnTopCon.constant = 50;
     }
     
 }
@@ -162,17 +204,26 @@ typedef NS_ENUM(NSInteger,LoginType) {
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField == self.phoneTF ) {
-        self.phoneTF.layer.borderColor = selectColor.CGColor;
+        self.phoneTF.layer.borderColor = UIColor.systemRedColor.CGColor;
         self.phoneTF.layer.borderWidth = 1;
         self.passwordTF.layer.borderColor = GrayBlogColor.CGColor;
         self.passwordTF.layer.borderWidth = 1;
-        
+        self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
+        self.confirepasswordTF.layer.borderWidth = 1;
+    }else if (textField == self.passwordTF){
+        self.phoneTF.layer.borderColor = GrayBlogColor.CGColor;
+        self.phoneTF.layer.borderWidth = 1;
+        self.passwordTF.layer.borderColor = UIColor.systemRedColor.CGColor;
+        self.passwordTF.layer.borderWidth = 1;
+        self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
+        self.confirepasswordTF.layer.borderWidth = 1;
     }else {
         self.phoneTF.layer.borderColor = GrayBlogColor.CGColor;
         self.phoneTF.layer.borderWidth = 1;
-        self.passwordTF.layer.borderColor = selectColor.CGColor;
+        self.passwordTF.layer.borderColor = GrayBlogColor.CGColor;
         self.passwordTF.layer.borderWidth = 1;
-
+        self.confirepasswordTF.layer.borderColor = UIColor.systemRedColor.CGColor;
+        self.confirepasswordTF.layer.borderWidth = 1;
     }
     return YES;
 }
@@ -191,9 +242,45 @@ typedef NS_ENUM(NSInteger,LoginType) {
 - (void)textDidChange:(id<UITextInput>)textInput {
     if (textInput == self.phoneTF) {
         if ([self.phoneTF validate]) {
-            if (self.passwordTF.text.length > 5) {
-                self.loginBtn.backgroundColor = HexCOLOR(0x318311);
-                self.loginBtn.enabled = YES;
+            if (self.passwordTF.text.length > 5 && self.passwordTF.text.length >5) {
+                if (self.type == myLoginType) {
+                    self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                    self.loginBtn.enabled = YES;
+                }else {
+                    if ([self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
+                        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                        self.loginBtn.enabled = YES;
+                    }else {
+                        self.loginBtn.backgroundColor = GrayBlogColor;
+                        self.loginBtn.enabled = NO;
+
+                    }
+                }
+                
+            }else {
+                self.loginBtn.backgroundColor = GrayBlogColor;
+                self.loginBtn.enabled = NO;
+            }
+        }else {
+            self.loginBtn.backgroundColor = GrayBlogColor;
+            self.loginBtn.enabled = NO;
+        }
+    }else if (textInput == self.passwordTF){
+        if (self.passwordTF.text.length > 5) {
+            if ([self.phoneTF validate]) {
+                if (self.type == myLoginType) {
+                    self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                    self.loginBtn.enabled = YES;
+                }else {
+                    if ([self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
+                        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                        self.loginBtn.enabled = YES;
+                    }else {
+                        self.loginBtn.backgroundColor = GrayBlogColor;
+                        self.loginBtn.enabled = NO;
+                    }
+                }
+                
             }else {
                 self.loginBtn.backgroundColor = GrayBlogColor;
                 self.loginBtn.enabled = NO;
@@ -203,8 +290,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
             self.loginBtn.enabled = NO;
         }
     }else {
-        if (self.passwordTF.text.length > 5) {
-            if ([self.phoneTF validate]) {
+        if (self.confirepasswordTF.text.length > 5) {
+            if ([self.phoneTF validate] && [self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
                 self.loginBtn.backgroundColor = HexCOLOR(0x318311);
                 self.loginBtn.enabled = YES;
             }else {
@@ -222,6 +309,43 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    
+    self.phoneTF.layer.borderColor = GrayBlogColor.CGColor;
+    self.phoneTF.layer.borderWidth = 1;
+    self.passwordTF.layer.borderColor = GrayBlogColor.CGColor;
+    self.passwordTF.layer.borderWidth = 1;
+    self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
+    self.confirepasswordTF.layer.borderWidth = 1;
+}
+
+- (IBAction)passwordSecturyClick1:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    self.passwordTF.secureTextEntry = !sender.selected;
+}
+
+- (IBAction)passwordSecturyClick2:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    self.confirepasswordTF.secureTextEntry = !sender.selected;
+}
+
+
+
+- (WMZCodeView *)codeView {
+    if (!_codeView) {
+        _codeView = [[WMZCodeView shareInstance] addCodeViewWithType:CodeTypeSlider withImageName:@"slder" witgFrame:CGRectMake(40, screenHeight-200, [UIScreen mainScreen].bounds.size.width-80, 50)  withBlock:^(BOOL success) {
+            if (success) {
+                NSLog(@"成功");
+                if (self.type == myLoginType) {
+                    [self logintAction];
+                }else {
+                    [self registerAction];
+                }
+
+            }
+        }];
+        _codeView.hidden = YES;
+    }
+    return _codeView;
 }
 
 @end

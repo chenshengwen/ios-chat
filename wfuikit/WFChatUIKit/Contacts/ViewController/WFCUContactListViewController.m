@@ -309,7 +309,7 @@ static NSMutableDictionary *hanziStringDict = nil;
         return dataSource.count;
     } else {
         if (section == 0) {
-            return 3;
+            return 2;//隐藏频道chensw
         } else {
             dataSource = self.allFriendSectionDic[self.allKeys[section - 1]];
             return dataSource.count;

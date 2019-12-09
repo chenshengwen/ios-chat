@@ -112,15 +112,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        return 0;
     } else if (section == 1) {
-        return 3; //
+        return 2; //
     } else if (section == 2) {
-        return 2; // 用户协议和隐私声明
+        return 0; // 用户协议和隐私声明
     } else if (section == 3) {
         return 1; //举报
     } else if (section == 4) {
-        return 1; //diagnose
+        return 0; //diagnose
     } else if (section == 5) {
         return 1; //logout
     }
@@ -179,7 +179,7 @@
 }
  
 - (void)onLogoutBtn:(id)sender {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedName"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedName"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedUserId"];
     [[WFCCNetworkService sharedInstance] disconnect:YES];
