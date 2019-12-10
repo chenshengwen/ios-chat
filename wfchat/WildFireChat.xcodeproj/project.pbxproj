@@ -69,6 +69,8 @@
 		2FF07F5E21F82E7200A78A62 /* WFCMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5421F82E7200A78A62 /* WFCMeTableViewController.m */; };
 		2FF07F5F21F82E7200A78A62 /* WFCSecurityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */; };
 		60131569239E8A3200D4E841 /* WMZCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60131568239E8A3200D4E841 /* WMZCodeView.m */; };
+		60EF4B8E239FA39F0086CEC1 /* MyEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */; };
+		60EF4B8F239FA39F0086CEC1 /* MyEditPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */; };
 		60F30481239C9397001215AE /* MyBaseWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */; };
 		60F30485239C93D2001215AE /* NSString+category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30484239C93D2001215AE /* NSString+category.m */; };
 		60F3048B239C9F99001215AE /* MyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30489239C9F99001215AE /* MyLoginViewController.m */; };
@@ -266,6 +268,9 @@
 		2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFCSecurityTableViewController.m; sourceTree = "<group>"; };
 		60131567239E8A3200D4E841 /* WMZCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZCodeView.h; sourceTree = "<group>"; };
 		60131568239E8A3200D4E841 /* WMZCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZCodeView.m; sourceTree = "<group>"; };
+		60EF4B8B239FA39F0086CEC1 /* MyEditPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditPasswordViewController.h; sourceTree = "<group>"; };
+		60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyEditPasswordViewController.m; sourceTree = "<group>"; };
+		60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEditPasswordViewController.xib; sourceTree = "<group>"; };
 		60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseWebViewViewController.m; sourceTree = "<group>"; };
 		60F30480239C9397001215AE /* MyBaseWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseWebViewViewController.h; sourceTree = "<group>"; };
 		60F30483239C93D2001215AE /* NSString+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+category.h"; sourceTree = "<group>"; };
@@ -718,6 +723,9 @@
 				90E927F122DFF45F00F168BC /* WFCPrivacyTableViewController.m */,
 				2F50BE82237970780049CD39 /* WFCDiagnoseViewController.h */,
 				2F50BE83237970780049CD39 /* WFCDiagnoseViewController.m */,
+				60EF4B8B239FA39F0086CEC1 /* MyEditPasswordViewController.h */,
+				60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */,
+				60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -959,6 +967,7 @@
 			files = (
 				2E1D20071FAF0AE600F4405D /* LaunchScreen.storyboard in Resources */,
 				2FBF915D232F6A47003521FF /* InfoPlist.strings in Resources */,
+				60EF4B8F239FA39F0086CEC1 /* MyEditPasswordViewController.xib in Resources */,
 				2BCEC537232E238E00D55E0D /* wfc.strings in Resources */,
 				2F143A72217F7DA900B3E38A /* Stickers.bundle in Resources */,
 				6E616DA020AB3435002CB8BE /* LICENSE.md in Resources */,
@@ -1043,6 +1052,7 @@
 				60F304BE239CD0F8001215AE /* BWIdentifyCodeValidator.m in Sources */,
 				9085427E222A00430009713D /* DIYScanViewController.m in Sources */,
 				2F94FCA422291813005BD461 /* LBXPermissionPhotos.m in Sources */,
+				60EF4B8E239FA39F0086CEC1 /* MyEditPasswordViewController.m in Sources */,
 				90854281222A04C80009713D /* QQLBXScanViewController.m in Sources */,
 				90E927F222DFF45F00F168BC /* WFCPrivacyTableViewController.m in Sources */,
 				2F94FCA722291813005BD461 /* LBXPermissionCamera.m in Sources */,

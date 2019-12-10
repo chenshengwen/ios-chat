@@ -8,6 +8,7 @@
 
 #import "WFCSecurityTableViewController.h"
 #import <WFChatClient/WFCChatClient.h>
+#import "MyEditPasswordViewController.h"
 
 @interface WFCSecurityTableViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong)UITableView *tableView;
@@ -41,6 +42,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         //cell.textLabel.text = @"修改密码";
+        MyEditPasswordViewController *vc = [MyEditPasswordViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

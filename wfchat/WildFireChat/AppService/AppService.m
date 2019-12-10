@@ -92,6 +92,19 @@ static AppService *sharedSingleton = nil;
    
 }
 
+- (void)modifyPassword:(NSDictionary *)dic success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {
+    
+    [self post:@"/send_code" data:dic success:^(NSDictionary *dict) {
+           if([dict[@"code"] intValue] == 0) {
+               successBlock();
+           } else {
+               errorBlock(@"error");
+           }
+       } error:^(NSError * _Nonnull error) {
+           errorBlock(error.localizedDescription);
+       }];
+}
+
 - (void)sendCode:(NSString *)phoneNumber success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {
     
     [self post:@"/send_code" data:@{@"mobile":phoneNumber} success:^(NSDictionary *dict) {
