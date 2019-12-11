@@ -80,7 +80,10 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     if (!BWIsNull(password)) {
         self.passwordTF.text = password;
+        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+        self.loginBtn.enabled = YES;
     }
+    
 
 }
 - (IBAction)loginClick:(UIButton *)sender {
