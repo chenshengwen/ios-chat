@@ -71,6 +71,7 @@
 		60131569239E8A3200D4E841 /* WMZCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60131568239E8A3200D4E841 /* WMZCodeView.m */; };
 		60EF4B8E239FA39F0086CEC1 /* MyEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */; };
 		60EF4B8F239FA39F0086CEC1 /* MyEditPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */; };
+		60F2272123AA697D002F596B /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F2272023AA697D002F596B /* UIImage+Category.m */; };
 		60F30481239C9397001215AE /* MyBaseWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */; };
 		60F30485239C93D2001215AE /* NSString+category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30484239C93D2001215AE /* NSString+category.m */; };
 		60F3048B239C9F99001215AE /* MyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F30489239C9F99001215AE /* MyLoginViewController.m */; };
@@ -271,6 +272,8 @@
 		60EF4B8B239FA39F0086CEC1 /* MyEditPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditPasswordViewController.h; sourceTree = "<group>"; };
 		60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyEditPasswordViewController.m; sourceTree = "<group>"; };
 		60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEditPasswordViewController.xib; sourceTree = "<group>"; };
+		60F2271F23AA697D002F596B /* UIImage+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Category.h"; sourceTree = "<group>"; };
+		60F2272023AA697D002F596B /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
 		60F3047F239C9396001215AE /* MyBaseWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseWebViewViewController.m; sourceTree = "<group>"; };
 		60F30480239C9397001215AE /* MyBaseWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseWebViewViewController.h; sourceTree = "<group>"; };
 		60F30483239C93D2001215AE /* NSString+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+category.h"; sourceTree = "<group>"; };
@@ -742,6 +745,8 @@
 		60F30482239C93C1001215AE /* category */ = {
 			isa = PBXGroup;
 			children = (
+				60F2271F23AA697D002F596B /* UIImage+Category.h */,
+				60F2272023AA697D002F596B /* UIImage+Category.m */,
 				60F30483239C93D2001215AE /* NSString+category.h */,
 				60F30484239C93D2001215AE /* NSString+category.m */,
 				60F304C3239CD235001215AE /* NSString+RegexCategory.h */,
@@ -900,7 +905,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E1D200D1FAF0AE600F4405D /* Build configuration list for PBXNativeTarget "WildFireChat" */;
 			buildPhases = (
-				2BCBC82E23954AAF009321AD /* ShellScript */,
+				2BCBC82E23954AAF009321AD /* Run Script */,
 				2E1D1FF31FAF0AE600F4405D /* Sources */,
 				2E1D1FF41FAF0AE600F4405D /* Frameworks */,
 				2E1D1FF51FAF0AE600F4405D /* Resources */,
@@ -989,7 +994,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2BCBC82E23954AAF009321AD /* ShellScript */ = {
+		2BCBC82E23954AAF009321AD /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -998,13 +1003,15 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1081,6 +1088,7 @@
 				90FF267E222AB34B0001D8AF /* PCLoginConfirmViewController.m in Sources */,
 				909ACDB321304CD900A64FE7 /* ChatroomItemCell.m in Sources */,
 				9085428B222A07280009713D /* UIImageView+CornerRadius.m in Sources */,
+				60F2272123AA697D002F596B /* UIImage+Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1248,7 +1256,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = 85C5K5F7LC;
+				DEVELOPMENT_TEAM = L35R378236;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1266,7 +1274,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.17;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.wildfirechat.messange-csw";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange;
 				PRODUCT_NAME = "【盛世】";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1285,7 +1293,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = ZTJABWRJ5T;
+				DEVELOPMENT_TEAM = L35R378236;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1303,10 +1311,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.17;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.wildfirechat.messange;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange;
 				PRODUCT_NAME = "【盛世】";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = wildfirechat_distribution;
+				PROVISIONING_PROFILE_SPECIFIER = cn.shengshichat.messange;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};

@@ -15,7 +15,7 @@
 #import "UILabel+YBAttributeTextTapAction.h"
 #import "WFCPrivacyViewController.h"
 #import "AppService.h"
-//#import "BWPasswordValidator.h"
+#import "BWPasswordValidator.h"
 #import "BWPhoneNumberValidator.h"
 #import "WMZCodeView.h"
 
@@ -49,24 +49,25 @@ typedef NS_ENUM(NSInteger,LoginType) {
     self.phoneTF.leftViewMode = UITextFieldViewModeAlways;
     self.phoneTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
     self.phoneTF.validator = [BWPhoneNumberValidator new];
-    [self.phoneTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+//    [self.phoneTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     
     self.passwordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.passwordTF.layer.borderWidth = 1;
     self.passwordTF.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
-//    self.passwordTF.validator = [BWPasswordValidator new];
-    [self.passwordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.passwordTF.validator = [BWPasswordValidator new];
+//    [self.passwordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.confirepasswordTF.layer.borderWidth = 1;
     self.confirepasswordTF.leftViewMode = UITextFieldViewModeAlways;
     self.confirepasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
-    [self.confirepasswordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.confirepasswordTF.validator = [BWPasswordValidator new];
+//    [self.confirepasswordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
-    self.loginBtn.backgroundColor = GrayBlogColor;
-    self.loginBtn.enabled = NO;
+//    self.loginBtn.backgroundColor = GrayBlogColor;
+//    self.loginBtn.enabled = NO;
     
     self.confirepasswordTF.hidden = YES;
     self.secturyBtn.hidden = YES;
@@ -84,21 +85,16 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 }
 - (IBAction)loginClick:(UIButton *)sender {
-    
-    
-    NSString *user = self.phoneTF.text;
-    NSString *password = self.passwordTF.text;
-
-    if (!user.length || !password.length) {
-      return;
-    }
-
     [self resetKeyboard:nil];
     
     
-    [self verfirSlider];
+//    [self verfirSlider];
 
-    
+    if (self.type == myLoginType) {
+        [self logintAction];
+    }else {
+        [self registerAction];
+    }
      
 }
 
@@ -108,6 +104,17 @@ typedef NS_ENUM(NSInteger,LoginType) {
 }
 
 - (void)logintAction {
+    
+    if (![self.phoneTF validate]) {
+        [MBProgressHUD showMessage:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    if (![self.passwordTF validate]) {
+        [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
+        return;
+    }
+    
     
        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
        hud.label.text = @"登陆中...";
@@ -146,6 +153,24 @@ typedef NS_ENUM(NSInteger,LoginType) {
 }
 
 - (void)registerAction {
+    
+    if (![self.phoneTF validate]) {
+        [MBProgressHUD showMessage:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    if (![self.passwordTF validate]) {
+        [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
+        return;
+
+    }
+    
+    if (![self.confirepasswordTF validate]) {
+        [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
+        return;
+    }
+
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"注册中...";
     [hud showAnimated:YES];
@@ -198,7 +223,6 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     [self.passwordTF resignFirstResponder];
     
-    self.loginBtn.backgroundColor = HexCOLOR(0x318311);
 }
 
 #pragma mark - UITextFieldDelegate
@@ -230,13 +254,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField == self.phoneTF) {
-        BWTextField *customField = (BWTextField *)textField;
-        return [customField validateCharacter:string range:range];
-
-    }
-    
-    return YES;
+    BWTextField *customField = (BWTextField *)textField;
+    return [customField validateCharacter:string range:range];
 }
 
 - (void)textDidChange:(id<UITextInput>)textInput {

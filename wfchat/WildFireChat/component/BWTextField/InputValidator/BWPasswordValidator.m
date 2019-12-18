@@ -14,7 +14,7 @@
     
     if (input.text.length <= 0) {
         
-        //        self.errorMessage = @"没有输入!";
+                self.errorMessage = @"没有输入!";
         
     } else {
         

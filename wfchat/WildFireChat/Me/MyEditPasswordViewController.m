@@ -8,12 +8,14 @@
 
 #import "MyEditPasswordViewController.h"
 #import "AppService.h"
+#import "BWPasswordValidator.h"
+#import "BWTextField.h"
 
-@interface MyEditPasswordViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *currentPasswordTF;
-@property (weak, nonatomic) IBOutlet UITextField *myPasswordTF;
+@interface MyEditPasswordViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet BWTextField *currentPasswordTF;
+@property (weak, nonatomic) IBOutlet BWTextField *myPasswordTF;
 
-@property (weak, nonatomic) IBOutlet UITextField *confirPasswordTF;
+@property (weak, nonatomic) IBOutlet BWTextField *confirPasswordTF;
 @property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
 
 @end
@@ -24,22 +26,26 @@
     [super viewDidLoad];
     
     self.title = @"修改密码";
-    
+        
     self.currentPasswordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.currentPasswordTF.layer.borderWidth = 1;
     self.currentPasswordTF.leftViewMode = UITextFieldViewModeAlways;
     self.currentPasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
+    self.currentPasswordTF.validator = [BWPasswordValidator new];
     
     self.myPasswordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.myPasswordTF.layer.borderWidth = 1;
     self.myPasswordTF.leftViewMode = UITextFieldViewModeAlways;
     self.myPasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
+    self.myPasswordTF.validator = [BWPasswordValidator new];
+
     
     self.confirPasswordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.confirPasswordTF.layer.borderWidth = 1;
     self.confirPasswordTF.leftViewMode = UITextFieldViewModeAlways;
     self.confirPasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
-    
+    self.confirPasswordTF.validator = [BWPasswordValidator new];
+
     
     
 }
@@ -47,15 +53,11 @@
 
 - (IBAction)modifyClick:(UIButton *)sender {
     
-    if (self.currentPasswordTF.text.length == 0 || self.myPasswordTF.text.length == 0 || self.confirPasswordTF.text.length == 0) {
-        [MBProgressHUD showMessage:@"密码不能为空"];
+    if (![self.currentPasswordTF validate] || ![self.myPasswordTF validate] || ![self.confirPasswordTF validate]) {
+        [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
         return;
     }
-    
-    if (self.myPasswordTF.text.length < 6 || self.confirPasswordTF.text.length < 6) {
-        [MBProgressHUD showMessage:@"输入的密码长度不能小于6位数"];
-        return;
-    }
+
     
     if (![self.myPasswordTF.text isEqualToString:self.confirPasswordTF.text]) {
         [MBProgressHUD showMessage:@"两次输入的密码不一致"];
@@ -98,6 +100,12 @@
 - (IBAction)eyeClick3:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.confirPasswordTF.secureTextEntry = !sender.selected;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BWTextField *customField = (BWTextField *)textField;
+    return [customField validateCharacter:string range:range];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

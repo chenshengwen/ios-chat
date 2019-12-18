@@ -241,6 +241,7 @@
         if (status == kConnectionStatusRejected || status == kConnectionStatusTokenIncorrect || status == kConnectionStatusSecretKeyMismatch) {
             [[WFCCNetworkService sharedInstance] disconnect:YES];
         } else if (status == kConnectionStatusLogout) {
+            
             UIViewController *loginVC = [[MyLoginViewController alloc] init];
             self.window.rootViewController = loginVC;
         } 

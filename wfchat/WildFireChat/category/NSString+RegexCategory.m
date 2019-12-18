@@ -140,7 +140,7 @@
 //
 //    return [self isValidateByRegex:regex] && [self isValidateByRegex:regex2] && [self isValidateByRegex:regex3] && [self isValidateByRegex:regex4];
     
-    NSString *regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z!@#$%^&*.]{6,14}$";
+    NSString *regex = @"(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,15}$";
     return [self isValidateByRegex:regex];
 }
 

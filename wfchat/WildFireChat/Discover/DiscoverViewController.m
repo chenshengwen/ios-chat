@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     if(NSClassFromString(@"SDTimeLineTableViewController")) {
         self.hasMoments = YES;
     } else {

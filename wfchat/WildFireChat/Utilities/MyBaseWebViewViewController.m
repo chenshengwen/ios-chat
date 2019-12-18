@@ -8,6 +8,7 @@
 
 #import "MyBaseWebViewViewController.h"
 #import "NSString+category.h"
+#import "UIImage+Category.h"
 
 @interface MyBaseWebViewViewController ()<WKUIDelegate, WKNavigationDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UIProgressView *myProgressView;
@@ -18,6 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    UIImage *navigationBarBackGraoudImage = [UIImage imageWithColor:[UIColor redColor]];
+//    [self.navigationController.navigationBar setBackgroundImage:[navigationBarBackGraoudImage
+//                   stretchableImageWithLeftCapWidth:navigationBarBackGraoudImage.size.width
+//                   topCapHeight:navigationBarBackGraoudImage.size.height]
+//    forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.translucent = YES;
+
+//    self.navigationController.navigationBar.barTintColor = [UIColor redColor];
+    
+    [self.navigationController.navigationBar setHidden:YES];
     
     [self creatWebView];
 
