@@ -113,7 +113,7 @@
 - (UIProgressView *)myProgressView
 {
     if (_myProgressView == nil) {
-        _myProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavigationBarH, [UIScreen mainScreen].bounds.size.width, 1)];
+        _myProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kStatusBarH, [UIScreen mainScreen].bounds.size.width, 1)];
         _myProgressView.tintColor = UIColor.redColor;
         _myProgressView.trackTintColor = UIColor.whiteColor;
     }
