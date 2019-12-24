@@ -38,10 +38,10 @@
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:WFCString(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
-    UIAlertAction *actionSubscribe = [UIAlertAction actionWithTitle:WFCString(@"SubscribeChannel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIViewController *vc = [[WFCUSearchChannelViewController alloc] init];
-        [ws.navigationController pushViewController:vc animated:YES];
-    }];
+//    UIAlertAction *actionSubscribe = [UIAlertAction actionWithTitle:WFCString(@"SubscribeChannel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        UIViewController *vc = [[WFCUSearchChannelViewController alloc] init];
+//        [ws.navigationController pushViewController:vc animated:YES];
+//    }];
     
     UIAlertAction *actionCreate = [UIAlertAction actionWithTitle:WFCString(@"CreateChannel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIViewController *vc = [[WFCUCreateChannelViewController alloc] init];
@@ -49,7 +49,7 @@
     }];
     
     //把action添加到actionSheet里
-    [actionSheet addAction:actionSubscribe];
+//    [actionSheet addAction:actionSubscribe];
     [actionSheet addAction:actionCreate];
     [actionSheet addAction:actionCancel];
     

@@ -81,8 +81,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     if (!BWIsNull(password)) {
         self.passwordTF.text = password;
-        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
-        self.loginBtn.enabled = YES;
+        self.loginBtn.backgroundColor = kRedThemColor;
     }
     
 
@@ -266,11 +265,11 @@ typedef NS_ENUM(NSInteger,LoginType) {
         if ([self.phoneTF validate]) {
             if (self.passwordTF.text.length > 5 && self.passwordTF.text.length >5) {
                 if (self.type == myLoginType) {
-                    self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                    self.loginBtn.backgroundColor = kRedThemColor;
                     self.loginBtn.enabled = YES;
                 }else {
                     if ([self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
-                        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                        self.loginBtn.backgroundColor = kRedThemColor;
                         self.loginBtn.enabled = YES;
                     }else {
                         self.loginBtn.backgroundColor = GrayBlogColor;
@@ -291,11 +290,11 @@ typedef NS_ENUM(NSInteger,LoginType) {
         if (self.passwordTF.text.length > 5) {
             if ([self.phoneTF validate]) {
                 if (self.type == myLoginType) {
-                    self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                    self.loginBtn.backgroundColor = kRedThemColor;
                     self.loginBtn.enabled = YES;
                 }else {
                     if ([self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
-                        self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                        self.loginBtn.backgroundColor = kRedThemColor;
                         self.loginBtn.enabled = YES;
                     }else {
                         self.loginBtn.backgroundColor = GrayBlogColor;
@@ -314,7 +313,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
     }else {
         if (self.confirepasswordTF.text.length > 5) {
             if ([self.phoneTF validate] && [self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
-                self.loginBtn.backgroundColor = HexCOLOR(0x318311);
+                self.loginBtn.backgroundColor = kRedThemColor;
                 self.loginBtn.enabled = YES;
             }else {
                 self.loginBtn.backgroundColor = GrayBlogColor;

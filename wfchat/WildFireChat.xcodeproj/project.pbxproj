@@ -69,6 +69,9 @@
 		2FF07F5E21F82E7200A78A62 /* WFCMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5421F82E7200A78A62 /* WFCMeTableViewController.m */; };
 		2FF07F5F21F82E7200A78A62 /* WFCSecurityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */; };
 		60131569239E8A3200D4E841 /* WMZCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60131568239E8A3200D4E841 /* WMZCodeView.m */; };
+		60432B6623AF9D88007985F9 /* shengshi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60432B6523AF9D88007985F9 /* shengshi.plist */; };
+		6050F98423B0F05A0060D4CA /* UINavigationBar+handle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050F98223B0F0590060D4CA /* UINavigationBar+handle.m */; };
+		60DFEAEA23B2630A00A72F0E /* WFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DFEAE923B2630A00A72F0E /* WFAlertView.m */; };
 		60EF4B8E239FA39F0086CEC1 /* MyEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */; };
 		60EF4B8F239FA39F0086CEC1 /* MyEditPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */; };
 		60F2272123AA697D002F596B /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F2272023AA697D002F596B /* UIImage+Category.m */; };
@@ -269,6 +272,11 @@
 		2FF07F5521F82E7200A78A62 /* WFCSecurityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFCSecurityTableViewController.m; sourceTree = "<group>"; };
 		60131567239E8A3200D4E841 /* WMZCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZCodeView.h; sourceTree = "<group>"; };
 		60131568239E8A3200D4E841 /* WMZCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZCodeView.m; sourceTree = "<group>"; };
+		60432B6523AF9D88007985F9 /* shengshi.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = shengshi.plist; sourceTree = "<group>"; };
+		6050F98223B0F0590060D4CA /* UINavigationBar+handle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+handle.m"; sourceTree = "<group>"; };
+		6050F98323B0F05A0060D4CA /* UINavigationBar+handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+handle.h"; sourceTree = "<group>"; };
+		60DFEAE823B2630A00A72F0E /* WFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFAlertView.h; sourceTree = "<group>"; };
+		60DFEAE923B2630A00A72F0E /* WFAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFAlertView.m; sourceTree = "<group>"; };
 		60EF4B8B239FA39F0086CEC1 /* MyEditPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditPasswordViewController.h; sourceTree = "<group>"; };
 		60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyEditPasswordViewController.m; sourceTree = "<group>"; };
 		60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEditPasswordViewController.xib; sourceTree = "<group>"; };
@@ -715,6 +723,7 @@
 				2FF07F4721F82E7200A78A62 /* WFCAboutViewController.m */,
 				2FF07F4821F82E7200A78A62 /* WFCMeTableViewCell.h */,
 				2FF07F4921F82E7200A78A62 /* WFCSettingTableViewController.m */,
+				60432B6523AF9D88007985F9 /* shengshi.plist */,
 				2FF07F4B21F82E7200A78A62 /* WFCMeTableViewController.h */,
 				2FF07F4C21F82E7200A78A62 /* WFCSecurityTableViewController.h */,
 				2FF07F5121F82E7200A78A62 /* WFCMeTableViewCell.m */,
@@ -751,6 +760,8 @@
 				60F30484239C93D2001215AE /* NSString+category.m */,
 				60F304C3239CD235001215AE /* NSString+RegexCategory.h */,
 				60F304C4239CD235001215AE /* NSString+RegexCategory.m */,
+				6050F98323B0F05A0060D4CA /* UINavigationBar+handle.h */,
+				6050F98223B0F0590060D4CA /* UINavigationBar+handle.m */,
 				60F304D3239CE310001215AE /* MBProgressHUD+JDW.h */,
 				60F304D4239CE310001215AE /* MBProgressHUD+JDW.m */,
 			);
@@ -769,6 +780,8 @@
 			isa = PBXGroup;
 			children = (
 				60F3048E239CD0F8001215AE /* BWTextField */,
+				60DFEAE823B2630A00A72F0E /* WFAlertView.h */,
+				60DFEAE923B2630A00A72F0E /* WFAlertView.m */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -977,6 +990,7 @@
 				2F143A72217F7DA900B3E38A /* Stickers.bundle in Resources */,
 				6E616DA020AB3435002CB8BE /* LICENSE.md in Resources */,
 				2F1B0DD321E1B38100139CB1 /* ring.caf in Resources */,
+				60432B6623AF9D88007985F9 /* shengshi.plist in Resources */,
 				2F143A70217F7DA900B3E38A /* Emoj.plist in Resources */,
 				60F3048C239C9F99001215AE /* MyLoginViewController.xib in Resources */,
 				2E1D20041FAF0AE600F4405D /* Assets.xcassets in Resources */,
@@ -1077,8 +1091,10 @@
 				2FF07F5921F82E7200A78A62 /* WFCAboutViewController.m in Sources */,
 				2F94FCA822291813005BD461 /* LBXPermission.m in Sources */,
 				60F304BB239CD0F8001215AE /* BWPasswordValidator.m in Sources */,
+				6050F98423B0F05A0060D4CA /* UINavigationBar+handle.m in Sources */,
 				2E1D1FFC1FAF0AE600F4405D /* AppDelegate.m in Sources */,
 				2F94FC9D22291813005BD461 /* UIAlertController+supportedInterfaceOrientations.m in Sources */,
+				60DFEAEA23B2630A00A72F0E /* WFAlertView.m in Sources */,
 				60F304B4239CD0F8001215AE /* BWRecommendValidator.m in Sources */,
 				60F304B6239CD0F8001215AE /* BWMoneyValidator.m in Sources */,
 				60F3048B239C9F99001215AE /* MyLoginViewController.m in Sources */,
@@ -1272,7 +1288,7 @@
 				INFOPLIST_FILE = WildFireChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.17;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange;
 				PRODUCT_NAME = "【盛世】";
@@ -1309,7 +1325,7 @@
 				INFOPLIST_FILE = WildFireChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.17;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange;
 				PRODUCT_NAME = "【盛世】";

@@ -75,6 +75,7 @@ static NSMutableDictionary *hanziStringDict = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+        
     CGRect frame = self.view.frame;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     self.tableView.delegate = self;
@@ -118,6 +119,7 @@ static NSMutableDictionary *hanziStringDict = nil;
     }
     
     [self.searchController.searchBar setPlaceholder:WFCString(@"SearchContact")];
+    
 
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = _searchController;

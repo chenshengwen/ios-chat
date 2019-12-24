@@ -51,6 +51,8 @@ alpha:alphaValue]
 #define selectColor   HexCOLOR(0x00A826)
 /*   灰色   */
 #define GrayBlogColor  HexCOLOR(0xD1D2D3)
+//主题红
+#define kRedThemColor HexCOLOR(0xEF413E)
 
 // 是否为空字符串
 #define BWIsNull(string) [BWDealNullTool isNullValue:string]

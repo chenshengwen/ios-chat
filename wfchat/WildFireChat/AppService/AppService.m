@@ -29,10 +29,10 @@ static AppService *sharedSingleton = nil;
 - (void)login:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *token, BOOL newUser))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
     [self post:@"/login" data:@{@"mobile":user, @"password":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS)} success:^(NSDictionary *dict) {
-        if([dict[@"code"] intValue] == 0 && dict != nil) {
-            NSString *userId = dict[@"result"][@"userId"];
-            NSString *token = dict[@"result"][@"token"];
-            BOOL newUser = [dict[@"result"][@"register"] boolValue];
+        if([dict[@"status"] intValue] == 200 && dict != nil) {
+            NSString *userId = dict[@"data"][@"userId"];
+            NSString *token = dict[@"data"][@"token"];
+            BOOL newUser = [dict[@"data"][@"register"] boolValue];
             successBlock(userId, token, newUser);
         } else {
             errorBlock([dict[@"code"] intValue], dict[@"message"]);
@@ -50,19 +50,21 @@ static AppService *sharedSingleton = nil;
     /*   获取   */
     dispatch_async(queue, ^{
         __block BOOL isExist = NO;
+        __block NSString *message = @"";
         NSString *url = [NSString stringWithFormat:@"/user/%@",user];
         [self post:url data:nil success:^(NSDictionary *dict) {
-            if([dict[@"code"] intValue] == 0 && dict != nil) {
-                isExist = YES;
-            } else {
+            if([dict[@"data"] boolValue] == NO && dict != nil && [dict[@"status"] intValue] == 200) {
                 isExist = NO;
+            } else {
+                isExist = YES;
+                message = @"用户已存在";
             }
             
             dispatch_semaphore_signal(semaphore);
 
         } error:^(NSError * _Nonnull error) {
             isExist = NO;
-            
+            message = @"网络错误";
             dispatch_semaphore_signal(semaphore);
 
         }];
@@ -71,14 +73,14 @@ static AppService *sharedSingleton = nil;
 
         if (isExist) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                errorBlock(-1, @"用户已存在");
+                errorBlock(-1, message);
             });
             return ;
         }
         [self post:@"/register" data:@{@"mobile":user, @"password":password} success:^(NSDictionary *dict) {
-               if([dict[@"code"] intValue] == 0 && dict != nil) {
-                   NSString *userId = dict[@"result"][@"userId"];
-                   NSString *name = dict[@"result"][@"name"];
+               if([dict[@"status"] intValue] == 200 && dict != nil) {
+                   NSString *userId = dict[@"data"][@"userId"];
+                   NSString *name = dict[@"data"][@"name"];
                    successBlock(userId, name);
                } else {
                    errorBlock([dict[@"code"] intValue], dict[@"message"]);
@@ -94,9 +96,27 @@ static AppService *sharedSingleton = nil;
 
 - (void)modifyPassword:(NSDictionary *)dic success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {
     
-    [self post:@"/send_code" data:dic success:^(NSDictionary *dict) {
-           if([dict[@"code"] intValue] == 0) {
+    [self post:@"/restPassword" data:dic success:^(NSDictionary *dict) {
+           if([dict[@"status"] intValue] == 200 && dict != nil) {
                successBlock();
+           } else {
+               errorBlock(@"error");
+           }
+       } error:^(NSError * _Nonnull error) {
+           errorBlock(error.localizedDescription);
+       }];
+}
+
+- (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl))successBlock error:(void(^)(NSString *message))errorBlock {
+    
+    [self post:@"/app/version" data:dic success:^(NSDictionary *dict) {
+           if([dict[@"status"] intValue] == 200 && dict != nil) {
+               
+               int myType = [dict[@"data"][@"type"] intValue];
+               NSString *myUpgradePrompt = dict[@"data"][@"upgradePrompt"];
+               NSString *url = dict[@"data"][@"apkUrl"];
+               
+               successBlock(myType, myUpgradePrompt,url);
            } else {
                errorBlock(@"error");
            }
@@ -217,6 +237,8 @@ static AppService *sharedSingleton = nil;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedToken"];
+    [manager.requestSerializer setValue:token forHTTPHeaderField:@"token"];
     
     [manager POST:[APP_SERVER_ADDRESS stringByAppendingPathComponent:path]
        parameters:data

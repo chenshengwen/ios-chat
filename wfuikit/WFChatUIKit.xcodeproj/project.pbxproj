@@ -343,6 +343,8 @@
 		2FD2EE81218F15B500CBA8B0 /* WFCUVerifyRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2EE7F218F15B500CBA8B0 /* WFCUVerifyRequestViewController.m */; };
 		2FE689A821AE9C0200DE54CC /* WFCUConversationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE689A621AE9C0100DE54CC /* WFCUConversationSearchTableViewController.m */; };
 		2FE689A921AE9C0200DE54CC /* WFCUConversationSearchTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FE689A721AE9C0200DE54CC /* WFCUConversationSearchTableViewController.h */; };
+		6050F98723B0F1AC0060D4CA /* UINavigationBar+handle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050F98523B0F1AC0060D4CA /* UINavigationBar+handle.m */; };
+		6050F98823B0F1AC0060D4CA /* UINavigationBar+handle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6050F98623B0F1AC0060D4CA /* UINavigationBar+handle.h */; };
 		901E270621F152F600A163CB /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 901E270121F152F600A163CB /* LICENSE.md */; };
 		901E270721F152F600A163CB /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 901E270421F152F600A163CB /* WebRTC.framework */; };
 		901E270821F152F600A163CB /* WFAVEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 901E270521F152F600A163CB /* WFAVEngineKit.framework */; };
@@ -693,6 +695,8 @@
 		2FD2EE7F218F15B500CBA8B0 /* WFCUVerifyRequestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFCUVerifyRequestViewController.m; sourceTree = "<group>"; };
 		2FE689A621AE9C0100DE54CC /* WFCUConversationSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFCUConversationSearchTableViewController.m; sourceTree = "<group>"; };
 		2FE689A721AE9C0200DE54CC /* WFCUConversationSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFCUConversationSearchTableViewController.h; sourceTree = "<group>"; };
+		6050F98523B0F1AC0060D4CA /* UINavigationBar+handle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+handle.m"; sourceTree = "<group>"; };
+		6050F98623B0F1AC0060D4CA /* UINavigationBar+handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+handle.h"; sourceTree = "<group>"; };
 		901E270121F152F600A163CB /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		901E270421F152F600A163CB /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		901E270521F152F600A163CB /* WFAVEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WFAVEngineKit.framework; sourceTree = "<group>"; };
@@ -1279,6 +1283,8 @@
 		2F55103F217F5CC100F56C26 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				6050F98623B0F1AC0060D4CA /* UINavigationBar+handle.h */,
+				6050F98523B0F1AC0060D4CA /* UINavigationBar+handle.m */,
 				2F551040217F5CC100F56C26 /* TabbarButton.h */,
 				2F551041217F5CC100F56C26 /* UIImage+ERCategory.h */,
 				2F551042217F5CC100F56C26 /* AttributedLabel.h */,
@@ -1585,6 +1591,7 @@
 				2F5510AA217F5CC200F56C26 /* WFCUMessageModel.h in Headers */,
 				2F55115E217F5CC200F56C26 /* SDWaitingView.h in Headers */,
 				2F551160217F5CC200F56C26 /* SDBrowserImageView.h in Headers */,
+				6050F98823B0F1AC0060D4CA /* UINavigationBar+handle.h in Headers */,
 				2F5510E4217F5CC200F56C26 /* WFCULocationPoint.h in Headers */,
 				2F5511DE217F5CC300F56C26 /* TYAlertScaleFadeAnimation.h in Headers */,
 				2F5511C0217F5CC300F56C26 /* SDWebImageManager.h in Headers */,
@@ -1963,6 +1970,7 @@
 				2F5510BF217F5CC200F56C26 /* WFCUCreateGroupViewController.m in Sources */,
 				2F3A6C18219EE941009A8B4B /* WFCUFaceBoard.m in Sources */,
 				9029D0FF21C5D7930002EBAA /* WFCUCreateChannelViewController.m in Sources */,
+				6050F98723B0F1AC0060D4CA /* UINavigationBar+handle.m in Sources */,
 				2F49910C2189239E005F6A84 /* WFCUVideoViewController.m in Sources */,
 				2F55121C217F5CC300F56C26 /* WFCUModifyMyProfileViewController.m in Sources */,
 				2F5510F7217F5CC200F56C26 /* CCHMapClusterAnnotation.m in Sources */,

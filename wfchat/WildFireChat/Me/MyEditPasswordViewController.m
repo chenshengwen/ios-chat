@@ -10,6 +10,7 @@
 #import "AppService.h"
 #import "BWPasswordValidator.h"
 #import "BWTextField.h"
+#import <WFChatClient/WFCChatClient.h>
 
 @interface MyEditPasswordViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet BWTextField *currentPasswordTF;
@@ -68,15 +69,18 @@
     hud.label.text = @"修改中...";
     [hud showAnimated:YES];
     
-    NSString *phone = [[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:phone forKey:@""];
-    [dic setValue:self.myPasswordTF.text forKey:@""];
+    [dic setValue:self.currentPasswordTF.text forKey:@"oldPassword"];
+    [dic setValue:self.myPasswordTF.text forKey:@"newPassword"];
     
     [[AppService sharedAppService] modifyPassword:dic success:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [hud hideAnimated:YES];
-            [MBProgressHUD showMessage:@"修改成功"];
+            [MBProgressHUD showMessage:@"密码修改成功，请重新登陆"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedUserId"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedPassword"];
+            [[WFCCNetworkService sharedInstance] disconnect:YES];
         });
     } error:^(NSString * _Nonnull message) {
         dispatch_async(dispatch_get_main_queue(), ^{

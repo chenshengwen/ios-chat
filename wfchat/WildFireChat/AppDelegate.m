@@ -34,20 +34,22 @@
 #import "GroupInfoViewController.h"
 #import <Bugly/Bugly.h>
 #import "AppService.h"
+#import "WFAlertView.h"
 
 
-@interface AppDelegate () <ConnectionStatusDelegate, ReceiveMessageDelegate,
+@interface AppDelegate () <ConnectionStatusDelegate, ReceiveMessageDelegate,UIAlertViewDelegate,
 #if WFCU_SUPPORT_VOIP
     WFAVEngineDelegate,
 #endif
     UNUserNotificationCenterDelegate, QrCodeDelegate>
 @property(nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, copy) NSString *downloadUrl;
 @end
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //替换为您自己的Bugly账户。
-    [Bugly startWithAppId:@"b21375e023"];
+    [Bugly startWithAppId:@"098d1b5496"];
     
     [WFCCNetworkService startLog];
     [WFCCNetworkService sharedInstance].connectionStatusDelegate = self;
@@ -108,7 +110,58 @@
         self.window.rootViewController = nav;
     }
     
+    //更新接口
+    [self updateRequest];
+    
     return YES;
+}
+
+- (void)updateRequest {
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:@2 forKey:@"appId"];
+    [dic setValue:@"SHENSHI" forKey:@"versionCode"];
+    
+    self.downloadUrl = @"https://baidu.com";
+
+    [[AppService sharedAppService] updateRequest:dic success:^(int type, NSString * _Nonnull upgradePrompt, NSString * _Nonnull downloadUrl) {
+        
+        if (type == 1) {//选更
+            self.downloadUrl = downloadUrl;
+            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alterView.tag = 100;
+            [alterView show];
+        }else if (type == 2) {//强更
+            self.downloadUrl = downloadUrl;
+            WFAlertView *alterView = [[WFAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            alterView.tag = 101;
+            [alterView show];
+        }
+        
+    } error:^(NSString * _Nonnull message) {
+        
+    }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 100) {
+        if (buttonIndex == 1) {
+            NSLog(@"选更");
+            if (!BWIsNull(self.downloadUrl)) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.downloadUrl]];
+            }
+        }
+    }else if (alertView.tag == 101) {
+        NSLog(@"强更");
+        if (!BWIsNull(self.downloadUrl)) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.downloadUrl]];
+        }
+        
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
 }
 
 
@@ -249,7 +302,7 @@
 }
 
 - (void)setupNavBar {
-    [WFCUConfigManager globalManager].naviBackgroudColor = [UIColor colorWithRed:0.1 green:0.27 blue:0.9 alpha:0.9];
+    [WFCUConfigManager globalManager].naviBackgroudColor = HexCOLOR(0xEF413E);
     [WFCUConfigManager globalManager].naviTextColor = [UIColor whiteColor];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
