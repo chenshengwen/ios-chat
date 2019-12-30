@@ -93,6 +93,8 @@
 @property (nonatomic, strong)UIActivityIndicatorView *footerActivityView;
 
 @property (nonatomic, strong)NSTimer *showTypingTimer;
+@property (nonatomic, strong)WFCCGroupInfo *groupInfo;
+
 @end
 
 @implementation WFCUMessageListViewController
@@ -137,6 +139,9 @@
       }];
       
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_chat_group"] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
+      
+      self.groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:self.conversation.target refresh:YES];
+      
   } else if(self.conversation.type == Channel_Type) {
       [[NSNotificationCenter defaultCenter] addObserverForName:kChannelInfoUpdated object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
           if ([ws.conversation.target isEqualToString:note.object]) {
@@ -1047,6 +1052,9 @@
     }
   WFCUProfileTableViewController *vc = [[WFCUProfileTableViewController alloc] init];
   vc.userId = model.message.fromUser;
+    if (self.conversation.type == Group_Type) {
+        vc.isPrivate = self.groupInfo.privateChat;
+    }
   vc.hidesBottomBarWhenPushed = YES;
   [self.navigationController pushViewController:vc animated:YES];
 }

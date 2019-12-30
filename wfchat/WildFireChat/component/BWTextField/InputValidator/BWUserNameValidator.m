@@ -18,10 +18,10 @@
         
     } else {
         
-        BOOL isMatch = [input.text isValidWithMinLenth:7 maxLenth:15 containChinese:NO firstCannotBeDigtal:NO];
+        BOOL isMatch = [input.text isValidWithMinLenth:7 maxLenth:21 containChinese:NO firstCannotBeDigtal:NO];
         if (isMatch == NO) {
             
-            self.errorMessage = @"请输入6~14字母或数字!";
+            self.errorMessage = @"请输入6~20字母或数字!";
             
         } else {
             
@@ -34,7 +34,7 @@
 
 - (BOOL)validateCharacter:(NSString *)string textField:(UITextField *)textField range:(NSRange)range
 {
-    self.errorMessage = @"请输入6~14字母或数字!";
+    self.errorMessage = @"请输入6~20字母或数字!";
     
     // 监控UITextField是否已有内容
     if(range.length <= 0) {
@@ -54,10 +54,10 @@
         
         return NO;
     }
-    NSInteger maxLen = 14;
+    NSInteger maxLen = 20;
     NSInteger newLen = textField.text.length + string.length - range.length;
     if (newLen > maxLen) {
-        self.errorMessage = @"输入的用户名不能超过14个字符哦!";
+        self.errorMessage = @"输入的用户名不能超过20个字符哦!";
         
         return NO;
     }

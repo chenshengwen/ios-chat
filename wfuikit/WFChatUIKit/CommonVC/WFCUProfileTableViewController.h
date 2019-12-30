@@ -11,4 +11,5 @@
 @class WFCCUserInfo;
 @interface WFCUProfileTableViewController : UIViewController
 @property (nonatomic, strong)NSString *userId;
+@property (nonatomic, assign) int isPrivate;
 @end

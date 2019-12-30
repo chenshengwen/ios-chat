@@ -16,7 +16,7 @@
 #import "WFCPrivacyViewController.h"
 #import "AppService.h"
 #import "BWPasswordValidator.h"
-#import "BWPhoneNumberValidator.h"
+#import "BWUserNameValidator.h"
 #import "WMZCodeView.h"
 
 
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
     self.phoneTF.layer.borderWidth = 1;
     self.phoneTF.leftViewMode = UITextFieldViewModeAlways;
     self.phoneTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
-    self.phoneTF.validator = [BWPhoneNumberValidator new];
+    self.phoneTF.validator = [BWUserNameValidator new];
 //    [self.phoneTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     
@@ -107,8 +107,13 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (void)logintAction {
     
-    if ([self.phoneTF validate]) {
+    if ([self.phoneTF.text isMobileNumber]) {
         [MBProgressHUD showMessage:@"不允许使用手机号码作为用户名"];
+        return;
+    }
+    
+    if (![self.phoneTF validate]) {
+        [MBProgressHUD showMessage:@"请输入6~20字母或数字!"];
         return;
     }
     
@@ -156,10 +161,15 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (void)registerAction {
     
-    if ([self.phoneTF validate]) {
-        [MBProgressHUD showMessage:@"不允许使用手机号码作为用户名"];
-        return;
-    }
+  if ([self.phoneTF.text isMobileNumber]) {
+           [MBProgressHUD showMessage:@"不允许使用手机号码作为用户名"];
+           return;
+       }
+       
+       if (![self.phoneTF validate]) {
+           [MBProgressHUD showMessage:@"请输入6~20字母或数字!"];
+           return;
+       }
     
     if (![self.passwordTF validate]) {
         [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
@@ -254,11 +264,11 @@ typedef NS_ENUM(NSInteger,LoginType) {
     return YES;
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    BWTextField *customField = (BWTextField *)textField;
-//    return [customField validateCharacter:string range:range];
-//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BWTextField *customField = (BWTextField *)textField;
+    return [customField validateCharacter:string range:range];
+}
 
 - (void)textDidChange:(id<UITextInput>)textInput {
     if (textInput == self.phoneTF) {

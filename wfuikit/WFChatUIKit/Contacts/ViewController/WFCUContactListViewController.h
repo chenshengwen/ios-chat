@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @interface WFCUContactListViewController : UIViewController
 @property (nonatomic, assign)BOOL selectContact;
 @property (nonatomic, assign)BOOL multiSelect;
@@ -21,4 +22,6 @@
 @property (nonatomic, strong)void (^createChannel)(void);
 @property (nonatomic, assign)BOOL showMentionAll;
 @property (nonatomic, strong)void (^mentionAll)(void);
+@property (nonatomic, assign)BOOL isGroup;
+
 @end

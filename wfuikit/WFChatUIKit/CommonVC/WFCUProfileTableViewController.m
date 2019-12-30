@@ -282,9 +282,18 @@
 }
 
 - (void)onAddFriendBtn:(id)sender {
-    WFCUVerifyRequestViewController *vc = [[WFCUVerifyRequestViewController alloc] init];
-    vc.userId = self.userId;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.isPrivate == 0) {
+        WFCUVerifyRequestViewController *vc = [[WFCUVerifyRequestViewController alloc] init];
+        vc.userId = self.userId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = @"管理员关闭了群组私聊权限";
+        //           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+        [hud hideAnimated:YES afterDelay:1.f];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -379,9 +388,17 @@
                 });
             }];
         } else {
-            WFCUVerifyRequestViewController *vc = [[WFCUVerifyRequestViewController alloc] init];
-            vc.userId = self.userId;
-            [self.navigationController pushViewController:vc animated:YES];
+            if (self.isPrivate == 0) {
+                WFCUVerifyRequestViewController *vc = [[WFCUVerifyRequestViewController alloc] init];
+                vc.userId = self.userId;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text = @"管理员关闭了群组私聊权限";
+                //           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+                [hud hideAnimated:YES afterDelay:1.f];
+            }
         }
     } else if(buttonIndex == 1) {// blacklist
         if ([[WFCCIMService sharedWFCIMService] isBlackListed:self.userId]) {

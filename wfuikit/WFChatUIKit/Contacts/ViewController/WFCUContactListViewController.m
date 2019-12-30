@@ -136,13 +136,6 @@ static NSMutableDictionary *hanziStringDict = nil;
     
     [self.tableView reloadData];
     
-    [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
-          
-          NSLog(@"%d",type);
-          
-      } error:^(NSString * _Nonnull message) {
-          
-      }];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -166,7 +159,12 @@ static NSMutableDictionary *hanziStringDict = nil;
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
     
     [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
-        NSInteger totalCount = self.disableUsers.count + self.selectedContacts.count;
+        NSInteger totalCount = type;
+        if (self.isGroup) {
+            totalCount = self.disableUsers.count + self.selectedContacts.count;
+        }else {
+            totalCount = self.disableUsers.count + self.selectedContacts.count + 1;
+        }
         if (totalCount > type) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
            hud.mode = MBProgressHUDModeText;
