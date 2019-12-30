@@ -122,8 +122,6 @@
     [dic setValue:@2 forKey:@"appId"];
     [dic setValue:@"SHENSHI" forKey:@"versionCode"];
     
-    self.downloadUrl = @"https://baidu.com";
-
     [[AppService sharedAppService] updateRequest:dic success:^(int type, NSString * _Nonnull upgradePrompt, NSString * _Nonnull downloadUrl) {
         
         if (type == 1) {//选更

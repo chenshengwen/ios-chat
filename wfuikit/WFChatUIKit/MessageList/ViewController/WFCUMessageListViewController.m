@@ -727,6 +727,7 @@
             continue;
         }
         
+        
         if (!([message.content.class getContentFlags] & 0x1)) {
             continue;
         }
@@ -744,6 +745,9 @@
         count++;
         
         if (newMessage) {
+            if (message.direction == MessageDirection_Receive) {
+                AudioServicesPlaySystemSound(1003);
+            }
             BOOL showTime = YES;
             if (self.modelList.count > 0 && (message.serverTime -  (self.modelList[self.modelList.count - 1]).message.serverTime < 60 * 1000)) {
                 showTime = NO;
@@ -1330,7 +1334,7 @@
     UIMenuItem *copyItem = [[UIMenuItem alloc]initWithTitle:WFCString(@"Copy") action:@selector(performCopy:)];
     UIMenuItem *forwardItem = [[UIMenuItem alloc]initWithTitle:WFCString(@"Forward") action:@selector(performForward:)];
     UIMenuItem *recallItem = [[UIMenuItem alloc]initWithTitle:WFCString(@"Recall") action:@selector(performRecall:)];
-    UIMenuItem *complainItem = [[UIMenuItem alloc]initWithTitle:WFCString(@"Complain") action:@selector(performComplain:)];
+//    UIMenuItem *complainItem = [[UIMenuItem alloc]initWithTitle:WFCString(@"Complain") action:@selector(performComplain:)];
     
     CGRect menuPos;
     if ([baseCell isKindOfClass:[WFCUMessageCell class]]) {
@@ -1350,7 +1354,7 @@
     }
     
     if (baseCell.model.message.direction == MessageDirection_Receive) {
-        [items addObject:complainItem];
+//        [items addObject:complainItem];
     }
     
     if ([msg.content isKindOfClass:[WFCCImageMessageContent class]] ||

@@ -107,8 +107,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (void)logintAction {
     
-    if (![self.phoneTF validate]) {
-        [MBProgressHUD showMessage:@"请输入正确的手机号码"];
+    if ([self.phoneTF validate]) {
+        [MBProgressHUD showMessage:@"不允许使用手机号码作为用户名"];
         return;
     }
     
@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
              
              MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
              hud.mode = MBProgressHUDModeText;
-             hud.label.text = @"登陆失败";
+               hud.label.text = BWIsNull(message) ? @"登陆失败" : message;
              hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
              [hud hideAnimated:YES afterDelay:1.f];
            });
@@ -156,8 +156,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
 
 - (void)registerAction {
     
-    if (![self.phoneTF validate]) {
-        [MBProgressHUD showMessage:@"请输入正确的手机号码"];
+    if ([self.phoneTF validate]) {
+        [MBProgressHUD showMessage:@"不允许使用手机号码作为用户名"];
         return;
     }
     
@@ -254,11 +254,11 @@ typedef NS_ENUM(NSInteger,LoginType) {
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    BWTextField *customField = (BWTextField *)textField;
-    return [customField validateCharacter:string range:range];
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    BWTextField *customField = (BWTextField *)textField;
+//    return [customField validateCharacter:string range:range];
+//}
 
 - (void)textDidChange:(id<UITextInput>)textInput {
     if (textInput == self.phoneTF) {

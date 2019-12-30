@@ -114,11 +114,11 @@
     if (section == 0) {
         return 0;
     } else if (section == 1) {
-        return 2; //
+        return 1; //
     } else if (section == 2) {
         return 0; // 用户协议和隐私声明
     } else if (section == 3) {
-        return 1; //举报
+        return 0; //举报
     } else if (section == 4) {
         return 0; //diagnose
     } else if (section == 5) {

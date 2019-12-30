@@ -28,6 +28,7 @@
 #import "WFCUContactTableViewCell.h"
 #import "QrCodeHelper.h"
 #import "WFCUConfigManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface WFCUConversationTableViewController () <UISearchControllerDelegate, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)NSMutableArray<WFCCConversationInfo *> *conversations;
@@ -43,6 +44,9 @@
 @property (nonatomic, assign) BOOL firstAppear;
 
 @property (nonatomic, strong) UIView *pcSessionView;
+
+@property(nonatomic, strong) AVAudioPlayer *audioPlayer;
+
 @end
 
 @implementation WFCUConversationTableViewController
@@ -315,10 +319,50 @@
 - (void)onReceiveMessages:(NSNotification *)notification {
   NSArray<WFCCMessage *> *messages = notification.object;
   if ([messages count]) {
-    [self refreshList];
+      if (self.navigationController.childViewControllers.count == 1) {
+          AudioServicesPlaySystemSound(1007);
+      }
+      [self refreshList];
     [self refreshLeftButton];
   }
 }
+
+/*
+- (void)shouldStartRing:(BOOL)isIncoming {
+    
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+        AudioServicesAddSystemSoundCompletion(kSystemSoundID_Vibrate, NULL, NULL, systemAudioCallback, NULL);
+        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+    } else {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        //默认情况按静音或者锁屏键会静音
+        [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+        [audioSession setActive:YES error:nil];
+        
+        if (self.audioPlayer) {
+            [self shouldStopRing];
+        }
+        
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"ring" withExtension:@"mp3"];
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        if (!error) {
+            self.audioPlayer.numberOfLoops = -1;
+            self.audioPlayer.volume = 1.0;
+            [self.audioPlayer prepareToPlay];
+            [self.audioPlayer play];
+        }
+    }
+}
+
+- (void)shouldStopRing {
+    if (self.audioPlayer) {
+        [self.audioPlayer stop];
+        self.audioPlayer = nil;
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
+}
+*/
 
 - (void)onSettingUpdated:(NSNotification *)notification {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
