@@ -135,6 +135,14 @@ static NSMutableDictionary *hanziStringDict = nil;
     [self.view bringSubviewToFront:self.activityIndicator];
     
     [self.tableView reloadData];
+    
+    [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
+          
+          NSLog(@"%d",type);
+          
+      } error:^(NSString * _Nonnull message) {
+          
+      }];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -156,17 +164,43 @@ static NSMutableDictionary *hanziStringDict = nil;
 }
 
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
-  if (self.selectContact) {
-    if (self.selectedContacts) {
-        [self left:^{
-            self.selectResult(self.selectedContacts);
-        }];
-    }
-  } else {
-    UIViewController *addFriendVC = [[WFCUAddFriendViewController alloc] init];
-    addFriendVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:addFriendVC animated:YES];
-  }
+    
+    [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
+        NSInteger totalCount = self.disableUsers.count + self.selectedContacts.count;
+        if (totalCount > type) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+           hud.mode = MBProgressHUDModeText;
+           hud.label.text = [NSString stringWithFormat:@"群成员数量不允许大于%d",type];
+//           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+           [hud hideAnimated:YES afterDelay:1.f];
+        }else {
+            [self addMemberAction];
+        }
+        NSLog(@"%d",type);
+        
+    } error:^(NSString * _Nonnull message) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      hud.mode = MBProgressHUDModeText;
+      hud.label.text = message;
+//      hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+      [hud hideAnimated:YES afterDelay:1.f];
+    }];
+    
+ 
+}
+
+- (void)addMemberAction {
+    if (self.selectContact) {
+       if (self.selectedContacts) {
+           [self left:^{
+               self.selectResult(self.selectedContacts);
+           }];
+       }
+     } else {
+       UIViewController *addFriendVC = [[WFCUAddFriendViewController alloc] init];
+       addFriendVC.hidesBottomBarWhenPushed = YES;
+       [self.navigationController pushViewController:addFriendVC animated:YES];
+     }
 }
 
 - (void)onLeftBarBtn:(UIBarButtonItem *)sender {
