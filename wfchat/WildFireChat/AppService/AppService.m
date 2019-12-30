@@ -121,8 +121,25 @@ static AppService *sharedSingleton = nil;
                errorBlock(@"error");
            }
        } error:^(NSError * _Nonnull error) {
-           errorBlock(error.localizedDescription);
+           errorBlock(@"网络错误");
        }];
+}
+
+//获取群限制成员数量
+- (void)getSystemSettingSuccess:(void(^)(int type))successBlock error:(void(^)(NSString *message))errorBlock {
+        
+    [self post:@"/admin/system/setting/1" data:nil success:^(NSDictionary *dict) {
+              if([dict[@"status"] intValue] == 200 && dict != nil) {
+                  
+                  int myType = [dict[@"data"][@"value"] intValue];
+
+                  successBlock(myType);
+              } else {
+                  errorBlock(dict[@"message"]);
+              }
+          } error:^(NSError * _Nonnull error) {
+              errorBlock(@"网络错误");
+          }];
 }
 
 - (void)sendCode:(NSString *)phoneNumber success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {

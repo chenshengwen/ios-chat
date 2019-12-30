@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
        announcement:(NSString *)announcement
             success:(void(^)(long timestamp))successBlock
               error:(void(^)(int error_code))errorBlock;
+
+//获取群限制成员数量
+- (void)getSystemSettingSuccess:(void(^)(int type))successBlock error:(void(^)(NSString *message))errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END
