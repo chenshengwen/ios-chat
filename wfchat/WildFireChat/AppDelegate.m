@@ -122,19 +122,25 @@
     [dic setValue:@2 forKey:@"appId"];
     [dic setValue:@"SHENSHI" forKey:@"versionCode"];
     
-    [[AppService sharedAppService] updateRequest:dic success:^(int type, NSString * _Nonnull upgradePrompt, NSString * _Nonnull downloadUrl) {
+    [[AppService sharedAppService] updateRequest:dic success:^(int type, NSString * _Nonnull upgradePrompt, NSString * _Nonnull downloadUrl, int versionId) {
         
-        if (type == 1) {//选更
-            self.downloadUrl = downloadUrl;
-            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alterView.tag = 100;
-            [alterView show];
-        }else if (type == 2) {//强更
-            self.downloadUrl = downloadUrl;
-            WFAlertView *alterView = [[WFAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-            alterView.tag = 101;
-            [alterView show];
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        int app_Version = [[infoDictionary objectForKey:@"CFBundleShortVersionString"] intValue];
+
+        if (versionId > app_Version) {
+            if (type == 1) {//选更
+                self.downloadUrl = downloadUrl;
+                UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alterView.tag = 100;
+                [alterView show];
+            }else if (type == 2) {//强更
+                self.downloadUrl = downloadUrl;
+                WFAlertView *alterView = [[WFAlertView alloc] initWithTitle:@"版本更新" message:upgradePrompt delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                alterView.tag = 101;
+                [alterView show];
+            }
         }
+        
         
     } error:^(NSString * _Nonnull message) {
         

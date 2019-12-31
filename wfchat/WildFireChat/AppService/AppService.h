@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)modifyPassword:(NSDictionary *)dic success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock;
 
-- (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl))successBlock error:(void(^)(NSString *message))errorBlock;
+- (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl, int versionId))successBlock error:(void(^)(NSString *message))errorBlock;
 
 
 

@@ -107,7 +107,7 @@ static AppService *sharedSingleton = nil;
        }];
 }
 
-- (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl))successBlock error:(void(^)(NSString *message))errorBlock {
+- (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl, int versionId))successBlock error:(void(^)(NSString *message))errorBlock {
     
     [self post:@"/app/version" data:dic success:^(NSDictionary *dict) {
            if([dict[@"status"] intValue] == 200 && dict != nil) {
@@ -115,8 +115,9 @@ static AppService *sharedSingleton = nil;
                int myType = [dict[@"data"][@"type"] intValue];
                NSString *myUpgradePrompt = dict[@"data"][@"upgradePrompt"];
                NSString *url = dict[@"data"][@"apkUrl"];
+               int version = [dict[@"data"][@"versionId"] intValue];
                
-               successBlock(myType, myUpgradePrompt,url);
+               successBlock(myType, myUpgradePrompt,url, version);
            } else {
                errorBlock(@"error");
            }

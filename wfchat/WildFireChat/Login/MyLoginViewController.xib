@@ -38,7 +38,7 @@
                         <constraint firstAttribute="height" constant="40" id="0KY-xn-f4C"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="2RX-Jk-akN"/>
                     </connections>
