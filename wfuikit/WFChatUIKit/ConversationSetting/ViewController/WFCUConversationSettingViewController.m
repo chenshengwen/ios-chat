@@ -4,7 +4,7 @@
 //
 //  Created by WF Chat on 2017/11/2.
 //  Copyright © 2017年 WildFireChat. All rights reserved.
-//
+// 查看群信息chensw
 
 #import "WFCUConversationSettingViewController.h"
 #import "SDWebImage.h"
