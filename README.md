@@ -104,7 +104,16 @@
 2、更换AppIcon
 3、更换bundld
 4、更换App名称
-5、更换版本更新标识
-6、更新注册用户接口company字段
+CFBundleName="【盛世】";
+CFBundleDisplayName="【盛世】";
+
+5、更换GlobalTool里面的appid
+
+
+
+//5、更换版本更新标识
+//6、更新注册用户接口company字段
+//7、更换发现页H5
+
 
 

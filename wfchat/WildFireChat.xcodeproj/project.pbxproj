@@ -71,6 +71,7 @@
 		60131569239E8A3200D4E841 /* WMZCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60131568239E8A3200D4E841 /* WMZCodeView.m */; };
 		60432B6623AF9D88007985F9 /* shengshi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60432B6523AF9D88007985F9 /* shengshi.plist */; };
 		6050F98423B0F05A0060D4CA /* UINavigationBar+handle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050F98223B0F0590060D4CA /* UINavigationBar+handle.m */; };
+		6079C12223BE38CE007F5202 /* GlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6079C12123BE38CE007F5202 /* GlobalTool.m */; };
 		60DFEAEA23B2630A00A72F0E /* WFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DFEAE923B2630A00A72F0E /* WFAlertView.m */; };
 		60EF4B8E239FA39F0086CEC1 /* MyEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EF4B8C239FA39F0086CEC1 /* MyEditPasswordViewController.m */; };
 		60EF4B8F239FA39F0086CEC1 /* MyEditPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60EF4B8D239FA39F0086CEC1 /* MyEditPasswordViewController.xib */; };
@@ -149,7 +150,7 @@
 		2BDCE7E22336278E0004212B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		2BED56732395EC4D00B55C79 /* WFMomentClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WFMomentClient.framework; sourceTree = "<group>"; };
 		2BED56742395EC4D00B55C79 /* WFMomentUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WFMomentUIKit.framework; sourceTree = "<group>"; };
-		2E1D1FF71FAF0AE600F4405D /* 金盛.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "金盛.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E1D1FF71FAF0AE600F4405D /* 518.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 518.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E1D1FFA1FAF0AE600F4405D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2E1D1FFB1FAF0AE600F4405D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2E1D20011FAF0AE600F4405D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -275,6 +276,8 @@
 		60432B6523AF9D88007985F9 /* shengshi.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = shengshi.plist; sourceTree = "<group>"; };
 		6050F98223B0F0590060D4CA /* UINavigationBar+handle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+handle.m"; sourceTree = "<group>"; };
 		6050F98323B0F05A0060D4CA /* UINavigationBar+handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+handle.h"; sourceTree = "<group>"; };
+		6079C12023BE38CE007F5202 /* GlobalTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalTool.h; sourceTree = "<group>"; };
+		6079C12123BE38CE007F5202 /* GlobalTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalTool.m; sourceTree = "<group>"; };
 		60DFEAE823B2630A00A72F0E /* WFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFAlertView.h; sourceTree = "<group>"; };
 		60DFEAE923B2630A00A72F0E /* WFAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFAlertView.m; sourceTree = "<group>"; };
 		60EF4B8B239FA39F0086CEC1 /* MyEditPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditPasswordViewController.h; sourceTree = "<group>"; };
@@ -442,7 +445,7 @@
 		2E1D1FF81FAF0AE600F4405D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2E1D1FF71FAF0AE600F4405D /* 金盛.app */,
+				2E1D1FF71FAF0AE600F4405D /* 518.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -842,6 +845,8 @@
 				60F304C7239CD2B5001215AE /* BWValidatorTool.m */,
 				60F304CD239CD41E001215AE /* BWDealNullTool.h */,
 				60F304CE239CD41E001215AE /* BWDealNullTool.m */,
+				6079C12023BE38CE007F5202 /* GlobalTool.h */,
+				6079C12123BE38CE007F5202 /* GlobalTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -930,7 +935,7 @@
 			);
 			name = WildFireChat;
 			productName = WildFireChat;
-			productReference = 2E1D1FF71FAF0AE600F4405D /* 金盛.app */;
+			productReference = 2E1D1FF71FAF0AE600F4405D /* 518.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1048,6 +1053,7 @@
 				60F304BC239CD0F8001215AE /* BWBetwayCardValidator.m in Sources */,
 				2F94FC9B22291813005BD461 /* UIActionSheet+LBXAlertAction.m in Sources */,
 				60F304BD239CD0F8001215AE /* BWProvinceValidator.m in Sources */,
+				6079C12223BE38CE007F5202 /* GlobalTool.m in Sources */,
 				60F304BA239CD0F8001215AE /* BWNumberValidator.m in Sources */,
 				2FF07F5E21F82E7200A78A62 /* WFCMeTableViewController.m in Sources */,
 				60F304C1239CD0F8001215AE /* BWPhoneNumberValidator.m in Sources */,
@@ -1291,7 +1297,7 @@
 				MARKETING_VERSION = 3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.518;
-				PRODUCT_NAME = "金盛";
+				PRODUCT_NAME = 518;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1327,10 +1333,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.JIUZHOU;
-				PRODUCT_NAME = "金盛";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.518;
+				PRODUCT_NAME = 518;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = cn.shengshichat.messange.JIUZHOU;
+				PROVISIONING_PROFILE_SPECIFIER = cn.shengshichat.messange.518;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};

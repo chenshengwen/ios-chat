@@ -52,7 +52,7 @@
     [self addChildViewController:nav];
     
     MyBaseWebViewViewController *webvc = [MyBaseWebViewViewController new];
-    webvc.url = @"https://ss111.cc/mobile/v3/";
+    webvc.url = [GlobalTool getAppURL];
     webvc.title = LocalizedString(@"Discover");
     nav = [[UINavigationController alloc] initWithRootViewController:webvc];
     item = nav.tabBarItem;

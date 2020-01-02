@@ -76,5 +76,15 @@ alpha:alphaValue]
 #define k918      @"918"        //918
 #define k518      @"518"        //518
 
+#define kShenshi_URL @"https://ss111.cc/mobile/v3/"         //盛世
+#define kJINSHENG_URL @"https://gy0007.com/m/#/%22"   //金盛
+#define kYINGRONG_URL @"https://yr869.com/m/#/"   //盈融
+#define kYINGCHENG_URL @"http://yc987cp.com/m/"   //赢城
+#define kCHENGXIN_URL @"https://858cxcp.com/m/#/"   //诚信
+#define kJIUZHOU_URL  @"https://jz6998.com/m/"    //九州
+#define kLIYING_URL   @"https://ly18.cc/mobile/v3/"     //利赢
+#define k918_URL      @"https://jc918.cc/mobile/v3/"        //918
+#define k518_URL      @"https://k92555.com/mobile/v3/"        //518
+
 
 #endif /* MyMacros_h */

@@ -20,6 +20,7 @@
 #import "BWValidatorTool.h"
 #import "BWDealNullTool.h"
 #import "MBProgressHUD+JDW.h"
+#import "GlobalTool.h"
 
 
 #endif /* WFChat_Prefix_Header_pch */
