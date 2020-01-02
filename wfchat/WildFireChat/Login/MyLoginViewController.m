@@ -187,7 +187,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
     hud.label.text = @"注册中...";
     [hud showAnimated:YES];
     
-    [[AppService sharedAppService] regist:self.phoneTF.text password:self.passwordTF.text success:^(NSString * _Nonnull userId, NSString * _Nonnull name) {
+    [[AppService sharedAppService] regist:self.phoneTF.text password:self.passwordTF.text company:kJIUZHOU success:^(NSString * _Nonnull userId, NSString * _Nonnull name) {
         dispatch_async(dispatch_get_main_queue(), ^{
           [hud hideAnimated:YES];
             [MBProgressHUD showMessage:@"注册成功，请点击登录"];

@@ -89,3 +89,22 @@
 
 ### 鸣谢
 本工程使用了[mars](https://github.com/tencent/mars)及其它大量优秀的开源项目，对他们的贡献表示感谢。本工程使用的Icon全部来源于[icons8](https://icons8.com)，对他们表示感谢。Gif动态图来源于网络，对网友的制作表示感谢。如果有什么地方侵犯了您的权益，请联系我们删除🙏🙏🙏
+
+
+金盛网址：gy0007.com   版本渠道：JINSHENG     cn.shengshichat.messange.JINSHENG
+盈融网址：  yr869.com  版本渠道：YINGRONG
+赢城网址：yc887.com    版本渠道：YINGCHENG
+诚信网址：858cxcp.com  版本渠道：CHENGXIN
+九州网址：jz555.cc     版本渠道：JIUZHOU
+利赢网址：ly18.cc      版本渠道：LIYING
+918网址：jc918.cc      版本渠道：918
+518网址：92518.com  版本渠道：518
+
+1、更换启动页
+2、更换AppIcon
+3、更换bundld
+4、更换App名称
+5、更换版本更新标识
+6、更新注册用户接口company字段
+
+

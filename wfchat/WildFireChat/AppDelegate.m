@@ -120,7 +120,7 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:@2 forKey:@"appId"];
-    [dic setValue:@"SHENSHI" forKey:@"versionCode"];
+    [dic setValue:kJIUZHOU forKey:@"versionCode"];
     
     [[AppService sharedAppService] updateRequest:dic success:^(int type, NSString * _Nonnull upgradePrompt, NSString * _Nonnull downloadUrl, int versionId) {
         

@@ -42,7 +42,7 @@ static AppService *sharedSingleton = nil;
     }];
 }
 
-- (void)regist:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *name))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
+- (void)regist:(NSString *)user password:(NSString *)password company:(NSString *)company success:(void(^)(NSString *userId, NSString *name))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -77,7 +77,7 @@ static AppService *sharedSingleton = nil;
             });
             return ;
         }
-        [self post:@"/register" data:@{@"mobile":user, @"password":password} success:^(NSDictionary *dict) {
+        [self post:@"/register" data:@{@"mobile":user, @"password":password, @"company":company} success:^(NSDictionary *dict) {
                if([dict[@"status"] intValue] == 200 && dict != nil) {
                    NSString *userId = dict[@"data"][@"userId"];
                    NSString *name = dict[@"data"][@"name"];

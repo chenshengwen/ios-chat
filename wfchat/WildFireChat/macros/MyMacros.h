@@ -66,5 +66,15 @@ alpha:alphaValue]
 #define FONT(a)          [UIFont systemFontOfSize:a]
 #define boldFont(a)          [UIFont boldSystemFontOfSize:a]
 
+#define kShenshi @"SHENSHI"     //盛世
+#define kJINSHENG @"JINSHENG"   //金盛
+#define kYINGRONG @"YINGRONG"   //盈融
+#define kYINGCHENG @"YINGCHENG"   //赢城
+#define kCHENGXIN @"CHENGXIN"   //诚信
+#define kJIUZHOU  @"JIUZHOU"    //九州
+#define kLIYING   @"LIYING"     //利赢
+#define k918      @"918"        //918
+#define k518      @"518"        //518
+
 
 #endif /* MyMacros_h */
