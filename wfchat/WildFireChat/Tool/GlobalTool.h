@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *myAPPID = k518;
-
 @interface GlobalTool : NSObject
 
 

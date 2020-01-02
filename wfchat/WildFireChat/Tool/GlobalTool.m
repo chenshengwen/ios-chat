@@ -11,23 +11,27 @@
 @implementation GlobalTool
 
 + (NSString *)getAppID {
-    if ([myAPPID isEqualToString:kShenshi]) {
+    
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+
+    
+    if ([appName isEqualToString:@"【盛世】"]) {
         return kShenshi;
-    }else if ([myAPPID isEqualToString:kJINSHENG]) {
+    }else if ([appName isEqualToString:@"金盛"]) {
         return kJINSHENG;
-    }else if ([myAPPID isEqualToString:kYINGRONG]) {
+    }else if ([appName isEqualToString:@"盈融"]) {
         return kYINGRONG;
-    }else if ([myAPPID isEqualToString:kYINGCHENG]) {
+    }else if ([appName isEqualToString:@"赢城"]) {
         return kYINGCHENG;
-    }else if ([myAPPID isEqualToString:kCHENGXIN]) {
+    }else if ([appName isEqualToString:@"诚信"]) {
         return kCHENGXIN;
-    }else if ([myAPPID isEqualToString:kJIUZHOU]) {
+    }else if ([appName isEqualToString:@"九州"]) {
         return kJIUZHOU;
-    }else if ([myAPPID isEqualToString:kLIYING]) {
+    }else if ([appName isEqualToString:@"利赢"]) {
         return kLIYING;
-    }else if ([myAPPID isEqualToString:k918]) {
+    }else if ([appName isEqualToString:@"918"]) {
         return k918;
-    }else if ([myAPPID isEqualToString:k518]) {
+    }else if ([appName isEqualToString:@"518"]) {
         return k518;
     }
     
@@ -35,25 +39,30 @@
 }
 
 + (NSString *)getAppURL {
-    if ([myAPPID isEqualToString:kShenshi]) {
+    
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+
+    
+    if ([appName isEqualToString:@"【盛世】"]) {
         return kShenshi_URL;
-    }else if ([myAPPID isEqualToString:kJINSHENG]) {
+    }else if ([appName isEqualToString:@"金盛"]) {
         return kJINSHENG_URL;
-    }else if ([myAPPID isEqualToString:kYINGRONG]) {
+    }else if ([appName isEqualToString:@"盈融"]) {
         return kYINGRONG_URL;
-    }else if ([myAPPID isEqualToString:kYINGCHENG]) {
+    }else if ([appName isEqualToString:@"赢城"]) {
         return kYINGCHENG_URL;
-    }else if ([myAPPID isEqualToString:kCHENGXIN]) {
+    }else if ([appName isEqualToString:@"诚信"]) {
         return kCHENGXIN_URL;
-    }else if ([myAPPID isEqualToString:kJIUZHOU]) {
+    }else if ([appName isEqualToString:@"九州"]) {
         return kJIUZHOU_URL;
-    }else if ([myAPPID isEqualToString:kLIYING]) {
+    }else if ([appName isEqualToString:@"利赢"]) {
         return kLIYING_URL;
-    }else if ([myAPPID isEqualToString:k918]) {
+    }else if ([appName isEqualToString:@"918"]) {
         return k918_URL;
-    }else if ([myAPPID isEqualToString:k518]) {
+    }else if ([appName isEqualToString:@"518"]) {
         return k518_URL;
     }
+    
     
     return @"";
 
