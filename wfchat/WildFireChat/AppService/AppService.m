@@ -38,7 +38,7 @@ static AppService *sharedSingleton = nil;
             errorBlock([dict[@"code"] intValue], dict[@"message"]);
         }
     } error:^(NSError * _Nonnull error) {
-        errorBlock(-1, error.description);
+        errorBlock(-1, @"网络错误");
     }];
 }
 
@@ -86,7 +86,7 @@ static AppService *sharedSingleton = nil;
                    errorBlock([dict[@"code"] intValue], dict[@"message"]);
                }
            } error:^(NSError * _Nonnull error) {
-               errorBlock(-1, error.description);
+               errorBlock(-1, @"网络错误");
            }];
         
     });

@@ -181,6 +181,11 @@ typedef NS_ENUM(NSInteger,LoginType) {
         [MBProgressHUD showMessage:@"请输入6-15位英文、数字、可使用特殊符号"];
         return;
     }
+    
+    if (![self.passwordTF.text isEqualToString:self.confirepasswordTF.text]) {
+        [MBProgressHUD showMessage:@"两次密码输入不一致"];
+        return;
+    }
 
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

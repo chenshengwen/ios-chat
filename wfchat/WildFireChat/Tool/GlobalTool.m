@@ -12,27 +12,27 @@
 
 + (NSString *)getAppID {
     
-    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 
     
-    if ([appName isEqualToString:@"【盛世】"]) {
-        return kShenshi;
-    }else if ([appName isEqualToString:@"金盛"]) {
+    if ([bundleId containsString:kJINSHENG]) {
         return kJINSHENG;
-    }else if ([appName isEqualToString:@"盈融"]) {
+    }else if ([bundleId containsString:kYINGRONG]) {
         return kYINGRONG;
-    }else if ([appName isEqualToString:@"赢城"]) {
+    }else if ([bundleId containsString:kYINGCHENG]) {
         return kYINGCHENG;
-    }else if ([appName isEqualToString:@"诚信"]) {
+    }else if ([bundleId containsString:kCHENGXIN]) {
         return kCHENGXIN;
-    }else if ([appName isEqualToString:@"九州"]) {
+    }else if ([bundleId containsString:kJIUZHOU]) {
         return kJIUZHOU;
-    }else if ([appName isEqualToString:@"利赢"]) {
+    }else if ([bundleId containsString:kLIYING]) {
         return kLIYING;
-    }else if ([appName isEqualToString:@"918"]) {
+    }else if ([bundleId containsString:k918]) {
         return k918;
-    }else if ([appName isEqualToString:@"518"]) {
+    }else if ([bundleId containsString:k518]) {
         return k518;
+    }else {
+        return kShenshi;
     }
     
     return @"";
@@ -40,27 +40,27 @@
 
 + (NSString *)getAppURL {
     
-    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 
     
-    if ([appName isEqualToString:@"【盛世】"]) {
-        return kShenshi_URL;
-    }else if ([appName isEqualToString:@"金盛"]) {
+    if ([bundleId containsString:kJINSHENG]) {
         return kJINSHENG_URL;
-    }else if ([appName isEqualToString:@"盈融"]) {
+    }else if ([bundleId containsString:kYINGRONG]) {
         return kYINGRONG_URL;
-    }else if ([appName isEqualToString:@"赢城"]) {
+    }else if ([bundleId containsString:kYINGCHENG]) {
         return kYINGCHENG_URL;
-    }else if ([appName isEqualToString:@"诚信"]) {
+    }else if ([bundleId containsString:kCHENGXIN]) {
         return kCHENGXIN_URL;
-    }else if ([appName isEqualToString:@"九州"]) {
+    }else if ([bundleId containsString:kJIUZHOU]) {
         return kJIUZHOU_URL;
-    }else if ([appName isEqualToString:@"利赢"]) {
+    }else if ([bundleId containsString:kLIYING]) {
         return kLIYING_URL;
-    }else if ([appName isEqualToString:@"918"]) {
+    }else if ([bundleId containsString:k918]) {
         return k918_URL;
-    }else if ([appName isEqualToString:@"518"]) {
+    }else if ([bundleId containsString:k518]) {
         return k518_URL;
+    }else {
+        return kShenshi_URL;
     }
     
     
