@@ -22,14 +22,17 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     
-    NSArray*cookies =[[NSUserDefaults standardUserDefaults]objectForKey:@"cookies"];
-    NSMutableDictionary*cookieProperties = [NSMutableDictionary dictionary];
-    [cookieProperties setObject:[cookies objectAtIndex:0]forKey:NSHTTPCookieName];
-    [cookieProperties setObject:[cookies objectAtIndex:1]forKey:NSHTTPCookieValue];
-    [cookieProperties setObject:[cookies objectAtIndex:3]forKey:NSHTTPCookieDomain];
-    [cookieProperties setObject:[cookies objectAtIndex:4]forKey:NSHTTPCookiePath];
-    NSHTTPCookie*cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookie:cookieuser];
+//    NSArray*cookies =[[NSUserDefaults standardUserDefaults]objectForKey:@"cookies"];
+//    NSMutableDictionary*cookieProperties = [NSMutableDictionary dictionary];
+//    if (cookies.count > 5) {
+//        [cookieProperties setObject:[cookies objectAtIndex:0]forKey:NSHTTPCookieName];
+//        [cookieProperties setObject:[cookies objectAtIndex:1]forKey:NSHTTPCookieValue];
+//        [cookieProperties setObject:[cookies objectAtIndex:3]forKey:NSHTTPCookieDomain];
+//        [cookieProperties setObject:[cookies objectAtIndex:4]forKey:NSHTTPCookiePath];
+//        NSHTTPCookie*cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
+//        [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookie:cookieuser];
+//    }
+    
     
     [self creatWebView];
 
@@ -77,22 +80,22 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     
-    NSArray*nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies];
-    NSHTTPCookie*cookie;
-    for(id c in nCookies)
-    {
-    if([c isKindOfClass:[NSHTTPCookie class]])
-    {
-    cookie=(NSHTTPCookie*)c;
-    if([cookie.name isEqualToString:@"PHPSESSID"]) {
-    NSNumber*sessionOnly = [NSNumber numberWithBool:cookie.sessionOnly];
-    NSNumber*isSecure = [NSNumber numberWithBool:cookie.isSecure];
-    NSArray*cookies = [NSArray arrayWithObjects:cookie.name, cookie.value, sessionOnly, cookie.domain, cookie.path, isSecure,nil];
-    [[NSUserDefaults standardUserDefaults]setObject:cookies forKey:@"cookies"];
-    break;
-    }
-    }
-    }
+//    NSArray*nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies];
+//    NSHTTPCookie*cookie;
+//    for(id c in nCookies)
+//    {
+//        if([c isKindOfClass:[NSHTTPCookie class]])
+//        {
+//            cookie=(NSHTTPCookie*)c;
+//                if([cookie.name isEqualToString:@"PHPSESSID"]) {
+//                NSNumber*sessionOnly = [NSNumber numberWithBool:cookie.sessionOnly];
+//                NSNumber*isSecure = [NSNumber numberWithBool:cookie.isSecure];
+//                NSArray*cookies = [NSArray arrayWithObjects:cookie.name, cookie.value, sessionOnly, cookie.domain, cookie.path, isSecure,nil];
+//                [[NSUserDefaults standardUserDefaults]setObject:cookies forKey:@"cookies"];
+//                break;
+//            }
+//        }
+//    }
 }
 #pragma mark - event response
 // 计算wkWebView进度条

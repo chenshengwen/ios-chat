@@ -1278,7 +1278,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L35R378236;
+				DEVELOPMENT_TEAM = 3AC5Z7RJQ3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1294,9 +1294,9 @@
 				INFOPLIST_FILE = WildFireChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4;
+				MARKETING_VERSION = 5;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.518;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.CHENGXIN;
 				PRODUCT_NAME = "聊8";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1331,12 +1331,12 @@
 				INFOPLIST_FILE = WildFireChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4;
+				MARKETING_VERSION = 5;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.518;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.shengshichat.messange.CHENGXIN;
 				PRODUCT_NAME = "聊8";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = cn.shengshichat.messange.518;
+				PROVISIONING_PROFILE_SPECIFIER = cn.shengshichat.messange.CHENGXIN;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};

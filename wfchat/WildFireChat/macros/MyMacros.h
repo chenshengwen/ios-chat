@@ -77,10 +77,10 @@ alpha:alphaValue]
 #define k518      @"518"        //518
 
 #define kShenshi_URL @"https://ss111.cc/mobile/v3/"         //盛世
-#define kJINSHENG_URL @"https://gy8008.com/m/#/%22"   //金盛
-#define kYINGRONG_URL @"https://yr879.com/m/#/"   //盈融
+#define kJINSHENG_URL @"http://gy8008.com/mobile/v3/"   //金盛
+#define kYINGRONG_URL @"http://yr879.com/mobile/v3/"   //盈融
 #define kYINGCHENG_URL @"http://yc987cp.com/m/"   //赢城
-#define kCHENGXIN_URL @"https://882cxcp.com/m/#/"   //诚信
+#define kCHENGXIN_URL @"http://882cxcp.com/mobile/v3/"   //诚信
 #define kJIUZHOU_URL  @"https://jz6998.com/m/"    //九州
 #define kLIYING_URL   @"https://ly18.cc/mobile/v3/"     //利赢
 #define k918_URL      @"https://jc918.cc/mobile/v3/"        //918
