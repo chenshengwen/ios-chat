@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WFCUForwardMessageCell : UITableViewCell
 @property (strong, nonatomic) WFCCConversation *conversation;
+@property(nonatomic, assign)BOOL checked;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -25,7 +25,6 @@
 @interface WFCUContactListViewController () <UITableViewDataSource, UISearchControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray<WFCCUserInfo *> *dataArray;
-@property (nonatomic, strong)NSMutableArray<NSString *> *selectedContacts;
 
 @property (nonatomic, strong) NSMutableArray<WFCCUserInfo *> *searchList;
 @property (nonatomic, strong)  UISearchController       *searchController;
@@ -72,6 +71,13 @@ static NSMutableDictionary *hanziStringDict = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFriendRequestUpdated:) name:kFriendRequestUpdated object:nil];
 }
 
+- (NSMutableArray<NSString *> *)selectedContacts {
+    if (!_selectedContacts) {
+        _selectedContacts = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _selectedContacts;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -87,7 +93,6 @@ static NSMutableDictionary *hanziStringDict = nil;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Cancel") style:UIBarButtonItemStyleDone target:self action:@selector(onLeftBarBtn:)];
         
         if(self.multiSelect) {
-            self.selectedContacts = [[NSMutableArray alloc] init];
             [self updateRightBarBtn];
         }
     } else {
@@ -210,6 +215,9 @@ static NSMutableDictionary *hanziStringDict = nil;
 
 - (void)left:(void (^)(void))completion {
     if (self.isPushed) {
+        if (completion) {
+            completion();
+        }
         [self.navigationController popViewControllerAnimated:YES];
     } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:completion];

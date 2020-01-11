@@ -23,5 +23,6 @@
 @property (nonatomic, assign)BOOL showMentionAll;
 @property (nonatomic, strong)void (^mentionAll)(void);
 @property (nonatomic, assign)BOOL isGroup;
+@property (nonatomic, strong)NSMutableArray<NSString *> *selectedContacts;
 
 @end

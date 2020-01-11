@@ -13,6 +13,8 @@
 @interface WFCUForwardMessageCell()
 @property (strong, nonatomic) UIImageView *portrait;
 @property (strong, nonatomic) UILabel *name;
+@property(nonatomic, strong)UIImageView *checkImageView;
+
 @end
 
 @implementation WFCUForwardMessageCell
@@ -26,6 +28,23 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (UIImageView *)checkImageView {
+    if (!_checkImageView) {
+        _checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 44, 18, 20, 20)];
+        [self.contentView addSubview:_checkImageView];
+    }
+    return _checkImageView;
+}
+
+- (void)setChecked:(BOOL)checked {
+    _checked = checked;
+    if (checked) {
+        self.checkImageView.image = [UIImage imageNamed:@"multi_selected"];
+    } else {
+        self.checkImageView.image = [UIImage imageNamed:@"multi_unselected"];
+    }
 }
 
 - (void)setConversation:(WFCCConversation *)conversation {

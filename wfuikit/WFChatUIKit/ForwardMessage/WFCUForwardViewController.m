@@ -18,6 +18,7 @@
 #import "UIView+Toast.h"
 #import "WFCUContactListViewController.h"
 #import "WFCUConfigManager.h"
+#import "MBProgressHUD.h"
 
 @interface WFCUForwardViewController () <UITableViewDataSource, UISearchControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
 @property (nonatomic, strong)UITableView *tableView;
@@ -25,6 +26,9 @@
 @property (nonatomic, strong)NSMutableArray<WFCCConversationInfo *> *conversations;
 @property (nonatomic, strong)NSArray<WFCCUserInfo *>  *searchFriendList;
 @property (nonatomic, strong)NSArray<WFCCGroupSearchInfo *>  *searchGroupList;
+@property (nonatomic, strong)NSMutableArray<WFCCConversation *> *selConversations;
+@property (nonatomic, strong)NSArray<NSString *> *selectedContacts;
+
 @end
 
 @implementation WFCUForwardViewController
@@ -41,10 +45,11 @@
     self.tableView.tableHeaderView = nil;
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Cancel") style:UIBarButtonItemStyleDone target:self action:@selector(onLeftBarBtn:)];
+    
+    [self updateRightBarBtn];
 
     self.conversations = [[[WFCCIMService sharedWFCIMService] getConversationInfos:@[@(Single_Type), @(Group_Type)] lines:@[@(0)]] mutableCopy];
-
-    
+    self.selConversations = [NSMutableArray arrayWithCapacity:0];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -75,6 +80,45 @@
     self.tableView.sectionIndexColor = [UIColor grayColor];
     [self.view addSubview:self.tableView];
     [self.tableView reloadData];
+}
+
+- (void)updateRightBarBtn {
+    if(self.selConversations.count == 0) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Ok") style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@(%d)", WFCString(@"Ok"),  (int)self.selConversations.count] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
+    }
+}
+
+- (void)onRightBarBtn:(UIBarButtonItem *)sender {
+    
+    [[WFCUConfigManager globalManager].appServiceProvider getForwardSettingSuccess:^(int type) {
+
+        if (self.selConversations.count > type) {
+           MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+           hud.mode = MBProgressHUDModeText;
+           hud.label.text = [NSString stringWithFormat:@"转发数量不允许大于%d",type];
+//           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+           [hud hideAnimated:YES afterDelay:1.f];
+        }else {
+            [self forwardAction];
+        }
+        NSLog(@"%d",type);
+        
+    } error:^(NSString * _Nonnull message) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      hud.mode = MBProgressHUDModeText;
+      hud.label.text = message;
+//      hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+      [hud hideAnimated:YES afterDelay:1.f];
+    }];
+    
+ 
+}
+
+- (void)forwardAction {
+    
 }
 
 - (void)onLeftBarBtn:(UIBarButtonItem *)sender {
@@ -178,6 +222,7 @@
             }
             WFCCConversationInfo *info = [self.conversations objectAtIndex:indexPath.row];
             cell.conversation = info.conversation;
+            cell.checked = NO;
             return cell;
         }
         
@@ -285,30 +330,63 @@
         if (indexPath.section == 0) { //new conversation
             WFCUContactListViewController *pvc = [[WFCUContactListViewController alloc] init];
             pvc.selectContact = YES;
-            pvc.multiSelect = NO;
+            pvc.multiSelect = YES;
             pvc.isPushed = YES;
+            pvc.selectedContacts = [NSMutableArray arrayWithArray:self.selectedContacts];
             __weak typeof(self)ws = self;
             pvc.selectResult = ^(NSArray<NSString *> *contacts) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (contacts.count == 1) {
+//                    if (contacts.count == 1) {
+//                        WFCCConversation *conversation = [[WFCCConversation alloc] init];
+//                        conversation.type = Single_Type;
+//                        conversation.target = contacts[0];
+//                        conversation.line = 0;
+//                        [ws altertSend:conversation];
+//                    }
+                    self.selectedContacts = contacts;
+                    for (NSString *contact in self.selectedContacts) {
                         WFCCConversation *conversation = [[WFCCConversation alloc] init];
                         conversation.type = Single_Type;
-                        conversation.target = contacts[0];
+                        conversation.target = contact;
                         conversation.line = 0;
-                        [ws altertSend:conversation];
+                        
+                        __block BOOL isContain = NO;
+                        [ws.selConversations enumerateObjectsUsingBlock:^(WFCCConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ([obj.target isEqualToString:contact]) {
+                                isContain = YES;
+                                *stop = YES;
+                            }
+                        }];
+                        
+                        if (!isContain) {
+                            [self.selConversations addObject:conversation];
+                        }
+                        
                     }
+                    [ws updateRightBarBtn];
                 });
             };
             
             [self.navigationController pushViewController:pvc animated:YES];
             return;
         } else {
-            selectedConv = self.conversations[indexPath.row].conversation;
+//            selectedConv = self.conversations[indexPath.row].conversation;
+            if ([self.selConversations containsObject:self.conversations[indexPath.row].conversation]) {
+                [self.selConversations removeObject:self.conversations[indexPath.row].conversation];
+                ((WFCUForwardMessageCell *)[tableView cellForRowAtIndexPath:indexPath]).checked = NO;
+            }else {
+                [self.selConversations addObject:self.conversations[indexPath.row].conversation];
+                ((WFCUForwardMessageCell *)[tableView cellForRowAtIndexPath:indexPath]).checked = YES;
+            }
+            [self updateRightBarBtn];
+
         }
     }
-    if (selectedConv) {
-        [self altertSend:selectedConv];
-    }
+    
+    [self updateRightBarBtn];
+//    if (selectedConv) {
+//        [self altertSend:selectedConv];
+//    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

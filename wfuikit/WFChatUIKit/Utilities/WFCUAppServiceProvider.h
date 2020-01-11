@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取群限制成员数量
 - (void)getSystemSettingSuccess:(void(^)(int type))successBlock error:(void(^)(NSString *message))errorBlock;
+
+//获取转发数量限制
+- (void)getForwardSettingSuccess:(void(^)(int type))successBlock error:(void(^)(NSString *message))errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END
