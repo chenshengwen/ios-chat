@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *digestLabel;
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UIView *digestBackgrouView;
+@property (weak, nonatomic) IBOutlet UIImageView *portraitImageView2;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel2;
+
+
 @end
 
 @implementation WFCUShareMessageView
@@ -39,81 +43,135 @@
         textMsg = [[WFCCTextMessageContent alloc] init];
         textMsg.text = self.messageTextView.text;
     }
-    
-    __strong WFCCConversation *conversation = self.conversation;
-    __strong void (^forwardDone)(BOOL success) = self.forwardDone;
-    
-    [[WFCCIMService sharedWFCIMService] send:conversation content:self.message.content success:^(long long messageUid, long long timestamp) {
-        if (textMsg) {
-            [[WFCCIMService sharedWFCIMService] send:conversation content:textMsg success:^(long long messageUid, long long timestamp) {
+    for (WFCCConversation *subconversation in self.conversations) {
+        __strong WFCCConversation *conversation = subconversation;
+        __strong void (^forwardDone)(BOOL success) = self.forwardDone;
+        
+        [[WFCCIMService sharedWFCIMService] send:conversation content:self.message.content success:^(long long messageUid, long long timestamp) {
+            if (textMsg) {
+                [[WFCCIMService sharedWFCIMService] send:conversation content:textMsg success:^(long long messageUid, long long timestamp) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (forwardDone) {
+                            forwardDone(YES);
+                        }
+                    });
+                } error:^(int error_code) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (forwardDone) {
+                            forwardDone(NO);
+                        }
+                    });
+                }];
+            } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (forwardDone) {
                         forwardDone(YES);
                     }
                 });
-            } error:^(int error_code) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (forwardDone) {
-                        forwardDone(NO);
-                    }
-                });
-            }];
-        } else {
+            }
+        } error:^(int error_code) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (forwardDone) {
-                    forwardDone(YES);
+                    forwardDone(NO);
                 }
             });
-        }
-    } error:^(int error_code) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (forwardDone) {
-                forwardDone(NO);
-            }
-        });
-    }];
+        }];
+    }
+    
 }
 
 - (IBAction)cancelAction:(id)sender {
     [self hideView];
 }
 
-- (void)setConversation:(WFCCConversation *)conversation {
+- (void)setConversations:(NSArray<WFCCConversation *> *)conversations {
     [self updateUI];
-    _conversation = conversation;
-    NSString *name;
-    NSString *portrait;
-    
-    if (conversation.type == Single_Type) {
-        WFCCUserInfo *userInfo = [[WFCCIMService sharedWFCIMService] getUserInfo:conversation.target refresh:NO];
-        if (userInfo) {
-            name = userInfo.displayName;
-            portrait = userInfo.portrait;
-        } else {
-            name = [NSString stringWithFormat:@"%@<%@>", WFCString(@"User"), conversation.target];
-        }
-        [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
-    } else if (conversation.type == Group_Type) {
-        WFCCGroupInfo *groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:conversation.target refresh:NO];
-        if (groupInfo) {
-            name = groupInfo.name;
-            portrait = groupInfo.portrait;
-        } else {
-            name = WFCString(@"GroupChat");
-        }
-        [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"group_default_portrait"]];
-    } else if (conversation.type == Channel_Type) {
-        WFCCChannelInfo *channelInfo = [[WFCCIMService sharedWFCIMService] getChannelInfo:conversation.target refresh:NO];
-        if (channelInfo) {
-            name = channelInfo.name;
-            portrait = channelInfo.portrait;
-        } else {
-            name = WFCString(@"Channel");
-        }
-        [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"channel_default_portrait"]];
+    _conversations = conversations;
+
+    if (conversations.count > 1) {
+        [self setConversation:conversations[0]];
+        [self setConversation2:conversations[1]];
+    }else {
+        [self setConversation:conversations[0]];
     }
+
+}
+
+- (void)setConversation:(WFCCConversation *)conversation {
     
-    self.nameLabel.text = name;
+        NSString *name;
+       NSString *portrait;
+       
+       if (conversation.type == Single_Type) {
+           WFCCUserInfo *userInfo = [[WFCCIMService sharedWFCIMService] getUserInfo:conversation.target refresh:NO];
+           if (userInfo) {
+               name = userInfo.displayName;
+               portrait = userInfo.portrait;
+           } else {
+               name = [NSString stringWithFormat:@"%@<%@>", WFCString(@"User"), conversation.target];
+           }
+           [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+       } else if (conversation.type == Group_Type) {
+           WFCCGroupInfo *groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:conversation.target refresh:NO];
+           if (groupInfo) {
+               name = groupInfo.name;
+               portrait = groupInfo.portrait;
+           } else {
+               name = WFCString(@"GroupChat");
+           }
+           [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"group_default_portrait"]];
+       } else if (conversation.type == Channel_Type) {
+           WFCCChannelInfo *channelInfo = [[WFCCIMService sharedWFCIMService] getChannelInfo:conversation.target refresh:NO];
+           if (channelInfo) {
+               name = channelInfo.name;
+               portrait = channelInfo.portrait;
+           } else {
+               name = WFCString(@"Channel");
+           }
+           [self.portraitImageView sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"channel_default_portrait"]];
+       }
+       
+       self.nameLabel.text = name;
+    
+}
+
+
+- (void)setConversation2:(WFCCConversation *)conversation {
+    
+        NSString *name;
+       NSString *portrait;
+       
+       if (conversation.type == Single_Type) {
+           WFCCUserInfo *userInfo = [[WFCCIMService sharedWFCIMService] getUserInfo:conversation.target refresh:NO];
+           if (userInfo) {
+               name = userInfo.displayName;
+               portrait = userInfo.portrait;
+           } else {
+               name = [NSString stringWithFormat:@"%@<%@>", WFCString(@"User"), conversation.target];
+           }
+           [self.portraitImageView2 sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"PersonalChat"]];
+       } else if (conversation.type == Group_Type) {
+           WFCCGroupInfo *groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:conversation.target refresh:NO];
+           if (groupInfo) {
+               name = groupInfo.name;
+               portrait = groupInfo.portrait;
+           } else {
+               name = WFCString(@"GroupChat");
+           }
+           [self.portraitImageView2 sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"group_default_portrait"]];
+       } else if (conversation.type == Channel_Type) {
+           WFCCChannelInfo *channelInfo = [[WFCCIMService sharedWFCIMService] getChannelInfo:conversation.target refresh:NO];
+           if (channelInfo) {
+               name = channelInfo.name;
+               portrait = channelInfo.portrait;
+           } else {
+               name = WFCString(@"Channel");
+           }
+           [self.portraitImageView2 sd_setImageWithURL:[NSURL URLWithString:[portrait stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"channel_default_portrait"]];
+       }
+       
+       self.nameLabel2.text = name;
+    
 }
 
 - (void)setMessage:(WFCCMessage *)message {

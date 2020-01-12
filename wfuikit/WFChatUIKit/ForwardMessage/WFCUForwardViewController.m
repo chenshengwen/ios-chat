@@ -83,52 +83,58 @@
 }
 
 - (void)updateRightBarBtn {
-    if(self.selConversations.count == 0) {
+    
+    int count = (int)self.selConversations.count + (int)self.selectedContacts.count;
+    
+    if(count == 0) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Ok") style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
     } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@(%d)", WFCString(@"Ok"),  (int)self.selConversations.count] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@(%d)", WFCString(@"Ok"), count] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
     }
 }
 
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
+    int count = (int)self.selConversations.count + (int)self.selectedContacts.count;
+    int limit = [WFCUConfigManager globalManager].forwardLimit == 0 ? forwardLimit : [WFCUConfigManager globalManager].forwardLimit;
     
-    [[WFCUConfigManager globalManager].appServiceProvider getForwardSettingSuccess:^(int type) {
-
-        if (self.selConversations.count > type) {
-           MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-           hud.mode = MBProgressHUDModeText;
-           hud.label.text = [NSString stringWithFormat:@"转发数量不允许大于%d",type];
+    if (count > limit) {
+       MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+       hud.mode = MBProgressHUDModeText;
+       hud.label.text = [NSString stringWithFormat:@"转发数量不允许大于%d",limit];
 //           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-           [hud hideAnimated:YES afterDelay:1.f];
-        }else {
-            [self forwardAction];
-        }
-        NSLog(@"%d",type);
-        
-    } error:^(NSString * _Nonnull message) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      hud.mode = MBProgressHUDModeText;
-      hud.label.text = message;
-//      hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-      [hud hideAnimated:YES afterDelay:1.f];
-    }];
+       [hud hideAnimated:YES afterDelay:1.f];
+    }else {
+        [self forwardAction];
+    }
     
  
 }
 
 - (void)forwardAction {
-    
+    if (self.selectedContacts > 0) {
+        for (NSString *contact in self.selectedContacts) {
+            WFCCConversation *conversation = [[WFCCConversation alloc] init];
+            conversation.type = Single_Type;
+            conversation.target = contact;
+            conversation.line = 0;
+            [self.selConversations addObject:conversation];
+        }
+    }
+    if (self.selConversations.count > 0) {
+        [self altertSend:self.selConversations.copy];
+    }
 }
 
 - (void)onLeftBarBtn:(UIBarButtonItem *)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)altertSend:(WFCCConversation *)conversation {
+- (void)altertSend:(NSArray<WFCCConversation *> *)conversations {
     WFCUShareMessageView *shareView = [WFCUShareMessageView createViewFromNib];
     
-    shareView.conversation = conversation;
+    shareView.conversations = conversations;
     shareView.message = self.message;
     __weak typeof(self)ws = self;
     shareView.forwardDone = ^(BOOL success) {
@@ -332,6 +338,7 @@
             pvc.selectContact = YES;
             pvc.multiSelect = YES;
             pvc.isPushed = YES;
+            pvc.isForward = YES;
             pvc.selectedContacts = [NSMutableArray arrayWithArray:self.selectedContacts];
             __weak typeof(self)ws = self;
             pvc.selectResult = ^(NSArray<NSString *> *contacts) {
@@ -344,25 +351,7 @@
 //                        [ws altertSend:conversation];
 //                    }
                     self.selectedContacts = contacts;
-                    for (NSString *contact in self.selectedContacts) {
-                        WFCCConversation *conversation = [[WFCCConversation alloc] init];
-                        conversation.type = Single_Type;
-                        conversation.target = contact;
-                        conversation.line = 0;
-                        
-                        __block BOOL isContain = NO;
-                        [ws.selConversations enumerateObjectsUsingBlock:^(WFCCConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            if ([obj.target isEqualToString:contact]) {
-                                isContain = YES;
-                                *stop = YES;
-                            }
-                        }];
-                        
-                        if (!isContain) {
-                            [self.selConversations addObject:conversation];
-                        }
-                        
-                    }
+                   
                     [ws updateRightBarBtn];
                 });
             };

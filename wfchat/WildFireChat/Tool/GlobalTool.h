@@ -12,10 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GlobalTool : NSObject
 
++ (instancetype)shareInstance;
 
 + (NSString *)getAppID;
 
 + (NSString *)getAppURL;
+
 
 @end
 

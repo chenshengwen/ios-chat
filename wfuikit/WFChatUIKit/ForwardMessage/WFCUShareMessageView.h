@@ -10,7 +10,7 @@
 #import <WFChatClient/WFCChatClient.h>
 
 @interface WFCUShareMessageView : UIView
-@property(nonatomic, strong)WFCCConversation *conversation;
+@property(nonatomic, strong)NSArray<WFCCConversation *> *conversations;
 @property(nonatomic, strong)WFCCMessage *message;
 @property(nonatomic, strong)void (^forwardDone)(BOOL success);
 @end

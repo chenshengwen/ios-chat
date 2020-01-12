@@ -8,7 +8,21 @@
 
 #import "GlobalTool.h"
 
+
+@interface GlobalTool ()
+@end
+
 @implementation GlobalTool
+
++ (instancetype)shareInstance {
+    static GlobalTool *helper;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        helper = [[GlobalTool alloc] init];
+    });
+    return helper;
+}
 
 + (NSString *)getAppID {
     
@@ -67,5 +81,6 @@
     return @"";
 
 }
+
 
 @end

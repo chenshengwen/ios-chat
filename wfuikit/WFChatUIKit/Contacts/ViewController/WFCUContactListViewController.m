@@ -154,42 +154,36 @@ static NSMutableDictionary *hanziStringDict = nil;
     
 - (void)updateRightBarBtn {
     if(self.selectedContacts.count == 0) {
+        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Ok") style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        if (self.isForward) {
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }else {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }
     } else {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@(%d)", WFCString(@"Ok"),  (int)self.selectedContacts.count] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
     }
 }
 
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
-    
-    [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
-        NSInteger totalCount = type;
-        if (self.isGroup) {
-            totalCount = self.disableUsers.count + self.selectedContacts.count;
-        }else {
-            totalCount = self.disableUsers.count + self.selectedContacts.count + 1;
-        }
-        if (totalCount > type) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-           hud.mode = MBProgressHUDModeText;
-           hud.label.text = [NSString stringWithFormat:@"群成员数量不允许大于%d",type];
-//           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-           [hud hideAnimated:YES afterDelay:1.f];
-        }else {
-            [self addMemberAction];
-        }
-        NSLog(@"%d",type);
-        
-    } error:^(NSString * _Nonnull message) {
+    int groupLimit = [WFCUConfigManager globalManager].groupLimit == 0 ? groupLimit : [WFCUConfigManager globalManager].groupLimit;
+    NSInteger totalCount = groupLimit;
+    if (self.isGroup) {
+        totalCount = self.disableUsers.count + self.selectedContacts.count;
+    }else {
+        totalCount = self.disableUsers.count + self.selectedContacts.count + 1;
+    }
+    if (totalCount > groupLimit) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      hud.mode = MBProgressHUDModeText;
-      hud.label.text = message;
-//      hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-      [hud hideAnimated:YES afterDelay:1.f];
-    }];
-    
- 
+       hud.mode = MBProgressHUDModeText;
+       hud.label.text = [NSString stringWithFormat:@"群成员数量不允许大于%d",groupLimit];
+//           hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+       [hud hideAnimated:YES afterDelay:1.f];
+    }else {
+        [self addMemberAction];
+    }
+
 }
 
 - (void)addMemberAction {

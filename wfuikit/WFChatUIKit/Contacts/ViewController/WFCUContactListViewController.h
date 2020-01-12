@@ -24,5 +24,5 @@
 @property (nonatomic, strong)void (^mentionAll)(void);
 @property (nonatomic, assign)BOOL isGroup;
 @property (nonatomic, strong)NSMutableArray<NSString *> *selectedContacts;
-
+@property (nonatomic, assign) BOOL isForward;//是否是转发
 @end

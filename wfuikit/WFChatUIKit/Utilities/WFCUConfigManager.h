@@ -12,6 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static int groupLimit = 500;
+static int forwardLimit = 100;
+
 @interface WFCUConfigManager : NSObject
 + (WFCUConfigManager *)globalManager;
 
@@ -26,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)UIColor *naviTextColor;
 
 @property(nonatomic, weak)id<WFCUAppServiceProvider> appServiceProvider;
+
+@property (nonatomic, assign) int groupLimit;//群成员限制
+@property (nonatomic, assign) int forwardLimit;//转发数量限制
+
 @end
 
 NS_ASSUME_NONNULL_END

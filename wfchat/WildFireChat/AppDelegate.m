@@ -35,6 +35,7 @@
 #import <Bugly/Bugly.h>
 #import "AppService.h"
 #import "WFAlertView.h"
+#import "GlobalTool.h"
 
 
 @interface AppDelegate () <ConnectionStatusDelegate, ReceiveMessageDelegate,UIAlertViewDelegate,
@@ -113,7 +114,27 @@
     //更新接口
     [self updateRequest];
     
+    //获取系统设置信息
+    [self getSystemSetting];
+    
     return YES;
+}
+
+- (void)getSystemSetting {
+    [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
+            
+        [WFCUConfigManager globalManager].groupLimit = type;
+            
+            
+        } error:^(NSString * _Nonnull message) {
+            [WFCUConfigManager globalManager].groupLimit = groupLimit;
+        }];
+    
+    [[WFCUConfigManager globalManager].appServiceProvider getForwardSettingSuccess:^(int type) {
+        [WFCUConfigManager globalManager].forwardLimit = type;
+    } error:^(NSString * _Nonnull message) {
+        [WFCUConfigManager globalManager].forwardLimit = forwardLimit;
+    }];
 }
 
 - (void)updateRequest {
