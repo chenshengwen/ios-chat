@@ -84,7 +84,7 @@ alpha:alphaValue]
 #define kJIUZHOU_URL  @"https://jz6998.com/m/"    //九州
 #define kLIYING_URL   @"https://ly18.cc/mobile/v3/"     //利赢
 #define k918_URL      @"https://jc918.cc/mobile/v3/"        //918
-#define k518_URL      @"https://k92555.com/mobile/v3/"        //518
+#define k518_URL      @"http://www.518gycp.com/mobile/v3/"        //518
 
 
 #endif /* MyMacros_h */
