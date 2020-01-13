@@ -141,14 +141,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_chat_group"] style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
       
       //关闭群成员私聊 chensw
-      __weak typeof(self) weakSelf = self;
-      [[WFCCIMService sharedWFCIMService] modifyGroupInfo:self.conversation.target type:Modify_Group_PrivateChat newValue:@"1" notifyLines:@[@(0)] notifyContent:nil success:^{
-          
-          weakSelf.groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:self.conversation.target refresh:YES];
-
-      } error:^(int error_code) {
-          
-      }];
+//      __weak typeof(self) weakSelf = self;
+//      [[WFCCIMService sharedWFCIMService] modifyGroupInfo:self.conversation.target type:Modify_Group_PrivateChat newValue:@"1" notifyLines:@[@(0)] notifyContent:nil success:^{
+//
+//          weakSelf.groupInfo = [[WFCCIMService sharedWFCIMService] getGroupInfo:self.conversation.target refresh:YES];
+//
+//      } error:^(int error_code) {
+//          
+//      }];
       
       
   } else if(self.conversation.type == Channel_Type) {

@@ -21,6 +21,7 @@
 #import "MBProgressHUD.h"
 #import "WFCUFavChannelTableViewController.h"
 #import "WFCUConfigManager.h"
+#import "WFCUForwardViewController.h"
 
 @interface WFCUContactListViewController () <UITableViewDataSource, UISearchControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
 @property (nonatomic, strong)UITableView *tableView;
@@ -345,7 +346,7 @@ static NSMutableDictionary *hanziStringDict = nil;
         return dataSource.count;
     } else {
         if (section == 0) {
-            return 2;//隐藏频道chensw
+            return 3;//隐藏频道chensw，新增群发助手
         } else {
             dataSource = self.allFriendSectionDic[self.allKeys[section - 1]];
             return dataSource.count;
@@ -405,7 +406,8 @@ static NSMutableDictionary *hanziStringDict = nil;
                     contactCell = [[WFCUContactTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:REUSEIDENTIFY];
                 }
                 
-                contactCell.nameLabel.text = WFCString(@"Channel");
+//                contactCell.nameLabel.text = WFCString(@"Channel");
+                contactCell.nameLabel.text = @"群发助手";
                 contactCell.portraitView.image = [UIImage imageNamed:@"contact_channel_icon"];
                 
                 return contactCell;
@@ -629,9 +631,15 @@ static NSMutableDictionary *hanziStringDict = nil;
                 groupVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:groupVC animated:YES];
             } else {
-                WFCUFavChannelTableViewController *channelVC = [[WFCUFavChannelTableViewController alloc] init];;
-                channelVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:channelVC animated:YES];
+//                WFCUFavChannelTableViewController *channelVC = [[WFCUFavChannelTableViewController alloc] init];;
+//                channelVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:channelVC animated:YES];
+                //群发助手
+                WFCUForwardViewController *controller = [[WFCUForwardViewController alloc] init];
+//                controller.message = self.cell4Menu.model.message;
+                controller.isGroupForward = YES;
+                UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:controller];
+                [self.navigationController presentViewController:navi animated:YES completion:nil];
             }
             return;
         } else {

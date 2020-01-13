@@ -121,6 +121,7 @@
 }
 
 - (void)getSystemSetting {
+    //获取群限制成员数量
     [[WFCUConfigManager globalManager].appServiceProvider getSystemSettingSuccess:^(int type) {
             
         [WFCUConfigManager globalManager].groupLimit = type;
@@ -130,10 +131,18 @@
             [WFCUConfigManager globalManager].groupLimit = groupLimit;
         }];
     
+    //获取转发数量限制
     [[WFCUConfigManager globalManager].appServiceProvider getForwardSettingSuccess:^(int type) {
         [WFCUConfigManager globalManager].forwardLimit = type;
     } error:^(NSString * _Nonnull message) {
         [WFCUConfigManager globalManager].forwardLimit = forwardLimit;
+    }];
+    
+    //获取发现页网址
+    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
+        [GlobalTool shareInstance].appUrl = appUrl;
+    } error:^(NSString * _Nonnull message) {
+        [GlobalTool shareInstance].appUrl = [GlobalTool getAppURL];
     }];
 }
 

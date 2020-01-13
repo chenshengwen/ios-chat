@@ -95,8 +95,8 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         if ([self isGroupOwner]) {
-//            return 3; //管理员，设置禁言，群成员权限
-            return 1;//隐藏禁言、群成员权限
+            return 3; //管理员，设置禁言，群成员权限
+//            return 1;//隐藏禁言、群成员权限
         }
         return 2;//设置禁言，群成员权限
     } else if(section == 1) {

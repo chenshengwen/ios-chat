@@ -26,7 +26,7 @@ static AppService *sharedSingleton = nil;
     return sharedSingleton;
 }
 
-- (void)login:(NSString *)user password:(NSString *)password success:(void(^)(NSString *userId, NSString *token, BOOL newUser))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
+- (void)login:(NSString *)user password:(NSString *)password company:(NSString *)company success:(void(^)(NSString *userId, NSString *token, BOOL newUser))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
     [self post:@"/login" data:@{@"mobile":user, @"password":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS)} success:^(NSDictionary *dict) {
         if([dict[@"status"] intValue] == 200 && dict != nil) {
@@ -158,6 +158,26 @@ static AppService *sharedSingleton = nil;
           } error:^(NSError * _Nonnull error) {
               errorBlock(@"网络错误");
           }];
+}
+
+#pragma mark - 获取发现页网址
+- (void)getAppUrlWithAppId:(NSString *)appId Success:(void(^)(NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock {
+    
+    NSString *url = [NSString stringWithFormat:@"/app/setting/%@",[GlobalTool getAppID]];
+    
+    [self post:url data:nil success:^(NSDictionary *dict) {
+        if([dict[@"status"] intValue] == 200 && dict != nil) {
+            
+            NSString *myUrl = dict[@"data"][@"value"];
+
+            successBlock(myUrl);
+        } else {
+            errorBlock(dict[@"message"]);
+        }
+    } error:^(NSError * _Nonnull error) {
+        errorBlock(@"网络错误");
+    }];
+    
 }
 
 - (void)sendCode:(NSString *)phoneNumber success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock {

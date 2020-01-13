@@ -220,7 +220,7 @@ alpha:1.0]
   hud.label.text = @"登陆中...";
   [hud showAnimated:YES];
   
-    [[AppService sharedAppService] login:user password:password success:^(NSString *userId, NSString *token, BOOL newUser) {
+    [[AppService sharedAppService] login:user password:password company:[GlobalTool getAppID] success:^(NSString *userId, NSString *token, BOOL newUser) {
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"savedName"];
         [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"savedToken"];
         [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"savedUserId"];

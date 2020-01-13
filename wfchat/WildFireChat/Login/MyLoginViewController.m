@@ -127,7 +127,10 @@ typedef NS_ENUM(NSInteger,LoginType) {
        hud.label.text = @"登陆中...";
        [hud showAnimated:YES];
        
-         [[AppService sharedAppService] login:self.phoneTF.text password:self.passwordTF.text success:^(NSString *userId, NSString *token, BOOL newUser) {
+         [[AppService sharedAppService] login:self.phoneTF.text
+                                     password:self.passwordTF.text
+                                      company:[GlobalTool getAppID]
+                                      success:^(NSString *userId, NSString *token, BOOL newUser) {
              [[NSUserDefaults standardUserDefaults] setObject:self.phoneTF.text forKey:@"savedName"];
              [[NSUserDefaults standardUserDefaults] setObject:self.passwordTF.text forKey:@"savedPassword"];
 

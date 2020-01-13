@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WFCUForwardViewController : UIViewController
 @property (nonatomic, strong) WFCCMessage *message;
+@property (nonatomic, assign) BOOL isGroupForward;//新建群发
 @end
 
 NS_ASSUME_NONNULL_END

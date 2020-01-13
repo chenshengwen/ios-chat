@@ -290,6 +290,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         NSLog(@"create group success");
         if (ws.onSuccess) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [ws privateChat:groupId];
                 ws.onSuccess(groupId);
             });
         }
@@ -303,6 +304,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)privateChat:(NSString *)groupId {
+      //关闭群成员私聊 chensw
+      [[WFCCIMService sharedWFCIMService] modifyGroupInfo:groupId type:Modify_Group_PrivateChat newValue:@"1" notifyLines:@[@(0)] notifyContent:nil success:^{
+
+
+      } error:^(int error_code) {
+
+      }];
+}
+
 - (void)modifyGroup:(NSString *)groupId portrait:(NSString *)portraitUrl {
   __weak typeof(self) ws = self;
     [[WFCCIMService sharedWFCIMService] modifyGroupInfo:groupId type:Modify_Group_Portrait newValue:portraitUrl notifyLines:@[@(0)] notifyContent:nil success:^{

@@ -36,6 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.isGroupForward) {
+        self.title = @"新建群发";
+    }
+    
     CGRect frame = self.view.frame;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 54, frame.size.width, frame.size.height - 64)];
     self.tableView.delegate = self;
@@ -84,7 +88,21 @@
 
 - (void)updateRightBarBtn {
     
-    int count = (int)self.selConversations.count + (int)self.selectedContacts.count;
+    __block int sampleCount = 0;
+    NSMutableArray *arr = self.selConversations.mutableCopy;
+    for (NSString *contact in self.selectedContacts) {
+        [arr enumerateObjectsUsingBlock:^(WFCCConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([contact isEqualToString:conversation.target]) {
+                sampleCount++;
+                [arr removeObject:conversation];
+            }
+        }];
+        
+    }
+    
+    self.selConversations = arr.mutableCopy;
+    
+    int count = (int)self.selConversations.count + (int)self.selectedContacts.count - sampleCount;
     
     if(count == 0) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Ok") style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
