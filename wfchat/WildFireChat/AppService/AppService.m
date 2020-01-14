@@ -28,7 +28,7 @@ static AppService *sharedSingleton = nil;
 
 - (void)login:(NSString *)user password:(NSString *)password company:(NSString *)company success:(void(^)(NSString *userId, NSString *token, BOOL newUser))successBlock error:(void(^)(int errCode, NSString *message))errorBlock {
     
-    [self post:@"/login" data:@{@"mobile":user, @"password":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS)} success:^(NSDictionary *dict) {
+    [self post:@"/login" data:@{@"mobile":user, @"password":password, @"clientId":[[WFCCNetworkService sharedInstance] getClientId], @"platform":@(Platform_iOS),@"company":company} success:^(NSDictionary *dict) {
         if([dict[@"status"] intValue] == 200 && dict != nil) {
             NSString *userId = dict[@"data"][@"userId"];
             NSString *token = dict[@"data"][@"token"];

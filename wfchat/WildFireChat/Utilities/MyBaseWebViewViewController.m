@@ -9,6 +9,7 @@
 #import "MyBaseWebViewViewController.h"
 #import "NSString+category.h"
 #import "UIImage+Category.h"
+#import "AppService.h"
 
 @interface MyBaseWebViewViewController ()<WKUIDelegate, WKNavigationDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UIProgressView *myProgressView;
@@ -22,19 +23,22 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     
-//    NSArray*cookies =[[NSUserDefaults standardUserDefaults]objectForKey:@"cookies"];
-//    NSMutableDictionary*cookieProperties = [NSMutableDictionary dictionary];
-//    if (cookies.count > 5) {
-//        [cookieProperties setObject:[cookies objectAtIndex:0]forKey:NSHTTPCookieName];
-//        [cookieProperties setObject:[cookies objectAtIndex:1]forKey:NSHTTPCookieValue];
-//        [cookieProperties setObject:[cookies objectAtIndex:3]forKey:NSHTTPCookieDomain];
-//        [cookieProperties setObject:[cookies objectAtIndex:4]forKey:NSHTTPCookiePath];
-//        NSHTTPCookie*cookieuser = [NSHTTPCookie cookieWithProperties:cookieProperties];
-//        [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookie:cookieuser];
-//    }
-    
-    
-    [self creatWebView];
+    [MBProgressHUD showLoadToView:self.view];
+    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
+        [MBProgressHUD hideHUDForView:self.view];
+        [GlobalTool shareInstance].appUrl = appUrl;
+        self.url = appUrl;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self creatWebView];
+        });
+
+    } error:^(NSString * _Nonnull message) {
+        [MBProgressHUD hideHUDForView:self.view];
+        self.url = [GlobalTool getAppURL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self creatWebView];
+        });
+    }];
 
 }
 
@@ -53,7 +57,7 @@
 //    config.userContentController = [[WKUserContentController alloc] init];
 
     config.allowsInlineMediaPlayback = YES;
-    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-kTabBarH) configuration:config];
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) configuration:config];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
 //    self.webView.scrollView.backgroundColor = cellBgColor;

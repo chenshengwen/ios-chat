@@ -38,6 +38,7 @@
 @property(nonatomic, assign)BOOL sorting;
 @property(nonatomic, assign)BOOL needSort;
 @property(nonatomic, strong)UIActivityIndicatorView *activityIndicator;
+
 @end
 
 static NSMutableDictionary *hanziStringDict = nil;
@@ -168,7 +169,7 @@ static NSMutableDictionary *hanziStringDict = nil;
 }
 
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
-    int groupLimit = [WFCUConfigManager globalManager].groupLimit == 0 ? groupLimit : [WFCUConfigManager globalManager].groupLimit;
+    int groupLimit = [WFCUConfigManager globalManager].groupLimit == 0 ? kGroupLimit : [WFCUConfigManager globalManager].groupLimit;
     NSInteger totalCount = groupLimit;
     if (self.isGroup) {
         totalCount = self.disableUsers.count + self.selectedContacts.count;
@@ -205,6 +206,7 @@ static NSMutableDictionary *hanziStringDict = nil;
     if (self.cancelSelect) {
         self.cancelSelect();
     }
+
     [self left:nil];
 }
 

@@ -28,6 +28,7 @@
 @property (nonatomic, strong)NSArray<WFCCGroupSearchInfo *>  *searchGroupList;
 @property (nonatomic, strong)NSMutableArray<WFCCConversation *> *selConversations;
 @property (nonatomic, strong)NSArray<NSString *> *selectedContacts;
+@property (nonatomic, strong)NSMutableArray<NSString *> *selectedContactsTemp;
 
 @end
 
@@ -54,6 +55,7 @@
 
     self.conversations = [[[WFCCIMService sharedWFCIMService] getConversationInfos:@[@(Single_Type), @(Group_Type)] lines:@[@(0)]] mutableCopy];
     self.selConversations = [NSMutableArray arrayWithCapacity:0];
+    self.selectedContactsTemp = [NSMutableArray arrayWithCapacity:0];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -87,23 +89,7 @@
 }
 
 - (void)updateRightBarBtn {
-    
-    __block int sampleCount = 0;
-    NSMutableArray *arr = self.selConversations.mutableCopy;
-    for (NSString *contact in self.selectedContacts) {
-        [arr enumerateObjectsUsingBlock:^(WFCCConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([contact isEqualToString:conversation.target]) {
-                sampleCount++;
-                [arr removeObject:conversation];
-            }
-        }];
-        
-    }
-    
-    self.selConversations = arr.mutableCopy;
-    
-    int count = (int)self.selConversations.count + (int)self.selectedContacts.count - sampleCount;
-    
+    int count = (int)self.selConversations.count + (int)self.selectedContactsTemp.count;
     if(count == 0) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:WFCString(@"Ok") style:UIBarButtonItemStyleDone target:self action:@selector(onRightBarBtn:)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -115,7 +101,7 @@
 
 - (void)onRightBarBtn:(UIBarButtonItem *)sender {
     int count = (int)self.selConversations.count + (int)self.selectedContacts.count;
-    int limit = [WFCUConfigManager globalManager].forwardLimit == 0 ? forwardLimit : [WFCUConfigManager globalManager].forwardLimit;
+    int limit = [WFCUConfigManager globalManager].forwardLimit == 0 ? kForwardLimit : [WFCUConfigManager globalManager].forwardLimit;
     
     if (count > limit) {
        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -130,8 +116,35 @@
  
 }
 
+- (NSArray<NSString *> *)getSingleContact {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
+    for (WFCCConversation *conversation in self.selConversations) {
+        if (conversation.type == Single_Type) {
+            [arr addObject:conversation.target];
+        }
+    }
+    return arr.copy;
+}
+
+- (void)searchFromSelectContacts {
+    self.selectedContactsTemp = [NSMutableArray arrayWithArray:self.selectedContacts.copy];
+    for (int i = 0; i < self.conversations.count; i++) {
+        WFCCConversationInfo *info = self.conversations[i];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+        
+        for (NSString *target in self.selectedContacts) {
+            if ([info.conversation.target isEqualToString:target]) {
+                ((WFCUForwardMessageCell *)[self.tableView cellForRowAtIndexPath:indexPath]).checked = YES;
+                [self.selConversations addObject:info.conversation];
+                [self.selectedContactsTemp removeObject:target];
+            }
+        }
+    }
+
+}
+
 - (void)forwardAction {
-    if (self.selectedContacts > 0) {
+    if (self.selectedContacts.count > 0) {
         for (NSString *contact in self.selectedContacts) {
             WFCCConversation *conversation = [[WFCCConversation alloc] init];
             conversation.type = Single_Type;
@@ -352,12 +365,15 @@
         }
     } else {
         if (indexPath.section == 0) { //new conversation
+            [self getSingleContact];
             WFCUContactListViewController *pvc = [[WFCUContactListViewController alloc] init];
             pvc.selectContact = YES;
             pvc.multiSelect = YES;
             pvc.isPushed = YES;
+            pvc.disableUsersSelected = YES;
+            pvc.selectedContacts = self.selectedContactsTemp;
+            pvc.disableUsers = [self getSingleContact];
             pvc.isForward = YES;
-            pvc.selectedContacts = [NSMutableArray arrayWithArray:self.selectedContacts];
             __weak typeof(self)ws = self;
             pvc.selectResult = ^(NSArray<NSString *> *contacts) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -368,8 +384,8 @@
 //                        conversation.line = 0;
 //                        [ws altertSend:conversation];
 //                    }
-                    self.selectedContacts = contacts;
-                   
+                    ws.selectedContacts = contacts;
+                    [ws searchFromSelectContacts];
                     [ws updateRightBarBtn];
                 });
             };
@@ -385,6 +401,7 @@
                 [self.selConversations addObject:self.conversations[indexPath.row].conversation];
                 ((WFCUForwardMessageCell *)[tableView cellForRowAtIndexPath:indexPath]).checked = YES;
             }
+            
             [self updateRightBarBtn];
 
         }

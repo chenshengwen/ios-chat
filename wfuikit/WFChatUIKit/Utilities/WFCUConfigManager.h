@@ -12,8 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static int groupLimit = 500;
-static int forwardLimit = 100;
+static int kGroupLimit = 500;
+static int kForwardLimit = 100;
 
 @interface WFCUConfigManager : NSObject
 + (WFCUConfigManager *)globalManager;

@@ -128,22 +128,22 @@
             
             
         } error:^(NSString * _Nonnull message) {
-            [WFCUConfigManager globalManager].groupLimit = groupLimit;
+            [WFCUConfigManager globalManager].groupLimit = kGroupLimit;
         }];
     
     //获取转发数量限制
     [[WFCUConfigManager globalManager].appServiceProvider getForwardSettingSuccess:^(int type) {
         [WFCUConfigManager globalManager].forwardLimit = type;
     } error:^(NSString * _Nonnull message) {
-        [WFCUConfigManager globalManager].forwardLimit = forwardLimit;
+        [WFCUConfigManager globalManager].forwardLimit = kForwardLimit;
     }];
     
     //获取发现页网址
-    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
-        [GlobalTool shareInstance].appUrl = appUrl;
-    } error:^(NSString * _Nonnull message) {
-        [GlobalTool shareInstance].appUrl = [GlobalTool getAppURL];
-    }];
+//    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
+//        [GlobalTool shareInstance].appUrl = appUrl;
+//    } error:^(NSString * _Nonnull message) {
+//        [GlobalTool shareInstance].appUrl = [GlobalTool getAppURL];
+//    }];
 }
 
 - (void)updateRequest {
