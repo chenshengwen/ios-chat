@@ -11,7 +11,7 @@
 @class WFCCConversation;
 @interface WFCUMessageListViewController : UIViewController
 @property (nonatomic, strong)WFCCConversation *conversation;
-
+@property (nonatomic, assign) BOOL isSilent;//是否设置免打扰
 @property (nonatomic, strong)NSString *highlightText;
 @property (nonatomic, assign)long highlightMessageId;
 

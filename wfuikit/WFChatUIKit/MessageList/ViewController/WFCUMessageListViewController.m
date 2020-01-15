@@ -621,6 +621,9 @@
         self.firstAppear = NO;
         [self scrollToBottom:NO];
     }
+    
+    WFCCConversationInfo *conversationInfo = [[WFCCIMService sharedWFCIMService] getConversationInfo:self.conversation];
+    self.isSilent = conversationInfo.isSilent;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -760,7 +763,10 @@
         
         if (newMessage) {
             if (message.direction == MessageDirection_Receive) {
-                AudioServicesPlaySystemSound(1003);
+                if (!self.isSilent) {
+                    AudioServicesPlaySystemSound(1003);
+                }
+                
             }
             BOOL showTime = YES;
             if (self.modelList.count > 0 && (message.serverTime -  (self.modelList[self.modelList.count - 1]).message.serverTime < 60 * 1000)) {

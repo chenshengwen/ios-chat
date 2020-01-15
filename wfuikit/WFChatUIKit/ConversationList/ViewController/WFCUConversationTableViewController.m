@@ -320,7 +320,16 @@
   NSArray<WFCCMessage *> *messages = notification.object;
   if ([messages count]) {
       if (self.navigationController.childViewControllers.count == 1) {
-          AudioServicesPlaySystemSound(1007);
+          
+          for (WFCCMessage *message in messages) {
+              for (WFCCConversationInfo *info in self.conversations) {
+                  if ([message.conversation.target isEqualToString:info.conversation.target]) {
+                      if (!info.isSilent) {
+                          AudioServicesPlaySystemSound(1007);
+                      }
+                  }
+              }
+          }
       }
       [self refreshList];
     [self refreshLeftButton];
@@ -786,6 +795,7 @@
         WFCUMessageListViewController *mvc = [[WFCUMessageListViewController alloc] init];
         WFCCConversationInfo *info = self.conversations[indexPath.row];
         mvc.conversation = info.conversation;
+        mvc.isSilent = info.isSilent;
         mvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:mvc animated:YES];
     }
