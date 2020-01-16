@@ -21,6 +21,6 @@
 #import "BWDealNullTool.h"
 #import "MBProgressHUD+JDW.h"
 #import "GlobalTool.h"
-
+#import "MYConst.h"
 
 #endif /* WFChat_Prefix_Header_pch */

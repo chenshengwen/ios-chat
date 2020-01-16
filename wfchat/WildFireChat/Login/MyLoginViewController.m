@@ -17,7 +17,7 @@
 #import "AppService.h"
 #import "BWPasswordValidator.h"
 #import "BWUserNameValidator.h"
-#import "WMZCodeView.h"
+#import "OpenInstallSDK.h"
 
 
 typedef NS_ENUM(NSInteger,LoginType) {
@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger,LoginType) {
 @property (weak, nonatomic) IBOutlet UIButton *secturyBtn;
 
 @property (nonatomic, assign) LoginType type;
-@property(nonatomic,strong)WMZCodeView *codeView;
 
 @end
 
@@ -89,20 +88,12 @@ typedef NS_ENUM(NSInteger,LoginType) {
 - (IBAction)loginClick:(UIButton *)sender {
     [self resetKeyboard:nil];
     
-    
-//    [self verfirSlider];
-
     if (self.type == myLoginType) {
         [self logintAction];
     }else {
         [self registerAction];
     }
      
-}
-
-- (void)verfirSlider {
-    [self.view addSubview:self.codeView];
-    self.codeView.hidden = NO;
 }
 
 - (void)logintAction {
@@ -198,6 +189,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
     [[AppService sharedAppService] regist:self.phoneTF.text password:self.passwordTF.text company:[GlobalTool getAppID] success:^(NSString * _Nonnull userId, NSString * _Nonnull name) {
         dispatch_async(dispatch_get_main_queue(), ^{
           [hud hideAnimated:YES];
+            //用户注册成功后调用
+            [OpenInstallSDK reportRegister];
             [MBProgressHUD showMessage:@"注册成功，请点击登录"];
             NSLog(@"userId:%@,name:%@",userId,name);
             [self registClick:self.regihterBtn];
@@ -365,26 +358,6 @@ typedef NS_ENUM(NSInteger,LoginType) {
 - (IBAction)passwordSecturyClick2:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.confirepasswordTF.secureTextEntry = !sender.selected;
-}
-
-
-
-- (WMZCodeView *)codeView {
-    if (!_codeView) {
-        _codeView = [[WMZCodeView shareInstance] addCodeViewWithType:CodeTypeSlider withImageName:@"slder" witgFrame:CGRectMake(40, screenHeight-200, [UIScreen mainScreen].bounds.size.width-80, 50)  withBlock:^(BOOL success) {
-            if (success) {
-                NSLog(@"成功");
-                if (self.type == myLoginType) {
-                    [self logintAction];
-                }else {
-                    [self registerAction];
-                }
-
-            }
-        }];
-        _codeView.hidden = YES;
-    }
-    return _codeView;
 }
 
 @end

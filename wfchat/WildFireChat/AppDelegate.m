@@ -36,9 +36,10 @@
 #import "AppService.h"
 #import "WFAlertView.h"
 #import "GlobalTool.h"
+#import "OpenInstallSDK.h"
+#import "AppDelegate+Notification.h"
 
-
-@interface AppDelegate () <ConnectionStatusDelegate, ReceiveMessageDelegate,UIAlertViewDelegate,
+@interface AppDelegate () <ConnectionStatusDelegate, ReceiveMessageDelegate,UIAlertViewDelegate,OpenInstallDelegate,
 #if WFCU_SUPPORT_VOIP
     WFAVEngineDelegate,
 #endif
@@ -51,6 +52,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //替换为您自己的Bugly账户。
     [Bugly startWithAppId:@"098d1b5496"];
+    
+    [OpenInstallSDK initWithDelegate:self];
+    
+    //添加通知
+    [self notificationApplication:application didFinishLaunchingWithOptions:launchOptions];
     
     [WFCCNetworkService startLog];
     [WFCCNetworkService sharedInstance].connectionStatusDelegate = self;
@@ -111,11 +117,11 @@
         self.window.rootViewController = nav;
     }
     
-    //更新接口
-    [self updateRequest];
-    
     //获取系统设置信息
     [self getSystemSetting];
+    
+    //更新接口
+    [self updateRequest];
     
     return YES;
 }
@@ -139,11 +145,18 @@
     }];
     
     //获取发现页网址
-//    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
-//        [GlobalTool shareInstance].appUrl = appUrl;
-//    } error:^(NSString * _Nonnull message) {
-//        [GlobalTool shareInstance].appUrl = [GlobalTool getAppURL];
-//    }];
+    [[OpenInstallSDK defaultManager] getInstallParmsCompleted:^(OpeninstallData*_Nullable appData) {
+        //在主线程中回调
+        if (appData.data) {//(动态安装参数)
+           //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
+        }
+        if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)
+            //e.g.可自己统计渠道相关数据等
+            [[NSUserDefaults standardUserDefaults] setObject:appData.channelCode forKey:kUserDefaultAppID];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    NSLog(@"OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode);
+    }];
 }
 
 - (void)updateRequest {
@@ -197,6 +210,51 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
 }
+
+#pragma mark - openinstall
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+    //判断是否通过OpenInstall Universal Link 唤起App
+    if ([OpenInstallSDK continueUserActivity:userActivity]){//如果使用了Universal link ，此方法必写
+        return YES;
+    }
+    //其他第三方回调；
+     return YES;
+}
+
+//适用目前所有iOS版本
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    //判断是否通过OpenInstall URL Scheme 唤起App
+    if  ([OpenInstallSDK handLinkURL:url]){//必写
+        return YES;
+    }
+    //其他第三方回调；
+    return YES;
+
+}
+
+//iOS9以上，会优先走这个方法
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(nonnull NSDictionary *)options{
+    //判断是否通过OpenInstall URL Scheme 唤起App
+    if  ([OpenInstallSDK handLinkURL:url]){//必写
+        return YES;
+    }
+    //其他第三方回调；
+     return YES;
+
+}
+
+#pragma mark - 通过OpenInstall获取已经安装App被唤醒时的参数（如果是通过渠道页面唤醒App时，会返回渠道编号）
+-(void)getWakeUpParams:(OpeninstallData *)appData{
+    if (appData.data) {//(动态唤醒参数)
+        //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
+    }
+    if (appData.channelCode) {//(通过渠道链接或二维码唤醒会返回渠道编号)
+        //e.g.可自己统计渠道相关数据等
+    }
+    NSLog(@"OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode);
+}
+
+
 
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:

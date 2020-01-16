@@ -26,6 +26,10 @@
 
 + (NSString *)getAppID {
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultAppID]) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultAppID];
+    }
+    
     NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 
     
