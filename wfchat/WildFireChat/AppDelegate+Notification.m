@@ -10,7 +10,7 @@
 #import "WFCBaseTabBarController.h"
 #import "MyLoginViewController.h"
 
-static NSString *kSocial_UMeng_Key = @"5e1d9176570df389d8000011";
+static NSString *kSocial_UMeng_Key = @"5e201a364ca3579e55000ddf";
 
 @implementation AppDelegate (Notification)
 
