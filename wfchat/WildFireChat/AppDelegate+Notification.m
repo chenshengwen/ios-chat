@@ -10,7 +10,8 @@
 #import "WFCBaseTabBarController.h"
 #import "MyLoginViewController.h"
 
-static NSString *kSocial_UMeng_Key = @"5e201a364ca3579e55000ddf";
+static NSString *kSocial_UMeng_Key = @"5e22750e570df346d100008a";
+//static NSString *kSocial_UMeng_Key = @"5e1d9176570df389d8000011";//自有
 
 @implementation AppDelegate (Notification)
 
@@ -41,6 +42,7 @@ static NSString *kSocial_UMeng_Key = @"5e201a364ca3579e55000ddf";
                           ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
                           ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
                           ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSLog(@"deviceToken:%@",token);
 
 }
 - (void)notificationApplication:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{

@@ -15,6 +15,7 @@
 #import "WFCPrivacyViewController.h"
 #import "WFCPrivacyTableViewController.h"
 #import "WFCDiagnoseViewController.h"
+#import <UMPush/UMessage.h>  //友盟推送
 
 @interface WFCSettingTableViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong)UITableView *tableView;
@@ -180,8 +181,14 @@
  
 - (void)onLogoutBtn:(id)sender {
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedName"];
+    
+    //移除别名
+    [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"] type:[GlobalTool getAppID] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+    }];
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedUserId"];
     [[WFCCNetworkService sharedInstance] disconnect:YES];
+    
 }
 @end

@@ -1540,7 +1540,7 @@
 				);
 				MARKETING_VERSION = 6;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.messange.518;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shengshi.tongzhou.push;
 				PRODUCT_NAME = "聊8";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1593,7 +1593,7 @@
 				);
 				MARKETING_VERSION = 6;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.messange.518;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shengshi.tongzhou.push;
 				PRODUCT_NAME = "聊8";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

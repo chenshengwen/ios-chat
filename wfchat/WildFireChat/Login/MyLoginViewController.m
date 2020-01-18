@@ -18,6 +18,7 @@
 #import "BWPasswordValidator.h"
 #import "BWUserNameValidator.h"
 #import "OpenInstallSDK.h"
+#import <UMPush/UMessage.h>  //友盟推送
 
 
 typedef NS_ENUM(NSInteger,LoginType) {
@@ -129,7 +130,10 @@ typedef NS_ENUM(NSInteger,LoginType) {
              [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"savedUserId"];
              [[NSUserDefaults standardUserDefaults] synchronize];
              
-             
+             //绑定别名
+             [UMessage addAlias:self.phoneTF.text type:[GlobalTool getAppID] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+                 NSLog(@"response:%@",responseObject);
+             }];
          //需要注意token跟clientId是强依赖的，一定要调用getClientId获取到clientId，然后用这个clientId获取token，这样connect才能成功，如果随便使用一个clientId获取到的token将无法链接成功。
              [[WFCCNetworkService sharedInstance] connect:userId token:token];
              

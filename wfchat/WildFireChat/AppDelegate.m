@@ -281,7 +281,17 @@
         
         [[WFCCNetworkService sharedInstance] setDeviceToken:token];
     }
+    
+    [self notificationApplication:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+
 }
+
+// 接受友盟推送
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    [self notificationApplication:application didReceiveRemoteNotification:userInfo];
+    
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

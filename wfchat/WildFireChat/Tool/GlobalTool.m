@@ -47,10 +47,10 @@
         return kLIYING;
     }else if ([bundleId containsString:k918]) {
         return k918;
-    }else if ([bundleId containsString:k518]) {
-        return k518;
-    }else {
+    }else if ([bundleId containsString:kShenshi]) {
         return kShenshi;
+    }else {
+        return k518;
     }
     
     return @"";
@@ -75,10 +75,10 @@
         return kLIYING_URL;
     }else if ([bundleId containsString:k918]) {
         return k918_URL;
-    }else if ([bundleId containsString:k518]) {
-        return k518_URL;
-    }else {
+    }else if ([bundleId containsString:kShenshi]) {
         return kShenshi_URL;
+    }else {
+        return k518_URL;
     }
     
     

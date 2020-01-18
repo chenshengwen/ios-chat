@@ -11,6 +11,7 @@
 #import "BWPasswordValidator.h"
 #import "BWTextField.h"
 #import <WFChatClient/WFCChatClient.h>
+#import <UMPush/UMessage.h>  //友盟推送
 
 @interface MyEditPasswordViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet BWTextField *currentPasswordTF;
@@ -77,6 +78,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [hud hideAnimated:YES];
             [MBProgressHUD showMessage:@"密码修改成功，请重新登陆"];
+            //移除别名
+            [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"] type:[GlobalTool getAppID] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            }];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedUserId"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedPassword"];
