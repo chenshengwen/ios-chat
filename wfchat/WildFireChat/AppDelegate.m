@@ -150,6 +150,7 @@
         if (appData.data) {//(动态安装参数)
            //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
             NSString *channelId = [appData.data objectForKey:@"appId"];
+
             if (channelId) {
                 [[NSUserDefaults standardUserDefaults] setObject:channelId forKey:kUserDefaultchannelID];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -172,6 +173,7 @@
     
     
 }
+
 
 - (void)updateRequest {
     

@@ -183,7 +183,7 @@
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedName"];
     
     //移除别名
-    [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"] type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+    [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedUserId"] type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
     }];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];

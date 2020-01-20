@@ -161,7 +161,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
              [[NSUserDefaults standardUserDefaults] synchronize];
              
              //绑定别名
-             [UMessage setAlias:self.phoneTF.text type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+             [UMessage setAlias:userId type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
                  NSLog(@"response:%@",responseObject);
              }];
          //需要注意token跟clientId是强依赖的，一定要调用getClientId获取到clientId，然后用这个clientId获取token，这样connect才能成功，如果随便使用一个clientId获取到的token将无法链接成功。

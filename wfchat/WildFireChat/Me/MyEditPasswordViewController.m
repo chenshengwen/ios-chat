@@ -79,7 +79,7 @@
             [hud hideAnimated:YES];
             [MBProgressHUD showMessage:@"密码修改成功，请重新登陆"];
             //移除别名
-            [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedName"] type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            [UMessage removeAlias:[[NSUserDefaults standardUserDefaults] objectForKey:@"savedUserId"] type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
             }];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedToken"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"savedUserId"];
