@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
     myRegistType
 };
 
+#define errorMsg @"渠道获取失败，请使用正确地址重新安装"
+
 @interface MyLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *regihterBtn;
@@ -89,12 +91,40 @@ typedef NS_ENUM(NSInteger,LoginType) {
 - (IBAction)loginClick:(UIButton *)sender {
     [self resetKeyboard:nil];
     
-    if (self.type == myLoginType) {
-        [self logintAction];
-    }else {
-        [self registerAction];
+    NSString *channelId = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultchannelID];
+    if (!channelId) {
+        [MBProgressHUD showMessage:errorMsg];
+        return;
     }
-     
+    
+    if ([GlobalTool getAppID]) {
+        if (self.type == myLoginType) {
+            [self logintAction];
+        }else {
+            [self registerAction];
+        }
+    }else {
+
+//        [[NSUserDefaults standardUserDefaults] setObject:@"Xp9mEeLu" forKey:kUserDefaultchannelID];
+
+        [self getAppIdFormChannelId:channelId];
+    }
+    
+}
+
+- (void)getAppIdFormChannelId:(NSString *)channelId {
+    
+    [[AppService sharedAppService] getAppIDWithChannelId:channelId Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
+        
+        if (self.type == myLoginType) {
+            [self logintAction];
+        }else {
+            [self registerAction];
+        }
+
+    } error:^(NSString * _Nonnull message) {
+        [MBProgressHUD showMessage:message];
+    }];
 }
 
 - (void)logintAction {
@@ -131,7 +161,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
              [[NSUserDefaults standardUserDefaults] synchronize];
              
              //绑定别名
-             [UMessage addAlias:self.phoneTF.text type:[GlobalTool getAppID] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+             [UMessage setAlias:self.phoneTF.text type:[GlobalTool getAliasType] response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
                  NSLog(@"response:%@",responseObject);
              }];
          //需要注意token跟clientId是强依赖的，一定要调用getClientId获取到clientId，然后用这个clientId获取token，这样connect才能成功，如果随便使用一个clientId获取到的token将无法链接成功。

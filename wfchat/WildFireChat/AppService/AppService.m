@@ -160,17 +160,22 @@ static AppService *sharedSingleton = nil;
           }];
 }
 
-#pragma mark - 获取发现页网址
-- (void)getAppUrlWithAppId:(NSString *)appId Success:(void(^)(NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock {
+#pragma mark - 获取appId和pappURL
+- (void)getAppIDWithChannelId:(NSString *)channeldId Success:(void(^)(NSString *appId,NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock {
     
-    NSString *url = [NSString stringWithFormat:@"/app/setting/%@",[GlobalTool getAppID]];
+    NSString *url = [NSString stringWithFormat:@"/app/setting/%@",channeldId];
     
     [self post:url data:nil success:^(NSDictionary *dict) {
         if([dict[@"status"] intValue] == 200 && dict != nil) {
             
             NSString *myUrl = dict[@"data"][@"value"];
+            NSString *myId = dict[@"data"][@"desc"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:myId forKey:kUserDefaultAppID];
+            [[NSUserDefaults standardUserDefaults] setObject:myUrl forKey:kUserDefaultAppURL];
+            [[NSUserDefaults standardUserDefaults] synchronize];
 
-            successBlock(myUrl);
+            successBlock(myId,myUrl);
         } else {
             errorBlock(dict[@"message"]);
         }

@@ -12,15 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GlobalTool : NSObject
 
-//发现页网址
-@property (nonatomic, strong) NSString *appUrl;
-
 + (instancetype)shareInstance;
 
 + (NSString *)getAppID;
 
 + (NSString *)getAppURL;
 
++ (NSString *)getAliasType;
 
 @end
 

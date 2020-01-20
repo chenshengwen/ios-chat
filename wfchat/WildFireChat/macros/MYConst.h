@@ -9,6 +9,10 @@
 #ifndef MYConst_h
 #define MYConst_h
 
+//渠道id
+static NSString *const kUserDefaultchannelID = @"kUserDefaultchannelID";
+//appId
 static NSString *const kUserDefaultAppID = @"kUserDefaultAppID";
-
+//appUrl
+static NSString *const kUserDefaultAppURL = @"kUserDefaultAppURL";
 #endif /* MYConst_h */

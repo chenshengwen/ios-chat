@@ -23,22 +23,7 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     
-    [MBProgressHUD showLoadToView:self.view];
-    [[AppService sharedAppService] getAppUrlWithAppId:[GlobalTool getAppID] Success:^(NSString * _Nonnull appUrl) {
-        [MBProgressHUD hideHUDForView:self.view];
-        [GlobalTool shareInstance].appUrl = appUrl;
-        self.url = appUrl;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self creatWebView];
-        });
-
-    } error:^(NSString * _Nonnull message) {
-        [MBProgressHUD hideHUDForView:self.view];
-        self.url = [GlobalTool getAppURL];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self creatWebView];
-        });
-    }];
+    [self creatWebView];
 
 }
 

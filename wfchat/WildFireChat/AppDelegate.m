@@ -149,14 +149,28 @@
         //在主线程中回调
         if (appData.data) {//(动态安装参数)
            //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
+            NSString *channelId = [appData.data objectForKey:@"appId"];
+            if (channelId) {
+                [[NSUserDefaults standardUserDefaults] setObject:channelId forKey:kUserDefaultchannelID];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                //获取appId和appURL
+                [[AppService sharedAppService] getAppIDWithChannelId:channelId Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
+                    
+                } error:^(NSString * _Nonnull message) {
+                    
+                }];
+            }
+            
         }
         if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)
             //e.g.可自己统计渠道相关数据等
-            [[NSUserDefaults standardUserDefaults] setObject:appData.channelCode forKey:kUserDefaultAppID];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            
         }
     NSLog(@"OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode);
     }];
+    
+    
 }
 
 - (void)updateRequest {

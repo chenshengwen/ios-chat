@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateRequest:(NSDictionary *)dic success:(void(^)(int type, NSString *upgradePrompt, NSString *downloadUrl, int versionId))successBlock error:(void(^)(NSString *message))errorBlock;
 
-#pragma mark - 获取发现页网址
-- (void)getAppUrlWithAppId:(NSString *)appId Success:(void(^)(NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock;
+#pragma mark - 获取appId和pappURL
+- (void)getAppIDWithChannelId:(NSString *)channeldId Success:(void(^)(NSString *appId,NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock;
 
 - (void)sendCode:(NSString *)phoneNumber success:(void(^)(void))successBlock error:(void(^)(NSString *message))errorBlock;
 
