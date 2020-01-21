@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
 @property (weak, nonatomic) IBOutlet BWTextField *confirepasswordTF;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTopCon;
 @property (weak, nonatomic) IBOutlet UIButton *secturyBtn;
+@property (nonatomic, copy) NSString *channelId;
 
 @property (nonatomic, assign) LoginType type;
 
@@ -46,12 +47,13 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     [self.navigationController setNavigationBarHidden:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showChannelInputView) name:knotificationDimissChannelId object:nil];
+    
     self.phoneTF.layer.borderColor = GrayBlogColor.CGColor;
     self.phoneTF.layer.borderWidth = 1;
     self.phoneTF.leftViewMode = UITextFieldViewModeAlways;
     self.phoneTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
     self.phoneTF.validator = [BWUserNameValidator new];
-//    [self.phoneTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     
     self.passwordTF.layer.borderColor = GrayBlogColor.CGColor;
@@ -59,17 +61,14 @@ typedef NS_ENUM(NSInteger,LoginType) {
     self.passwordTF.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
     self.passwordTF.validator = [BWPasswordValidator new];
-//    [self.passwordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     self.confirepasswordTF.layer.borderColor = GrayBlogColor.CGColor;
     self.confirepasswordTF.layer.borderWidth = 1;
     self.confirepasswordTF.leftViewMode = UITextFieldViewModeAlways;
     self.confirepasswordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 5)];
     self.confirepasswordTF.validator = [BWPasswordValidator new];
-//    [self.confirepasswordTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 
-//    self.loginBtn.backgroundColor = GrayBlogColor;
-//    self.loginBtn.enabled = NO;
     
     self.confirepasswordTF.hidden = YES;
     self.secturyBtn.hidden = YES;
@@ -85,15 +84,25 @@ typedef NS_ENUM(NSInteger,LoginType) {
         self.passwordTF.text = password;
         self.loginBtn.backgroundColor = kRedThemColor;
     }
-    
 
 }
+
+
+- (void)channelTextChange:(NSNotification *)noti {
+    UITextField *textField = noti.object;
+    self.channelId = textField.text;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (IBAction)loginClick:(UIButton *)sender {
     [self resetKeyboard:nil];
     
     NSString *channelId = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultchannelID];
     if (!channelId) {
-        [MBProgressHUD showMessage:errorMsg];
+        [self showChannelInputView];
         return;
     }
     
@@ -105,11 +114,30 @@ typedef NS_ENUM(NSInteger,LoginType) {
         }
     }else {
 
-//        [[NSUserDefaults standardUserDefaults] setObject:@"Xp9mEeLu" forKey:kUserDefaultchannelID];
-
         [self getAppIdFormChannelId:channelId];
     }
     
+}
+
+- (void)showChannelInputView {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请输入渠道码" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cacel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    __weak typeof(self) weakSelf = self;
+    UIAlertAction *comfir = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:weakSelf.channelId forKey:kUserDefaultchannelID];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }];
+    [alert addAction:cacel];
+    [alert addAction:comfir];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入渠道码";
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelTextChange:) name:UITextFieldTextDidChangeNotification object:textField];
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)getAppIdFormChannelId:(NSString *)channelId {
@@ -122,9 +150,14 @@ typedef NS_ENUM(NSInteger,LoginType) {
             [self registerAction];
         }
 
-    } error:^(NSString * _Nonnull message) {
+    } error:^(NSString * _Nonnull message, int errorCode) {
+        if (errorCode == 404) {
+            [self showChannelInputView];
+        }
         [MBProgressHUD showMessage:message];
+
     }];
+    
 }
 
 - (void)logintAction {

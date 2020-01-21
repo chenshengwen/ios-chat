@@ -149,7 +149,7 @@
         //在主线程中回调
         if (appData.data) {//(动态安装参数)
            //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
-            NSString *channelId = [appData.data objectForKey:@"appId"];
+            NSString *channelId = [appData.data objectForKey:@"app"];
 
             if (channelId) {
                 [[NSUserDefaults standardUserDefaults] setObject:channelId forKey:kUserDefaultchannelID];
@@ -158,11 +158,18 @@
                 //获取appId和appURL
                 [[AppService sharedAppService] getAppIDWithChannelId:channelId Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
                     
-                } error:^(NSString * _Nonnull message) {
-                    
+                } error:^(NSString * _Nonnull message, int errorCode) {
+                    if (errorCode == 404) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
+
+                    }
+                    [MBProgressHUD showMessage:message];
                 }];
             }
             
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
+
         }
         if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)
             //e.g.可自己统计渠道相关数据等
@@ -411,8 +418,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (status == kConnectionStatusRejected || status == kConnectionStatusTokenIncorrect || status == kConnectionStatusSecretKeyMismatch) {
             [[WFCCNetworkService sharedInstance] disconnect:YES];
+            [MBProgressHUD showMessage:@"登录失效"];
         } else if (status == kConnectionStatusLogout) {
-            
+            [MBProgressHUD showMessage:@"退出登录"];
             UIViewController *loginVC = [[MyLoginViewController alloc] init];
             self.window.rootViewController = loginVC;
         } 

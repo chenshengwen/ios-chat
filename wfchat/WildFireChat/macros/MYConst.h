@@ -15,4 +15,10 @@ static NSString *const kUserDefaultchannelID = @"kUserDefaultchannelID";
 static NSString *const kUserDefaultAppID = @"kUserDefaultAppID";
 //appUrl
 static NSString *const kUserDefaultAppURL = @"kUserDefaultAppURL";
+
+
+
+//noti
+static NSString *const knotificationDimissChannelId = @"knotificationDimissChannelId";
+
 #endif /* MYConst_h */

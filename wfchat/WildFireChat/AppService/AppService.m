@@ -161,7 +161,7 @@ static AppService *sharedSingleton = nil;
 }
 
 #pragma mark - 获取appId和pappURL
-- (void)getAppIDWithChannelId:(NSString *)channeldId Success:(void(^)(NSString *appId,NSString *appUrl))successBlock error:(void(^)(NSString *message))errorBlock {
+- (void)getAppIDWithChannelId:(NSString *)channeldId Success:(void(^)(NSString *appId,NSString *appUrl))successBlock error:(void(^)(NSString *message, int errorCode))errorBlock {
     
     NSString *url = [NSString stringWithFormat:@"/app/setting/%@",channeldId];
     
@@ -177,10 +177,10 @@ static AppService *sharedSingleton = nil;
 
             successBlock(myId,myUrl);
         } else {
-            errorBlock(dict[@"message"]);
+            errorBlock(dict[@"message"],[dict[@"status"] intValue]);
         }
     } error:^(NSError * _Nonnull error) {
-        errorBlock(@"网络错误");
+        errorBlock(@"网络错误",-1);
     }];
     
 }
