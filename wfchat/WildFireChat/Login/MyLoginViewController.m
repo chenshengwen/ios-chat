@@ -144,6 +144,10 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     [[AppService sharedAppService] getAppIDWithChannelId:channelId Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
         
+        [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kUserDefaultAppID];
+        [[NSUserDefaults standardUserDefaults] setObject:appUrl forKey:kUserDefaultAppURL];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         if (self.type == myLoginType) {
             [self logintAction];
         }else {

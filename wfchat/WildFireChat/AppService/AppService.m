@@ -170,10 +170,6 @@ static AppService *sharedSingleton = nil;
             
             NSString *myUrl = dict[@"data"][@"value"];
             NSString *myId = dict[@"data"][@"desc"];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:myId forKey:kUserDefaultAppID];
-            [[NSUserDefaults standardUserDefaults] setObject:myUrl forKey:kUserDefaultAppURL];
-            [[NSUserDefaults standardUserDefaults] synchronize];
 
             successBlock(myId,myUrl);
         } else {

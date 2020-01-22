@@ -158,6 +158,10 @@
                 //获取appId和appURL
                 [[AppService sharedAppService] getAppIDWithChannelId:channelId Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
                     
+                    [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kUserDefaultAppID];
+                    [[NSUserDefaults standardUserDefaults] setObject:appUrl forKey:kUserDefaultAppURL];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
                 } error:^(NSString * _Nonnull message, int errorCode) {
                     if (errorCode == 404) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];

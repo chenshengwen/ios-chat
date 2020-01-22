@@ -27,6 +27,29 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //获取appId和appURL
+    NSString *channel = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultchannelID];
+    [[AppService sharedAppService] getAppIDWithChannelId:channel Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
+        
+        NSString *localUrl = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultAppURL];
+        if (![appUrl isEqualToString:localUrl]) {
+            
+            [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kUserDefaultAppID];
+            [[NSUserDefaults standardUserDefaults] setObject:appUrl forKey:kUserDefaultAppURL];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            self.url = appUrl;
+            [self requstWeb];
+        }
+        
+    } error:^(NSString * _Nonnull message, int errorCode) {
+        
+    }];
+}
+
 
 -(void)creatWebView{
     //以下代码适配大小
