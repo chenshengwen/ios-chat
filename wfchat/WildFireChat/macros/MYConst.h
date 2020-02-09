@@ -15,7 +15,8 @@ static NSString *const kUserDefaultchannelID = @"kUserDefaultchannelID";
 static NSString *const kUserDefaultAppID = @"kUserDefaultAppID";
 //appUrl
 static NSString *const kUserDefaultAppURL = @"kUserDefaultAppURL";
-
+//是否第一次安装
+static NSString *const kFirstInstall = @"kFirstInstall";
 
 
 //noti

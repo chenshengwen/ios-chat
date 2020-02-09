@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger,LoginType) {
 @interface MyLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *regihterBtn;
+@property (weak, nonatomic) IBOutlet UIButton *inputCodeBtn;
+
 @property (weak, nonatomic) IBOutlet BWTextField *confirepasswordTF;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTopCon;
 @property (weak, nonatomic) IBOutlet UIButton *secturyBtn;
@@ -47,7 +49,13 @@ typedef NS_ENUM(NSInteger,LoginType) {
     
     [self.navigationController setNavigationBarHidden:YES];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showChannelInputView) name:knotificationDimissChannelId object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showChannelInputView) name:knotificationDimissChannelId object:nil];
+    //是否第一次安装app，弹窗渠道输入框
+    BOOL isFirstInstall = [[NSUserDefaults standardUserDefaults] objectForKey:kFirstInstall];
+    if (!isFirstInstall) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstInstall];
+        [self showChannelInputView];
+    }
     
     self.phoneTF.layer.borderColor = GrayBlogColor.CGColor;
     self.phoneTF.layer.borderWidth = 1;
@@ -117,6 +125,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
         [self getAppIdFormChannelId:channelId];
     }
     
+    
 }
 
 - (void)showChannelInputView {
@@ -130,6 +139,15 @@ typedef NS_ENUM(NSInteger,LoginType) {
         [[NSUserDefaults standardUserDefaults] setObject:weakSelf.channelId forKey:kUserDefaultchannelID];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+        [[AppService sharedAppService] getAppIDWithChannelId:weakSelf.channelId  Success:^(NSString * _Nonnull appId, NSString * _Nonnull appUrl) {
+              
+              [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kUserDefaultAppID];
+              [[NSUserDefaults standardUserDefaults] setObject:appUrl forKey:kUserDefaultAppURL];
+              [[NSUserDefaults standardUserDefaults] synchronize];
+
+          } error:^(NSString * _Nonnull message, int errorCode) {
+              
+          }];
     }];
     [alert addAction:cacel];
     [alert addAction:comfir];
@@ -289,6 +307,7 @@ typedef NS_ENUM(NSInteger,LoginType) {
         self.confirepasswordTF.hidden = NO;
         self.secturyBtn.hidden = NO;
         self.loginBtnTopCon.constant = 100;
+        self.inputCodeBtn.hidden = NO;
     }else {
         self.type = myLoginType;
         [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
@@ -297,7 +316,14 @@ typedef NS_ENUM(NSInteger,LoginType) {
         self.confirepasswordTF.hidden = YES;
         self.secturyBtn.hidden = YES;
         self.loginBtnTopCon.constant = 50;
+        self.inputCodeBtn.hidden = YES;
     }
+    
+}
+
+
+- (IBAction)inputCodeAction:(UIButton *)sender {
+    [self showChannelInputView];
     
 }
 

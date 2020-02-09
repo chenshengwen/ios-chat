@@ -1538,7 +1538,7 @@
 					"$(PROJECT_DIR)/WildFireChat/友盟/iOS/share/share_ios_6.9.6/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/WildFireChat/友盟/iOS/share/share_ios_6.9.6/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 6;
+				MARKETING_VERSION = 7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shengshi.tongzhou.push;
 				PRODUCT_NAME = "聊8";
@@ -1591,7 +1591,7 @@
 					"$(PROJECT_DIR)/WildFireChat/友盟/iOS/share/share_ios_6.9.6/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/WildFireChat/友盟/iOS/share/share_ios_6.9.6/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 6;
+				MARKETING_VERSION = 7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shengshi.tongzhou.push;
 				PRODUCT_NAME = "聊8";

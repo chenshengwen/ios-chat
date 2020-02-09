@@ -164,7 +164,7 @@
                     
                 } error:^(NSString * _Nonnull message, int errorCode) {
                     if (errorCode == 404) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
 
                     }
                     [MBProgressHUD showMessage:message];
@@ -172,7 +172,7 @@
             }
             
         }else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:knotificationDimissChannelId object:nil];
 
         }
         if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)

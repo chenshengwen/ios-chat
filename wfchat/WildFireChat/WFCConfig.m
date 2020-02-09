@@ -13,10 +13,10 @@
 //NSString *IM_SERVER_HOST = @"wildfirechat.cn";
 
 /** 生产环境 */
-//NSString *IM_SERVER_HOST = @"47.75.149.71";
+NSString *IM_SERVER_HOST = @"47.75.149.71";
 
 /** 开发环境 */
-NSString *IM_SERVER_HOST = @"47.56.123.21";
+//NSString *IM_SERVER_HOST = @"47.56.123.21";
 
 //NSString *IM_SERVER_HOST = @"http://im.a1239999.com";
 
@@ -29,10 +29,10 @@ int IM_SERVER_PORT = 80;
 //NSString *APP_SERVER_ADDRESS = @"http://api.a1239999.com";
 
 /**生产环境*/
-//NSString *APP_SERVER_ADDRESS = @"http://47.90.3.133";
+NSString *APP_SERVER_ADDRESS = @"http://47.90.3.133";
 
 /**开发环境*/
-NSString *APP_SERVER_ADDRESS = @"http://47.56.123.21:8888";
+//NSString *APP_SERVER_ADDRESS = @"http://47.56.123.21:8888";
 
 
 NSString *ICE_ADDRESS = @"turn:turn.wildfirechat.cn:3478";

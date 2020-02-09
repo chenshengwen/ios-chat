@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="confirepasswordTF" destination="vrl-wE-pmm" id="qom-gd-zvz"/>
                 <outlet property="headerView" destination="M9Y-ky-7iu" id="BmZ-6p-fk4"/>
+                <outlet property="inputCodeBtn" destination="FSL-Ht-oFf" id="TzK-E9-zN6"/>
                 <outlet property="loginBtn" destination="8OC-5X-d6q" id="zS6-rR-xeM"/>
                 <outlet property="loginBtnTopCon" destination="jwQ-c8-wfg" id="1sO-BV-p0y"/>
                 <outlet property="passwordTF" destination="xnK-r4-W3y" id="xUU-F0-dOP"/>
@@ -125,6 +126,19 @@
                         <action selector="passwordSecturyClick1:" destination="-1" eventType="touchUpInside" id="Z5J-4b-O0w"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Ht-oFf">
+                    <rect key="frame" x="25" y="786" width="80" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="bA9-6Z-IUw"/>
+                        <constraint firstAttribute="width" constant="80" id="m2O-px-uCb"/>
+                    </constraints>
+                    <state key="normal" title="设置渠道">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="inputCodeAction:" destination="-1" eventType="touchUpInside" id="1Db-ja-PCD"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -134,9 +148,11 @@
                 <constraint firstItem="xnK-r4-W3y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="5YI-VC-q9J"/>
                 <constraint firstItem="vrl-wE-pmm" firstAttribute="top" secondItem="xnK-r4-W3y" secondAttribute="bottom" constant="25" id="B9C-4x-IHh"/>
                 <constraint firstItem="jCT-iK-nqD" firstAttribute="centerY" secondItem="xnK-r4-W3y" secondAttribute="centerY" id="G2K-YV-kLT"/>
+                <constraint firstItem="0FB-sw-RZh" firstAttribute="centerY" secondItem="FSL-Ht-oFf" secondAttribute="centerY" id="LDM-mz-MwU"/>
                 <constraint firstAttribute="trailing" secondItem="WAz-tI-Pdg" secondAttribute="trailing" constant="55" id="MSJ-5j-sWQ"/>
                 <constraint firstItem="xnK-r4-W3y" firstAttribute="top" secondItem="DYu-fp-VtT" secondAttribute="bottom" constant="25" id="Pv8-k2-Y0Q"/>
                 <constraint firstAttribute="trailing" secondItem="0FB-sw-RZh" secondAttribute="trailing" constant="40" id="ZUh-6o-9fd"/>
+                <constraint firstItem="FSL-Ht-oFf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="ZnX-Ra-oWq"/>
                 <constraint firstAttribute="trailing" secondItem="vrl-wE-pmm" secondAttribute="trailing" constant="40" id="Zv4-yx-BU8"/>
                 <constraint firstItem="DYu-fp-VtT" firstAttribute="top" secondItem="M9Y-ky-7iu" secondAttribute="bottom" constant="50" id="bRM-at-5Ha"/>
                 <constraint firstAttribute="trailing" secondItem="xnK-r4-W3y" secondAttribute="trailing" constant="40" id="d9h-hY-38b"/>
@@ -153,7 +169,7 @@
         </view>
     </objects>
     <resources>
-        <image name="laun_image" width="24" height="24"/>
+        <image name="laun_image" width="270" height="270"/>
         <image name="login_icon_password_disable_dayModel" width="20" height="13.5"/>
         <image name="login_icon_password_enable_dayModel" width="20" height="12"/>
     </resources>
