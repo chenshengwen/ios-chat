@@ -66,7 +66,9 @@
     NSString *formatMsg;
     if ([[WFCCNetworkService sharedInstance].userId isEqualToString:self.quitMember]) {
         formatMsg = @"你退出了群聊";
-    } else {
+    }
+    else {
+
         WFCCUserInfo *userInfo = [[WFCCIMService sharedWFCIMService] getUserInfo:self.quitMember inGroup:self.groupId refresh:NO];
         if (userInfo.friendAlias.length > 0) {
             formatMsg = [NSString stringWithFormat:@"%@退出了群聊", userInfo.friendAlias];
@@ -77,6 +79,8 @@
         } else {
             formatMsg = [NSString stringWithFormat:@"用户<%@>退出了群聊", self.quitMember];
         }
+
+
     }
     
     return formatMsg;

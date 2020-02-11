@@ -730,6 +730,12 @@
     int count = 0;
     for (int i = 0; i < messages.count; i++) {
         WFCCMessage *message = [messages objectAtIndex:i];
+        //踢人、退群、拉人不显示消息 ，chensw
+        if ([message.content.class getContentType] == MESSAGE_CONTENT_TYPE_ADD_GROUP_MEMBER ||
+            [message.content.class getContentType] == MESSAGE_CONTENT_TYPE_KICKOF_GROUP_MEMBER ||
+            [message.content.class getContentType] == MESSAGE_CONTENT_TYPE_QUIT_GROUP) {
+            continue;
+        }
         
         if (![message.conversation isEqual:self.conversation]) {
             continue;

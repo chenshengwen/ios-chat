@@ -69,6 +69,7 @@
 }
 
 - (NSString *)formatNotification:(WFCCMessage *)message {
+
     NSString *formatMsg;
     if ([self.invitees count] == 1 && [[self.invitees objectAtIndex:0] isEqualToString:self.invitor]) {
         if ([[WFCCNetworkService sharedInstance].userId isEqualToString:self.invitor]) {
@@ -87,7 +88,7 @@
         }
         return formatMsg;
     }
-    
+
     if ([[WFCCNetworkService sharedInstance].userId isEqualToString:self.invitor]) {
         formatMsg = @"你邀请";
     } else {
@@ -98,7 +99,7 @@
             formatMsg = [NSString stringWithFormat:@"%@邀请", self.invitor];
         }
     }
-    
+
     for (NSString *member in self.invitees) {
         if ([member isEqualToString:[WFCCNetworkService sharedInstance].userId]) {
             formatMsg = [formatMsg stringByAppendingString:@" 你"];
